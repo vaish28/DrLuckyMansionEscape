@@ -151,7 +151,7 @@ public class DrLuckyWorld implements World {
 
 
   @Override
-  public List<Item> itemInRoom(String roomName) {
+  public List<Item> getItemsInRoom(String roomName) {
     List<Item> itemsInRoom = new ArrayList<>();
     for (Space space : spaceList) {
       if (space.getSpaceName().equals(roomName)) {
@@ -521,11 +521,12 @@ public class DrLuckyWorld implements World {
   }
 
   private String lookAroundString(Player currentPlayer) {
-    List<Space> neList = lookAroundGetNeighbors(currentPlayer);
     Space currentPlayerSpace = getCurrentPlayerSpace(currentPlayer);
+    List<Space> neList = getNeighbors(currentPlayerSpace);
     String lookAround = printSpaceInfoForLookAround(neList, currentPlayerSpace);
     return lookAround;
   }
+  
 
   private String printSpaceInfoForLookAround(List<Space> neList, Space currentPlayerSpace) {
 
@@ -592,12 +593,6 @@ public class DrLuckyWorld implements World {
       return false;
     }
     return true;
-  }
-
-  private List<Space> lookAroundGetNeighbors(Player player) {
-    Space currentSpaceIn = getCurrentPlayerSpace(player);
-    List<Space> neighbors = getNeighbors(currentSpaceIn);
-    return neighbors;
   }
 
 
@@ -677,65 +672,10 @@ public class DrLuckyWorld implements World {
     return neighNames.contains(spaceName);
   }
 
-//  @Override
-//  public String simulateAction(Player player) {
-//    increaseNumberOfTurns();
-//    double moveProbability = 0.4;
-//    double pickUpProbability = 0.3;
-//    double lookAroundProbability = 0.5;
-//    double randomValue = random.nextDouble();
-//    StringBuilder sb = new StringBuilder();
-//    String result = "";
-//
-//    if (checkIfTargetCharacterInSameSpace(player)) {
-//      prevAction = ActionType.ATTACK;
-//      sb.append("Performing attack");
-//      performComputerAttack();
-//      result = sb.toString();
-//    } else {
-//      if (randomValue < moveProbability && (prevAction != ActionType.MOVE)) {
-//        prevAction = ActionType.MOVE;
-//        sb.append("Performing move");
-//        result = performRandomAction(ActionType.MOVE, player);
-//        sb.append(result);
-//        result = sb.toString();
-//
-//      } else if (randomValue < moveProbability + pickUpProbability
-//              && (prevAction != ActionType.PICKUP_ITEM)) {
-//        sb.append("Performing pick");
-//        prevAction = ActionType.PICKUP_ITEM;
-//
-//        result = performRandomAction(ActionType.PICKUP_ITEM, player);
-//        sb.append(result);
-//        result = sb.toString();
-//      } else if (randomValue < (moveProbability + pickUpProbability + lookAroundProbability)
-//              && (prevAction != ActionType.LOOK_AROUND)) {
-//
-//        sb.append("Performing lookaround");
-//        prevAction = ActionType.LOOK_AROUND;
-//        result = performRandomAction(ActionType.LOOK_AROUND, player);
-//        sb.append(result);
-//        result = sb.toString();
-//      } else {
-//        prevAction = ActionType.MOVE_PET;
-//        int spaceNumber = random.nextInt(0, spaceList.size() - 1);
-//        petMove(spaceList.get(spaceNumber).getSpaceName());
-//        sb.append("Performing pet move");
-//        result = sb.toString();
-//      }
-//    }
-//
-//    return result;
-//  }
 
   @Override
   public void increaseNumberOfTurns() {
     this.numberOfTurns += 1;
-  }
-
-  @Override
-  public void movePetSpace(int spaceNumber) {
-    this.petMove(spaceList.get(spaceNumber).getSpaceName());
   }
 
   @Override
@@ -745,10 +685,6 @@ public class DrLuckyWorld implements World {
     }
     return false;
   }
-
-
-
-
 
   @Override
   public String evaluateLookAround(Space currentSpace, Player player) {

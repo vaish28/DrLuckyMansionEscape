@@ -74,7 +74,7 @@ public class MockWorldModel implements World {
   }
 
   @Override
-  public List<Item> itemInRoom(String roomName) {
+  public List<Item> getItemsInRoom(String roomName) {
     return null;
   }
 
@@ -94,10 +94,7 @@ public class MockWorldModel implements World {
     return null;
   }
 
-  @Override
-  public void movePetSpace(int spaceNumber) {
 
-  }
 
   @Override
   public String evaluateLookAround(Space currentSpace, Player player) {

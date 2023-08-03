@@ -282,7 +282,7 @@ public class DrLuckyWorldTest {
   @Test
   public void itemInRoomTest() {
     spaceOne.addItemToSpace(itemOne);
-    List<Item> tempItems = world.itemInRoom("Garden");
+    List<Item> tempItems = world.getItemsInRoom("Garden");
     List<Item> list2 = new ArrayList<>();
     list2.add(itemOne);
     assertTrue(list2.equals(tempItems));
