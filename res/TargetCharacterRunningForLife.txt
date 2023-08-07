@@ -1,0 +1,336 @@
+The number of maximum turns allocated are: 10
+----- The World Game -----
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+human
+human
+Add the details of the player Enter the username and maximum capacity of carrying the items
+v
+v
+Add your max capacity to carry items for this player 
+3
+3
+Which room do you want to move in? Refer to the image:
+Billiard Room
+Billiard Room
+Player has been added successfully
+Current Player Details are: 
+Current player name: v  Current space name: Billiard Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+computer
+computer
+Now adding a computer controlled player!
+Player has been added successfully
+Current Player Details are: 
+Current player name: v  Current space name: Billiard Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+move
+move
+It is the turn of Human Player Information: (Player Name = v Items in hand = [])
+
+Dining Hall
+Trophy Room
+
+Enter the space name you want to move in about
+Dining Hall
+Dining Hall
+Player moved successfullyHuman Player Information: (Player Name = v Items in hand = [])
+Current player name: computerplayer0  Current space name: Drawing Room
+Current player name: computerplayer0  Current space name: Drawing Room
+ 
+ 
+
+Before state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Drawing Room, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])
+
+Performing pick
+Computer picked up item - Item Information (Item Name = Letter Opener, Damage Value = 2)
+
+Next state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [Item Information (Item Name = Letter Opener, Damage Value = 2)])
+Player space is: Space Information (Space Name = Drawing Room, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, Items = No Items)
+
+Current Player Details are: 
+Current player name: v  Current space name: Dining Hall
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Billiard Room
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+move
+move
+It is the turn of Human Player Information: (Player Name = v Items in hand = [])
+
+Billiard Room
+Drawing Room
+Kitchen
+Parlor
+Tennessee Room
+Trophy Room
+Wine Cellar
+
+Enter the space name you want to move in about
+Drawing Room
+Drawing Room
+Player moved successfullyHuman Player Information: (Player Name = v Items in hand = [])
+Current player name: computerplayer0  Current space name: Drawing Room
+Current player name: computerplayer0  Current space name: Drawing Room
+ 
+ 
+
+Before state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [Item Information (Item Name = Letter Opener, Damage Value = 2)])
+Player space is: Space Information (Space Name = Drawing Room, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, Items = No Items)
+
+Performing lookaround
+
+Next state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [Item Information (Item Name = Letter Opener, Damage Value = 2)]
+)
+Player space is: Space Information (Space Name = Drawing Room, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, Items = No Items)
+
+Current Player Details are: 
+Current player name: v  Current space name: Drawing Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Carriage House
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+lookaround
+lookaround
+Looking around neighbours
+The name of the space you are currently in: Drawing Room
+Name of the other players in your room are:computerplayer0
+v
+No items in your current room
+
+Space Info: Space Information (Space Name = Dining Hall, WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, WorldPosition LowerRight Row = 21, WorldPosition LowerRight Column = 20, Items = No Items)
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Foyer, WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, Items = No Items)
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Wine Cellar, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 5, WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 12, Items = [Item Information (Item Name = Rat Poison, Damage Value = 2), Item Information (Item Name = Piece of Rope, Damage Value = 2)])
+Players: No players in this room
+Current player name: computerplayer0  Current space name: Drawing Room
+ 
+ 
+
+Before state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [Item Information (Item Name = Letter Opener, Damage Value = 2)])
+Player space is: Space Information (Space Name = Drawing Room, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, Items = No Items)
+
+performing pick
+
+
+Next state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [Item Information (Item Name = Letter Opener, Damage Value = 2)])
+Player space is: Space Information (Space Name = Drawing Room, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, Items = No Items)
+
+Current Player Details are: 
+Current player name: v  Current space name: Drawing Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Dining Hall
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+movepet
+movepet
+Which room do you want to want to move the pet to?Billiard Room
+Billiard Room
+Pet Information Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+Pet Information Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Billiard Room
+Current player name: computerplayer0  Current space name: Drawing Room
+ 
+ 
+
+Before state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [Item Information (Item Name = Letter Opener, Damage Value = 2)])
+Player space is: Space Information (Space Name = Drawing Room, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, Items = No Items)
+
+performing attack
+
+Next state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Drawing Room, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, Items = No Items)
+
+Current Player Details are: 
+Current player name: v  Current space name: Drawing Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Drawing Room
+Health 2
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Billiard Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+lookaround
+lookaround
+Looking around neighbours
+The name of the space you are currently in: Drawing Room
+Name of the other players in your room are:computerplayer0
+v
+No items in your current room
+The target character is in this room: Character Information (Character Name = Doctor Lucky , Character Health = 2, Character is Target = true)
+
+Space Info: Space Information (Space Name = Armory, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, Items = [Item Information (Item Name = Revolver, Damage Value = 3)])
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Dining Hall, WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, WorldPosition LowerRight Row = 21, WorldPosition LowerRight Column = 20, Items = No Items)
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Foyer, WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, Items = No Items)
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Wine Cellar, WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 5, WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 12, Items = [Item Information (Item Name = Rat Poison, Damage Value = 2), Item Information (Item Name = Piece of Rope, Damage Value = 2)])
+Players: No players in this room
+The target character wins the game
+
+
+All the players have lost the game!

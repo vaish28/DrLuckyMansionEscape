@@ -18,14 +18,6 @@ public interface World extends ReadOnlyWorldModel{
   void addSpaceToSpaceList(Space space);
 
 
-  /**
-   * Returns the list of items in the specified room using the room name.
-   *
-   * @param roomName name of the room.
-   * @return the item in the room.
-   */
-  List<Item> getItemsInRoom(String roomName);
-
   void addComputerPlayer(int maxCapacityComputer, int spaceIndexRandom);
 
   /**
@@ -81,14 +73,6 @@ public interface World extends ReadOnlyWorldModel{
 
 
   /**
-   * This will return a space from the space name.
-   *
-   * @param spaceName a string indicating the name of the space.
-   * @return a space object corresponding to the space name.
-   */
-  Space getSpaceFromSpaceName(String spaceName);
-
-  /**
    * Moves the current player to the specified space.
    *
    * @param spaceName the name of the space to move to.
@@ -132,28 +116,6 @@ public interface World extends ReadOnlyWorldModel{
    */
   void nextTurn();
 
-  /**
-   * Returns a list of neighboring spaces for the specified space.
-   *
-   * @param space the space to get neighbors for.
-   * @return a list of neighboring spaces.
-   */
-  List<Space> getNeighbors(Space space);
-
-
-  /**
-   * Returns the current player playing the game.
-   *
-   * @return the current player playing the game.
-   */
-  Player getCurrentPlayer();
-
-  /**
-   * Returns a list of all players in the world.
-   *
-   * @return a list of players.
-   */
-  List<Player> getPlayers();
 
   /**
    * Returns a boolean value indicating if input is necessary from the user to take the next step.
@@ -161,47 +123,6 @@ public interface World extends ReadOnlyWorldModel{
    * @return true if input is needed, false otherwise.
    */
   boolean isToPromptForInput();
-
-
-  /**
-   * Returns the information about the specified space along with the players present.
-   *
-   * @param spaceName the name of the space.
-   * @return the space information as a string.
-   */
-  String getSpaceInfoWithPlayer(String spaceName);
-
-  /**
-   * Returns the number of turns left.
-   *
-   * @return the turns in the game.
-   */
-  int getNumberOfTurns();
-
-  /**
-   * Checks if the game has ended.
-   *
-   * @param maxTurns the maximum number of turns allowed for the game
-   * @return true if the game has ended, false otherwise.
-   */
-
-  boolean hasGameEnded(int maxTurns);
-
-  /**
-   * Get the player description from the name of the player.
-   *
-   * @param playerName the name of the player.
-   * @return a string value indicating the description of the player.
-   */
-  String getPlayerDescriptionFromUsername(String playerName);
-
-  /**
-   * Returns the player with the specified name.
-   *
-   * @param playerName the name of the player.
-   * @return the player object.
-   */
-  Player getPlayerByPlayerName(String playerName);
 
   /**
    * Returns a list of string representations of the neighbors of a space.
@@ -219,12 +140,7 @@ public interface World extends ReadOnlyWorldModel{
    */
   List<String> getNeighborsStrings();
 
-  /**
-   * Returns the current information about the pet.
-   *
-   * @return The current pet information as a string.
-   */
-  String getCurrentPetInfo();
+
 
   /**
    * Moves the pet to the specified space.
@@ -268,12 +184,7 @@ public interface World extends ReadOnlyWorldModel{
    */
   boolean attackHuman(String itemName);
 
-  /**
-   * Displays the information of the current player.
-   *
-   * @return The current player information as a string.
-   */
-  String displayCurrentPlayerInfo();
+
 
 
 
@@ -284,19 +195,7 @@ public interface World extends ReadOnlyWorldModel{
   void changePrevAction(ActionType newAction);
 
 
-  /**
-   * Returns the space the specified player is in.
-   *
-   * @param player The player to get the space for.
-   * @return The space the player is in.
-   */
-  Space getCurrentPlayerSpace(Player player);
 
-  /**
-   * Return the previous action performed by the computer player.
-   * @return an actiontype object.
-   */
-  ActionType getPrevActionOfComputer();
 
 
 }

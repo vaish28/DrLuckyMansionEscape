@@ -238,8 +238,8 @@ public class DrLuckyWorld implements World {
     StringBuilder sb = new StringBuilder();
     sb.append("Name of the target character: ").append(targetCharacter.getCharacterName()).append(
                     "  Target character is in room: ")
-            .append(getCurrentSpaceTargetIsIn().getSpaceName())
-            .append("\nHealth ").append(targetCharacter.getHealth());
+            .append(getCurrentSpaceTargetIsIn().getSpaceName()).append("  ")
+            .append("\nHealth ").append(targetCharacter.getHealth()).append("\n");
     return sb.toString();
   }
 
@@ -268,9 +268,11 @@ public class DrLuckyWorld implements World {
 
   @Override
   public Player getCurrentPlayer() {
-    return playerList.get(currentTurn);
+    if (playerList.size() != 0) {
+      return playerList.get(currentTurn);
+    }
+    return null;
   }
-
   // get players list
 
   @Override
@@ -312,11 +314,13 @@ public class DrLuckyWorld implements World {
     //TODO name , space  only.
     Player player = this.getCurrentPlayer();
     StringBuilder sb = new StringBuilder();
-    sb.append("Current player name: ");
-    sb.append(player.getName());
-    sb.append("  ");
-    sb.append("Current space name: ");
-    sb.append(getCurrentPlayerSpace(player).getSpaceName()).append("\n");
+    if(player!=null) {
+      sb.append("Current player name: ");
+      sb.append(player.getName());
+      sb.append("  ");
+      sb.append("Current space name: ");
+      sb.append(getCurrentPlayerSpace(player).getSpaceName()).append("\n");
+    }
     return sb.toString();
 
   }
@@ -371,9 +375,14 @@ public class DrLuckyWorld implements World {
 
   @Override
   public String getCurrentPetInfo() {
-    return String.format("Name of the pet " + pet.getPetName() + "\nPet space information\n"
+    return String.format("Name of the pet: " + pet.getPetName() + "\n  Pet space information: \n"
             + petSpace.getSpaceName());
     // only the name of the space.
+  }
+
+  @Override
+  public Map<Space, List<Player>> getMappingOfSpaceAndPlayer() {
+    return mappingSpaceToPlayers;
   }
 
   @Override
@@ -526,7 +535,7 @@ public class DrLuckyWorld implements World {
     String lookAround = printSpaceInfoForLookAround(neList, currentPlayerSpace);
     return lookAround;
   }
-  
+
 
   private String printSpaceInfoForLookAround(List<Space> neList, Space currentPlayerSpace) {
 

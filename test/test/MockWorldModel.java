@@ -265,6 +265,11 @@ public class MockWorldModel implements World {
   }
 
   @Override
+  public Map<Space, List<Player>> getMappingOfSpaceAndPlayer() {
+    return null;
+  }
+
+  @Override
   public void petMove(String petMoveToSpace) {
     log.append("Moving the pet");
   }

@@ -121,7 +121,7 @@ public class DiagramWorldClass extends JPanel {
 
     }
 
-    String filePath = "grid_image.png"; // Provide your desired file path
+    String filePath = "rgrid_image.png"; // Provide your desired file path
     saveAsPng(bufferedImage, filePath);
     graphicWorld.dispose();
 

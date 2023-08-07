@@ -1,0 +1,46 @@
+20 20 Mysterious Island
+60 Professor Robinson
+Fortune Dr Lucky Cat
+26
+0 0 4 4 Beach
+0 5 4 9 Jungle
+0 10 4 14 Waterfall
+5 0 9 4 Cave
+5 5 9 9 Temple
+5 10 9 14 Ruins
+10 0 14 4 Forest
+10 5 14 9 Cliff
+10 10 14 14 Volcano
+15 0 19 4 River
+15 5 19 9 Mountain
+15 10 19 14 Village
+5 15 9 19 Lake
+10 15 14 19 Swamp
+8 8 12 12 Distant land
+16 15 20 19 Near land
+3 1 7 5 Cabin  
+7 8 11 12 Bridge
+1 10 4 13 Waterfall Cave
+11 0 14 3 Deep Forest
+2 6 4 8 Bamboo Grove
+12 4 14 6 Lava Pit
+3 16 7 19 Hidden Cove
+12 15 15 19 Abandoned Ship
+0 15 2 19 Sandy Shore
+10 1 4 3 Ancient Ruins
+15
+1 1 Compass
+0 3 Hammer
+8 10 Telescope
+10 5 Saw
+12 13 Water Canteen
+4 15 Shovel
+3 7 Machete
+5 11 Binoculars
+7 3 Flare Gun
+9 9 Rope
+11 6 Flashlight
+13 2 First Aid Kit
+15 8 Map
+14 4 Pocket Knife
+17 12 Whistle

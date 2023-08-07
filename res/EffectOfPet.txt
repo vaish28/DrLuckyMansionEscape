@@ -1,0 +1,566 @@
+The number of maximum turns allocated are: 10
+----- The World Game -----
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+human
+human
+Add the details of the player Enter the username and maximum capacity of carrying the items
+v
+v
+Add your max capacity to carry items for this player 
+3
+3
+Which room do you want to move in? Refer to the image:
+Billiard Room
+Carriage House
+Dining Hall
+Drawing Room
+Foyer
+Green House
+Hedge Maze
+Kitchen
+Lancaster Room
+Library
+Lilac Room
+Master Suite
+Nursery
+Parlor
+Piazza
+Servants' Quarters
+Tennessee Room
+Trophy Room
+Wine Cellar
+Winter Garden
+Lilac Room
+Lilac Room
+Player has been added successfully
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+computer
+computer
+Now adding a computer controlled player!
+Player has been added successfully
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+movepet
+movepet
+Which room do you want to want to move the pet to?Lilac Room
+Lilac Room
+Pet Information Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+Pet Information Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+Current player name: computerplayer0  Current space name: Piazza
+ 
+ 
+
+Before state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Piazza, WorldPosition UpperLeft Row = 28, WorldPosition UpperLeft Column = 12, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 19, Items = [Item Information (Item Name = Civil War Cannon, Damage Value = 3)])
+
+Performing lookaroundThe name of the space you are currently in: Piazza
+There are no players in the room other than you.
+The items that are currently laying in the room: 
+Item Information (Item Name = Civil War Cannon, Damage Value = 3)
+
+Space Info: Space Information (Space Name = Foyer, WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, Items = No Items)
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Hedge Maze, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 20, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 25, Items = [Item Information (Item Name = Loud Noise, Damage Value = 2)])
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Winter Garden, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 6, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 11, Items = No Items)
+Players: No players in this room
+
+
+
+
+Next state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Piazza, WorldPosition UpperLeft Row = 28, WorldPosition UpperLeft Column = 12, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 19, Items = [Item Information (Item Name = Civil War Cannon, Damage Value = 3)])
+
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Billiard Room
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+pickitme
+pickitme
+Enter correct choice from the options to play!
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Billiard Room
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+pickitem
+pickitem
+It is the turn of Human Player Information: (Player Name = v Items in hand = [])
+
+Player space is: Space Information (Space Name = Lilac Room, WorldPosition UpperLeft Row = 2, WorldPosition UpperLeft Column = 9, WorldPosition LowerRight Row = 7, WorldPosition LowerRight Column = 14, Items = [Item Information (Item Name = Tight Hat, Damage Value = 2)])
+
+Space Information (Space Name = Lilac Room, WorldPosition UpperLeft Row = 2, WorldPosition UpperLeft Column = 9, WorldPosition LowerRight Row = 7, WorldPosition LowerRight Column = 14, Items = [Item Information (Item Name = Tight Hat, Damage Value = 2)])
+Enter the item you want to pick from the current space 
+Pick an item 
+Tight Hat
+Item picked successfullyHuman Player Information: (Player Name = v Items in hand = [Item Information (Item Name = Tight Hat, Damage Value = 2)])
+Current player name: computerplayer0  Current space name: Piazza
+ 
+ 
+
+Before state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Piazza, WorldPosition UpperLeft Row = 28, WorldPosition UpperLeft Column = 12, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 19, Items = [Item Information (Item Name = Civil War Cannon, Damage Value = 3)])
+
+Performing moveComputer picked up item - Space Information (Space Name = Hedge Maze, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 20, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 25, Items = [Item Information (Item Name = Loud Noise, Damage Value = 2)])
+
+
+
+Next state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Hedge Maze, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 20, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 25, Items = [Item Information (Item Name = Loud Noise, Damage Value = 2)])
+
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Carriage House
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+
+
+Enter correct choice from the options to play!
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Carriage House
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+lookaround
+lookaround
+Looking around neighbours
+The name of the space you are currently in: Lilac Room
+There are no players in the room other than you.
+No items in your current room
+The target character's pet is in this room! 
+ Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+Space Info: Space Information (Space Name = Lancaster Room, WorldPosition UpperLeft Row = 0, WorldPosition UpperLeft Column = 3, WorldPosition LowerRight Row = 5, WorldPosition LowerRight Column = 8, Items = [Item Information (Item Name = Silken Cord, Damage Value = 3)])
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Master Suite, WorldPosition UpperLeft Row = 2, WorldPosition UpperLeft Column = 15, WorldPosition LowerRight Row = 7, WorldPosition LowerRight Column = 22, Items = [Item Information (Item Name = Shoe Horn, Damage Value = 2)])
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Servants' Quarters, WorldPosition UpperLeft Row = 6, WorldPosition UpperLeft Column = 3, WorldPosition LowerRight Row = 9, WorldPosition LowerRight Column = 8, Items = [Item Information (Item Name = Broom Stick, Damage Value = 2)])
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Tennessee Room, WorldPosition UpperLeft Row = 8, WorldPosition UpperLeft Column = 11, WorldPosition LowerRight Row = 11, WorldPosition LowerRight Column = 20, Items = No Items)
+Players: No players in this room
+Current player name: computerplayer0  Current space name: Hedge Maze
+ 
+ 
+
+Before state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Hedge Maze, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 20, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 25, Items = [Item Information (Item Name = Loud Noise, Damage Value = 2)])
+
+Performing lookaroundThe name of the space you are currently in: Hedge Maze
+There are no players in the room other than you.
+The items that are currently laying in the room: 
+Item Information (Item Name = Loud Noise, Damage Value = 2)
+
+Space Info: Space Information (Space Name = Green House, WorldPosition UpperLeft Row = 28, WorldPosition UpperLeft Column = 26, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 29, Items = [Item Information (Item Name = Trowel, Damage Value = 2), Item Information (Item Name = Pinking Shears, Damage Value = 2)])
+Players: No players in this room
+
+Space Info: Space Information (Space Name = Piazza, WorldPosition UpperLeft Row = 28, WorldPosition UpperLeft Column = 12, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 19, Items = [Item Information (Item Name = Civil War Cannon, Damage Value = 3)])
+Players: No players in this room
+
+
+
+
+Next state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Hedge Maze, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 20, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 25, Items = [Item Information (Item Name = Loud Noise, Damage Value = 2)])
+
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Dining Hall
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+human
+human
+Add the details of the player Enter the username and maximum capacity of carrying the items
+a
+a
+Add your max capacity to carry items for this player 
+2
+2
+Which room do you want to move in? Refer to the image:
+Armory
+Billiard Room
+Carriage House
+Dining Hall
+Drawing Room
+Foyer
+Green House
+Hedge Maze
+Kitchen
+Lancaster Room
+Library
+Master Suite
+Nursery
+Parlor
+Piazza
+Servants' Quarters
+Tennessee Room
+Trophy Room
+Wine Cellar
+Winter Garden
+Piazza
+Piazza
+Player has been added successfully
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Dining Hall
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+playerinfo
+playerinfo
+Which player information do you want to want to view? Enter the username of the player 
+v
+v
+Current player information Human Player Information: (Player Name = v Items in hand = [Item Information (Item Name = Tight Hat, Damage Value = 2)])
+
+Player space is: Space Information (Space Name = Lilac Room, WorldPosition UpperLeft Row = 2, WorldPosition UpperLeft Column = 9, WorldPosition LowerRight Row = 7, WorldPosition LowerRight Column = 14, Items = No Items)
+
+Current Player Details are: 
+Current player name: v  Current space name: Lilac Room
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Dining Hall
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+move
+move
+It is the turn of Human Player Information: (Player Name = v Items in hand = [Item Information (Item Name = Tight Hat, Damage Value = 2)])
+
+Lancaster Room
+Master Suite
+Servants' Quarters
+Tennessee Room
+
+Enter the space name you want to move in about
+Master Suite
+Master Suite
+Player moved successfullyHuman Player Information: (Player Name = v Items in hand = [Item Information (Item Name = Tight Hat, Damage Value = 2)])
+Current player name: computerplayer0  Current space name: Hedge Maze
+Current player name: computerplayer0  Current space name: Hedge Maze
+ 
+ 
+
+Before state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [])
+Player space is: Space Information (Space Name = Hedge Maze, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 20, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 25, Items = [Item Information (Item Name = Loud Noise, Damage Value = 2)])
+
+Performing pickComputer picked up item - Item Information (Item Name = Loud Noise, Damage Value = 2)
+
+
+
+Next state of computer player 
+
+Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [Item Information (Item Name = Loud Noise, Damage Value = 2)])
+Player space is: Space Information (Space Name = Hedge Maze, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 20, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 25, Items = No Items)
+
+Current Player Details are: 
+Current player name: a  Current space name: Piazza
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Drawing Room
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+lookaround
+lookaround
+Looking around neighbours
+The name of the space you are currently in: Piazza
+There are no players in the room other than you.
+The items that are currently laying in the room: 
+Item Information (Item Name = Civil War Cannon, Damage Value = 3)
+
+Space Info: Space Information (Space Name = Foyer, WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, Items = No Items)
+Players: No players in this room
+Space Info: Space Information (Space Name = Hedge Maze, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 20, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 25, Items = No Items)
+Players in this room:
+
+Player Info: Computer Controlled Player Information: (Player Name = computerplayer0, Items in hand = [Item Information (Item Name = Loud Noise, Damage Value = 2)])
+
+Space Info: Space Information (Space Name = Winter Garden, WorldPosition UpperLeft Row = 30, WorldPosition UpperLeft Column = 6, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 11, Items = No Items)
+Players: No players in this room
+Current Player Details are: 
+Current player name: v  Current space name: Master Suite
+
+Target Character Details: 
+Name of the target character: Doctor Lucky   Target character is in room: Foyer
+Health 4
+
+
+Target Character Pet Details: 
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Lilac Room
+
+
+Enter the choice for the playing the game: 
+worldview: for viewing the graphical representation, 
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+pickitem
+pickitem
+It is the turn of Human Player Information: (Player Name = v Items in hand = [Item Information (Item Name = Tight Hat, Damage Value = 2)])
+
+Player space is: Space Information (Space Name = Master Suite, WorldPosition UpperLeft Row = 2, WorldPosition UpperLeft Column = 15, WorldPosition LowerRight Row = 7, WorldPosition LowerRight Column = 22, Items = [Item Information (Item Name = Shoe Horn, Damage Value = 2)])
+
+Space Information (Space Name = Master Suite, WorldPosition UpperLeft Row = 2, WorldPosition UpperLeft Column = 15, WorldPosition LowerRight Row = 7, WorldPosition LowerRight Column = 22, Items = [Item Information (Item Name = Shoe Horn, Damage Value = 2)])
+Enter the item you want to pick from the current space 
+Pick an item 
+Shoe Horn
+Item picked successfullyHuman Player Information: (Player Name = v Items in hand = [Item Information (Item Name = Tight Hat, Damage Value = 2), Item Information (Item Name = Shoe Horn, Damage Value = 2)])
+The target character wins the game
+
+
+All the players have lost the game!

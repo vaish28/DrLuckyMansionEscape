@@ -1,0 +1,205 @@
+The number of maximum turns allocated are: 10
+----- The World Game -----
+Target Character Details:
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details:
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game:
+worldview: for viewing the graphical representation,
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+human
+human
+Add the details of the player Enter the username and maximum capacity of carrying the items
+v
+v
+Add your max capacity to carry items for this player
+3
+3
+Which room do you want to move in? Refer to the image:
+Carriage House
+Carriage House
+Player has been added successfully
+Current Player Details are:
+Current player name: v  Current space name: Carriage House
+
+Target Character Details:
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details:
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game:
+worldview: for viewing the graphical representation,
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+human
+human
+Add the details of the player Enter the username and maximum capacity of carrying the items
+a
+a
+Add your max capacity to carry items for this player
+2
+2
+Which room do you want to move in? Refer to the image:
+Foyer
+Foyer
+Player has been added successfully
+Current Player Details are:
+Current player name: v  Current space name: Carriage House
+
+Target Character Details:
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details:
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game:
+worldview: for viewing the graphical representation,
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+playerinfo
+playerinfo
+Which player information do you want to want to view? Enter the username of the player
+a
+a
+Current player information Human Player Information: (Player Name = v Items in hand = [])
+
+Player space is: Space Information (Space Name = Carriage House, WorldPosition UpperLeft Row = 28, WorldPosition UpperLeft Column = 0, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 5, Items = [Item Information (Item Name = Chain Saw, Damage Value = 4), Item Information (Item Name = Big Red Hammer, Damage Value = 4)])
+
+Current Player Details are:
+Current player name: v  Current space name: Carriage House
+
+Target Character Details:
+Name of the target character: Doctor Lucky   Target character is in room: Armory
+Health 4
+
+
+Target Character Pet Details:
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game:
+worldview: for viewing the graphical representation,
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+pickitem
+pickitem
+It is the turn of Human Player Information: (Player Name = v Items in hand = [])
+
+Player space is: Space Information (Space Name = Carriage House, WorldPosition UpperLeft Row = 28, WorldPosition UpperLeft Column = 0, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 5, Items = [Item Information (Item Name = Chain Saw, Damage Value = 4), Item Information (Item Name = Big Red Hammer, Damage Value = 4)])
+
+Space Information (Space Name = Carriage House, WorldPosition UpperLeft Row = 28, WorldPosition UpperLeft Column = 0, WorldPosition LowerRight Row = 35, WorldPosition LowerRight Column = 5, Items = [Item Information (Item Name = Chain Saw, Damage Value = 4), Item Information (Item Name = Big Red Hammer, Damage Value = 4)])
+Enter the item you want to pick from the current space
+Pick an item
+Chain Saw
+Item picked successfullyHuman Player Information: (Player Name = v Items in hand = [Item Information (Item Name = Chain Saw, Damage Value = 4)])
+Current Player Details are:
+Current player name: a  Current space name: Foyer
+
+Target Character Details:
+Name of the target character: Doctor Lucky   Target character is in room: Billiard Room
+Health 4
+
+
+Target Character Pet Details:
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game:
+worldview: for viewing the graphical representation,
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+pickitem
+pickitem
+No items to pick in this space!Current Player Details are:
+Current player name: v  Current space name: Carriage House
+
+Target Character Details:
+Name of the target character: Doctor Lucky   Target character is in room: Carriage House
+Health 4
+
+
+Target Character Pet Details:
+Name of the pet Fortune Dr Lucky Cat
+Pet space information
+Armory
+
+
+Enter the choice for the playing the game:
+worldview: for viewing the graphical representation,
+human: for adding a human controlled player
+computer: for adding a computer controlled player
+spaceinfo: Displaying the space information
+playerinfo: displaying the player information
+move: for moving the current player
+pickitem: for picking an item in the space,
+lookaround: for looking in spaces surrounding each other
+movepet: for moving the pet around the world
+attack: for attack on the target character
+attack
+attack
+Chain Saw
+Enter the item name you want to attack with
+Chain Saw
+Attack successful!
+The target character wins the game
+
+
+All the players have lost the game!

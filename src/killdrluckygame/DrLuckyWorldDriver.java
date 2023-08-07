@@ -1,5 +1,8 @@
 package killdrluckygame;
 
+import killdrluckygame.view.WorldViewImpl;
+import killdrluckygame.view.WorldViewInterface;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,9 +27,10 @@ public class DrLuckyWorldDriver {
    * Constructs a new DrLuckyWorldDriver object with default values for file path and maximum turns.
    */
   public DrLuckyWorldDriver() {
-    filePath = "";
-    maxTurns = 0;
-    random = new CustomRandom();
+    this.filePath = "";
+    this.maxTurns = 0;
+    this.random = new CustomRandom();
+
   }
 
   /**
@@ -61,10 +65,13 @@ public class DrLuckyWorldDriver {
     try {
 
       Readable read = new InputStreamReader(System.in);
-      GameControllerInterface play = new GameController(read, System.out, random);
-      World game = new DrLuckyWorld.Input().readInput(new FileReader(filePath));
 
-      play.gamePlay(game, maxTurns);
+      World game = new DrLuckyWorld.Input().readInput(new FileReader(filePath));
+      // Create the game view
+      WorldViewInterface worldView = new WorldViewImpl(game);
+      random = new CustomRandom();
+      ControllerGuiInterface play = new ControllerGuiImpl( random,game, worldView , maxTurns);
+      play.playGame();
     } catch (IOException e) {
       // Handle file reading or parsing errors
       String.format("An error occurred while reading the file: " + e.getMessage());
