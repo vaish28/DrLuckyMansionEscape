@@ -16,4 +16,16 @@ public interface ControllerGuiInterface {
   int generateRandomFirstSpace();
 
   void processComputerClick();
+
+  String lookAround();
+
+  String pickItem(String pickedItem);
+
+  String attemptOnTargetCharacter(String itemName);
+
+  void loadNewGame(String worldFileName);
+
+  void resetGame();
+
+  String movePlayerToRoom(Player currentPlayer, Space clickedRoom);
 }

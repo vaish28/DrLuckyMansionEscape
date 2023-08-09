@@ -1,7 +1,10 @@
 package killdrluckygame;
 
+import killdrluckygame.view.WorldViewImpl;
 import killdrluckygame.view.WorldViewInterface;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -10,13 +13,14 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   private WorldViewInterface worldView;
   private final int maxTurns;
   private CustomRandomInterface random;
-
+  private String filePath;
   public ControllerGuiImpl(CustomRandomInterface random,
-                           World worldModel, WorldViewInterface worldView, int maxTurns) {
+                           World worldModel, WorldViewInterface worldView, int maxTurns, String filePath) {
     this.worldModel = worldModel;
     this.worldView = worldView;
     this.random = random;
     this.maxTurns = maxTurns;
+    this.filePath = filePath;
     initializeListeners();
     worldView.addListener(this);
   }
@@ -24,32 +28,10 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
 
   @Override
   public void playGame() {
-    //click listener
-    // keyboard listener
-    // makevisible
+
   }
   private void initializeListeners() {
-    // Add listeners to the GUI components (e.g., buttons, mouse events, keyboard events)
-    // When the user interacts with the GUI, the corresponding methods in this controller
-    // will be called to handle the actions.
-    // For example:
-    // - Add a button click listener to handle actions like "Look Around," "Pick Up Item," etc.
-    // - Add a mouse click listener to handle moving the player in the world.
-    // - Add keyboard event listeners to handle key presses for game actions.
 
-    // Example:
-    // worldView.getMoveButton().addActionListener(e -> moveButtonClicked());
-    // worldView.getPickUpButton().addActionListener(e -> pickUpButtonClicked());
-    // worldView.getWorldPanel().addMouseListener(new MouseAdapter() {
-    //     public void mouseClicked(MouseEvent e) {
-    //         handleMouseClick(e.getX(), e.getY());
-    //     }
-    // });
-    // worldView.addKeyListener(new KeyAdapter() {
-    //     public void keyPressed(KeyEvent e) {
-    //         handleKeyPress(e.getKeyCode());
-    //     }
-    // });
   }
 
   // Implement methods to handle different user actions based on the GUI interactions
@@ -128,6 +110,85 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
         }
       }
     }
+  }
+
+  @Override
+  public String pickItem(String pickedItem) {
+    if(worldModel!=null) {
+      if(worldModel.pickItem(pickedItem)) {
+        worldModel.moveTargetCharacter();
+        worldModel.nextTurn();
+        return "Item picked successfully";
+      }
+      else {
+        return "Item not picked successfully";
+      }
+    }
+
+    return "";
+  }
+
+  @Override
+  public String lookAround() {
+    if(worldModel!=null) {
+      if(worldModel.lookAround()!=null) {
+        worldModel.moveTargetCharacter();
+        worldModel.nextTurn();
+        return worldModel.lookAround();
+      }
+      else {
+        return "Look around not successful";
+      }
+    }
+    return "";
+  }
+
+  @Override
+  public String attemptOnTargetCharacter(String itemName) {
+    if(worldModel!=null) {
+      if(worldModel.attackHuman(itemName)) {
+        worldModel.moveTargetCharacter();
+        worldModel.nextTurn();
+        return "Attack successful";
+      }
+      else {
+        return "Attack not successful";
+      }
+    }
+    return "";
+  }
+
+  @Override
+  public void loadNewGame(String worldFileName) {
+    try {
+      this.worldModel = new DrLuckyWorld.Input().readInput(new FileReader(worldFileName));
+    } catch (IOException e) {
+      // Handle file reading or parsing errors
+      String.format("An error occurred while reading the file: " + e.getMessage());
+      e.printStackTrace();
+    }
+    worldView.setWorld(worldModel);
+  }
+
+  public void resetGame() {
+
+    try {
+      this.worldModel = new DrLuckyWorld.Input().readInput(new FileReader(filePath));
+    } catch (IOException e) {
+      String.format(e.getMessage());
+    }
+    worldView.setWorld(worldModel);
+  }
+
+  @Override
+  public String movePlayerToRoom(Player currentPlayer, Space clickedRoom) {
+    if(worldModel.move(clickedRoom.getSpaceName())){
+      worldModel.moveTargetCharacter();
+      worldModel.nextTurn();
+      return "moved successfully";
+    }
+
+    return "move not successful";
   }
 
 
