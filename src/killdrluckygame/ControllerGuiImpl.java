@@ -191,6 +191,11 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     return "move not successful";
   }
 
+  @Override
+  public String getDsecription(Player currentPlayer) {
+    return null;
+  }
+
 
   @Override
   public int generateRandomMaxCapacity() {

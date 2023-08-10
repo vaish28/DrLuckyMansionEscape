@@ -28,4 +28,6 @@ public interface ControllerGuiInterface {
   void resetGame();
 
   String movePlayerToRoom(Player currentPlayer, Space clickedRoom);
+
+  String getDsecription(Player currentPlayer);
 }

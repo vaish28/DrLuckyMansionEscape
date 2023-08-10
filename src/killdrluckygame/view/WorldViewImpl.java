@@ -37,8 +37,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private boolean ignoreMouseEvents = false;
 
   private BufferedImage targetCharacterImage;
-  private int cellWidth; // Add cellWidth as a class variable
-  private int cellHeight;
+
   private MenuItemFactory menuItemFactory = new GameMenuItemFactory(this);
 
   public WorldViewImpl(ReadOnlyWorldModel model) {
@@ -132,7 +131,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private void attemptOnTargetCharacter() {
 
-    String resultAttack="";
+    String resultAttack = "";
     int result = JOptionPane.showConfirmDialog(
             WorldViewImpl.this,
             "Are you sure you want to attempt on the target character's life?",
@@ -166,10 +165,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         // Determine the selected item and execute the attack
         for (int i = 0; i < radioButtons.length; i++) {
           if (radioButtons[i].isSelected()) {
-            if(radioButtons[i].isSelected() && i==0) {
+            if (radioButtons[i].isSelected() && i == 0) {
               resultAttack = listener.attemptOnTargetCharacter("");
-            }
-            else {
+            } else {
               String item = items.get(i).getItemName();
               resultAttack = listener.attemptOnTargetCharacter(item);
               break;
@@ -213,7 +211,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     }
     updateDisplay();
   }
-
 
 
   private void loadPlayerImage() {
@@ -363,10 +360,10 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
       try {
         // Load the new world from the specified file
         listener.loadNewGame(worldFileName);
-    } catch (Exception ex) {
-      JOptionPane.showMessageDialog(this, "Error loading the new world: " + ex.getMessage(),
-              "Error", JOptionPane.ERROR_MESSAGE);
-    }
+      } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error loading the new world: " + ex.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+      }
     } else {
       JOptionPane.showMessageDialog(this, "Please input a valid file name.",
               "Error", JOptionPane.ERROR_MESSAGE);
@@ -415,31 +412,52 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
 
-
-
   private class GridPanel extends JPanel {
 
+    // Draw the grid here
+    int cellWidth;
+    int cellHeight;
+
+
     public GridPanel() {
-     // addKeyListener(new ListenKey());
       addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-          int mouseX = e.getX();
-          int mouseY = e.getY();
-
-          // Determine the clicked room based on mouse coordinates
-          int roomCol = mouseX / cellWidth;
-          int roomRow = mouseY / cellHeight;
-          Space clickedRoom = getClickedRoom(roomRow, roomCol);
-
-          if (clickedRoom != null ) {
-            String result = listener.movePlayerToRoom(model.getCurrentPlayer(), clickedRoom);
-            System.out.println(result);
-            updateDisplay();
-          }
+          handleMouseClick(e);
         }
       });
     }
+
+    private void handleMouseClick(MouseEvent e) {
+      int mouseX = e.getX();
+      int mouseY = e.getY();
+
+      // Determine the clicked room based on mouse coordinates
+      int roomCol = mouseX / cellWidth;
+      int roomRow = mouseY / cellHeight;
+      Space clickedRoom = getClickedRoom(roomRow, roomCol);
+
+      if (clickedRoom != null) {
+        Player currentPlayer = model.getCurrentPlayer();
+        List<Player> playersInClickedRoom = model.getMappingOfSpaceAndPlayer().get(clickedRoom);
+
+        if (currentPlayer.isHumanControlled()) { // Check if the current player is human-controlled
+          if (playersInClickedRoom != null && playersInClickedRoom.contains(currentPlayer)) {
+            // Clicked on a room with the current player, show the player's description
+            String description = "player description"; // Replace with your description logic
+            JOptionPane.showMessageDialog(
+                    WorldViewImpl.this,
+                    description,
+                    "Player Description",
+                    JOptionPane.INFORMATION_MESSAGE);
+          } else {
+            listener.movePlayerToRoom(currentPlayer, clickedRoom);
+            updateDisplay();
+          }
+        }
+      }
+    }
+
 
     //&& model.isValidMove(model.getCurrentPlayer(), clickedRoom)
 
@@ -463,14 +481,12 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     protected void paintComponent(Graphics g) {
       super.paintComponent(g);
 
-      // Draw the grid here
       int worldWidth = getWidth();
       int worldHeight = getHeight();
       int numRows = rows;
       int numCols = columns;
-      int cellWidth = worldWidth / numCols;
-      int cellHeight = worldHeight / numRows;
-
+      cellWidth = worldWidth / numCols;
+      cellHeight = worldHeight / numRows;
       g.setColor(Color.white);
       g.fillRect(0, 0, worldWidth, worldHeight);
 
@@ -574,7 +590,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private class ListenKey implements KeyListener {
 
-    public ListenKey(){
+    public ListenKey() {
 
       // Set the focusable state of the frame to true so that it can receive keyboard events
       setFocusable(true);
