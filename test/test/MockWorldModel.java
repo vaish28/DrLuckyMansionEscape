@@ -259,25 +259,13 @@ public class MockWorldModel implements World {
     return null;
   }
 
-  @Override
-  public String getCurrentPetInfo() {
-    return log.append("Current player is:").toString();
-  }
 
   @Override
   public Map<Space, List<Player>> getMappingOfSpaceAndPlayer() {
     return null;
   }
 
-  @Override
-  public void petMove(String petMoveToSpace) {
-    log.append("Moving the pet");
-  }
 
-  @Override
-  public Space getPetSpace() {
-    return null;
-  }
 
   @Override
   public void performComputerAttack() {

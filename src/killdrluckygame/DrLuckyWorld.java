@@ -30,9 +30,9 @@ public class DrLuckyWorld implements World {
   private Map<Space, List<Player>> mappingSpaceToPlayers;
   private final CustomRandomInterface random;
   private int numberOfTurns;
-  private Space petSpace;
+
   private List<Item> evidenceList;
-  private final TargetCharacterPetInterface pet;
+
   private int computerPlayerCount;
 
 
@@ -50,8 +50,7 @@ public class DrLuckyWorld implements World {
    */
   public DrLuckyWorld(int totalRows, int totalColumns, String worldName,
                       Character targetCharacter,
-                      List<Space> spaceList, CustomRandomInterface random,
-                      TargetCharacterPetInterface pet)
+                      List<Space> spaceList, CustomRandomInterface random)
           throws IllegalArgumentException {
 
     if (totalRows <= 0 || totalColumns < 0
@@ -66,11 +65,10 @@ public class DrLuckyWorld implements World {
     this.targetCharacter = targetCharacter;
     this.worldName = worldName;
     this.spaceList = spaceList;
-    this.pet = pet;
+
 
     this.currentTurn = 0;
     this.currentSpaceIndex = 0;
-    this.petSpace = spaceList.get(currentSpaceIndex); //set starting position of pet
 
     this.cmPlayer = null;
     this.prevAction = null;
@@ -175,10 +173,9 @@ public class DrLuckyWorld implements World {
 
     List<String> neighNames = new ArrayList<>();
     for (Space space : neigh) {
-      //TODO pet space invisible
-      if (!getPetSpace().equals(space)) {
-        neighNames.add(space.getSpaceName());
-      }
+
+      neighNames.add(space.getSpaceName());
+
     }
     return neighNames;
   }
@@ -238,8 +235,8 @@ public class DrLuckyWorld implements World {
     StringBuilder sb = new StringBuilder();
     sb.append("Name of the target character: ").append(targetCharacter.getCharacterName()).append(
                     "  Target character is in room: ")
-            .append(getCurrentSpaceTargetIsIn().getSpaceName()).append("  ")
-            .append("\nHealth ").append(targetCharacter.getHealth()).append("\n");
+            .append(getCurrentSpaceTargetIsIn().getSpaceName())
+            .append("\nHealth ").append(targetCharacter.getHealth());
     return sb.toString();
   }
 
@@ -268,11 +265,9 @@ public class DrLuckyWorld implements World {
 
   @Override
   public Player getCurrentPlayer() {
-    if (playerList.size() != 0) {
-      return playerList.get(currentTurn);
-    }
-    return null;
+    return playerList.get(currentTurn);
   }
+
   // get players list
 
   @Override
@@ -314,13 +309,11 @@ public class DrLuckyWorld implements World {
     //TODO name , space  only.
     Player player = this.getCurrentPlayer();
     StringBuilder sb = new StringBuilder();
-    if(player!=null) {
-      sb.append("Current player name: ");
-      sb.append(player.getName());
-      sb.append("  ");
-      sb.append("Current space name: ");
-      sb.append(getCurrentPlayerSpace(player).getSpaceName()).append("\n");
-    }
+    sb.append("Current player name: ");
+    sb.append(player.getName());
+    sb.append("  ");
+    sb.append("Current space name: ");
+    sb.append(getCurrentPlayerSpace(player).getSpaceName()).append("\n");
     return sb.toString();
 
   }
@@ -373,37 +366,15 @@ public class DrLuckyWorld implements World {
             getRows(), getColumns(), getSpaces());
   }
 
-  @Override
-  public String getCurrentPetInfo() {
-    return String.format("Name of the pet: " + pet.getPetName() + "\n  Pet space information: \n"
-            + petSpace.getSpaceName());
-    // only the name of the space.
-  }
 
-  @Override
-  public Map<Space, List<Player>> getMappingOfSpaceAndPlayer() {
-    return mappingSpaceToPlayers;
-  }
-
-  @Override
-  public void petMove(String movePetToSpace) {
-    increaseNumberOfTurns();
-    this.petSpace = getSpaceFromSpaceName(movePetToSpace);
-  }
-
-  @Override
-  public Space getPetSpace() {
-    return petSpace;
-  }
 
   @Override
   public String displayPotentialListOfSpaces() {
     StringBuilder sb = new StringBuilder();
     for (Space space : spaceList) {
-      if (!space.equals(getPetSpace())) {
-        sb.append(space.getSpaceName());
-        sb.append("\n");
-      }
+
+      sb.append(space.getSpaceName());
+      sb.append("\n");
     }
     return sb.toString();
   }
@@ -530,12 +501,11 @@ public class DrLuckyWorld implements World {
   }
 
   private String lookAroundString(Player currentPlayer) {
+    List<Space> neList = lookAroundGetNeighbors(currentPlayer);
     Space currentPlayerSpace = getCurrentPlayerSpace(currentPlayer);
-    List<Space> neList = getNeighbors(currentPlayerSpace);
     String lookAround = printSpaceInfoForLookAround(neList, currentPlayerSpace);
     return lookAround;
   }
-
 
   private String printSpaceInfoForLookAround(List<Space> neList, Space currentPlayerSpace) {
 
@@ -579,19 +549,11 @@ public class DrLuckyWorld implements World {
     }
 
 
-    //TODO check if pet is in the same space:
-    if (currentPlayerSpace.equals(getPetSpace())) {
-      sb.append("The target character's pet is in this room! \n ");
-      sb.append(getCurrentPetInfo());
-      sb.append("\n");
-    }
-
     // TODO Neighboring spaces
     if (neList != null) {
       for (Space space : neList) {
-        if (!space.equals(getPetSpace())) {
-          sb.append(this.printSpaceInfo(space));
-        }
+
+        sb.append(this.printSpaceInfo(space));
       }
     }
     return sb.toString();
@@ -604,13 +566,18 @@ public class DrLuckyWorld implements World {
     return true;
   }
 
+  private List<Space> lookAroundGetNeighbors(Player player) {
+    Space currentSpaceIn = getCurrentPlayerSpace(player);
+    List<Space> neighbors = getNeighbors(currentSpaceIn);
+    return neighbors;
+  }
+
 
   @Override
   public String getSpaceInfoWithPlayer(String spaceName) {
     return printSpaceInfo(getSpaceFromSpaceName(spaceName));
   }
 
-  // add pet description
   @Override
   public String printSpaceInfo(Space space) {
     StringBuilder sb = new StringBuilder();
@@ -625,10 +592,6 @@ public class DrLuckyWorld implements World {
                 "\n"));
       }
 
-      if ((space != null) && (space.equals(getPetSpace()))) {
-        sb.append(String.format("The pet of target character is in this space: %s\n",
-                getCurrentPetInfo(), "\n"));
-      }
     } else {
       sb.append("\n");
       sb.append(String.format("Space Info: %s\nPlayers: No players in this room", space))
@@ -637,15 +600,9 @@ public class DrLuckyWorld implements World {
         sb.append(String.format("The target character is in this room: %s\n", targetCharacter,
                 "\n"));
       }
-      if ((space != null) && (space.equals(getPetSpace()))) {
-        sb.append(String.format("The pet of target character is in this space: %s\n",
-                getCurrentPetInfo(), "\n"));
-      }
+
     }
 
-
-    // TODO add neighbors display
-    // here those spaces that are adjacent and do not have a pet will be visible.
 
     return sb.toString();
   }
@@ -681,11 +638,12 @@ public class DrLuckyWorld implements World {
     return neighNames.contains(spaceName);
   }
 
-
   @Override
   public void increaseNumberOfTurns() {
     this.numberOfTurns += 1;
   }
+
+
 
   @Override
   public boolean checkIfTargetCharacterInSameSpace(Player player) {
@@ -694,6 +652,10 @@ public class DrLuckyWorld implements World {
     }
     return false;
   }
+
+
+
+
 
   @Override
   public String evaluateLookAround(Space currentSpace, Player player) {
@@ -742,18 +704,14 @@ public class DrLuckyWorld implements World {
 
     if (neighboringSpaces.size() != 0) {
 
-
-
       for (Space space : neighboringSpaces) {
-        if (!space.equals(getPetSpace())) {
-          int score = 0;
-          for (Item item : space.getItems()) {
-            score += item.getDamageValue();
-          }
-          if (score > bestScore) {
-            bestScore = score;
-            bestSpaceToMove = space;
-          }
+        int score = 0;
+        for (Item item : space.getItems()) {
+          score += item.getDamageValue();
+        }
+        if (score > bestScore) {
+          bestScore = score;
+          bestSpaceToMove = space;
         }
       }
     }
@@ -852,7 +810,7 @@ public class DrLuckyWorld implements World {
     for (Space space : spaceNeighbors) {
       if (mappingSpaceToPlayers.containsKey(space)) {
         List<Player> players = mappingSpaceToPlayers.get(space);
-        if ((players.size() != 0) && (!currentSpace.equals(getPetSpace()))) {
+        if ((players.size() != 0)) {
           return true;
         }
       }
@@ -901,6 +859,11 @@ public class DrLuckyWorld implements World {
     return prevAction;
   }
 
+  @Override
+  public Map<Space, List<Player>> getMappingOfSpaceAndPlayer() {
+    return mappingSpaceToPlayers;
+  }
+
 
   @Override
   public void changePrevAction(ActionType newAction) {
@@ -918,7 +881,7 @@ public class DrLuckyWorld implements World {
     private final List<Integer> gridDimensions;
     private final StringBuilder targetName;
     private final int[] targetHealth;
-    private final StringBuilder petName;
+
 
     /**
      * A constructor to build the objects of world class.
@@ -933,8 +896,6 @@ public class DrLuckyWorld implements World {
       targetHealth = new int[1];
       targetName = new StringBuilder();
 
-      //pet details
-      petName = new StringBuilder();
     }
 
     /**
@@ -952,14 +913,13 @@ public class DrLuckyWorld implements World {
       //create the target character
       Character target = new GameCharacter(targetHealth[0], targetName.toString(), true);
 
-      TargetCharacterPetInterface pet = new TargetCharacterPet(petName.toString().trim());
 
 
       String worldName = dimensionName.toString().trim();
 
       //create the luckyworld object
       return new DrLuckyWorld(gridDimensions.get(0), gridDimensions.get(1),
-              worldName, target, spaceList, new CustomRandom(), pet);
+              worldName, target, spaceList, new CustomRandom());
 
     }
 
@@ -1011,28 +971,11 @@ public class DrLuckyWorld implements World {
 
       }
 
-      populatePetInformation();
 
       populateSpaceInformation();
 
       populateItemInformationForEachSpace();
 
-    }
-
-    private void populatePetInformation() {
-      if (scanner.hasNextLine()) {
-        String line = scanner.nextLine();
-
-        // Process the line as per your requirements
-        String[] values = line.split(" "); // Assuming space-separated values
-        for (String value : values) {
-
-          // Value is a string
-          petName.append(value).append(" ");
-
-        }
-
-      }
     }
 
     private void populateItemInformationForEachSpace() {

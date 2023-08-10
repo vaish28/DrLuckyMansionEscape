@@ -141,21 +141,6 @@ public interface World extends ReadOnlyWorldModel{
   List<String> getNeighborsStrings();
 
 
-
-  /**
-   * Moves the pet to the specified space.
-   *
-   * @param petMoveToSpace The space to move the pet to.
-   */
-  void petMove(String petMoveToSpace);
-
-  /**
-   * return the space of the pet.
-   *
-   * @return a space object representing the location of the pet.
-   */
-  Space getPetSpace();
-
   /**
    * Performs a computer attack on the target character.
    */

@@ -20,7 +20,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private ReadOnlyWorldModel model;
   private ControllerGuiInterface listener;
   private JLabel targetCharacterInfoLabel;
-  private JLabel petInfoLabel;
+
   private JLabel currentPlayerLabel;
   private JLabel pickedItemLabel;
   private JPanel infoDisplayPanel;
@@ -54,7 +54,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     this.infoDisplayPanel = new JPanel();
     this.infoDisplayPanel.setLayout(new BoxLayout(infoDisplayPanel, BoxLayout.Y_AXIS));
     this.targetCharacterInfoLabel = new JLabel();
-    this.petInfoLabel = new JLabel();
+
     this.addHumanPlayer = new JButton("Enter human player info");
     this.addComputerPlayer = new JButton("Enter computer player info");
     this.currentPlayerLabel = new JLabel();
@@ -233,8 +233,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     targetCharacterInfoLabel.setFont(new Font("Arial", Font.PLAIN, 14));
     infoDisplayPanel.add(targetCharacterInfoLabel);
 
-    petInfoLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-    infoDisplayPanel.add(petInfoLabel);
+
 
     currentPlayerLabel.setFont(new Font("Arial", Font.PLAIN, 14));
     infoDisplayPanel.add(currentPlayerLabel);
@@ -285,7 +284,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private void updateDisplay() {
     displayTargetCharacterInfo();
-    displayTargetCharacterPetInfo();
+
     displayCurrentPlayerInfo();
     gridPanel.repaint();
     gridPanel.removeKeyListener(this.keyListener);
@@ -305,11 +304,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     }
   }
 
-  private void displayTargetCharacterPetInfo() {
-    if (model != null) {
-      petInfoLabel.setText(model.getCurrentPetInfo());
-    }
-  }
 
   private void showInputDialog() {
     nameField = new JTextField(10);

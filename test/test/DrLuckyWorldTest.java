@@ -17,8 +17,6 @@ import killdrluckygame.HumanControlledPlayer;
 import killdrluckygame.Item;
 import killdrluckygame.Player;
 import killdrluckygame.Space;
-import killdrluckygame.TargetCharacterPet;
-import killdrluckygame.TargetCharacterPetInterface;
 import killdrluckygame.World;
 import killdrluckygame.WorldPosition;
 import org.junit.Before;
@@ -53,9 +51,9 @@ public class DrLuckyWorldTest {
    */
   protected World worldValidChecker(int totalRows, int totalColumns, String worldName,
                                     Character targetCharacter,
-                                    List<Space> spaceList, TargetCharacterPetInterface pet) {
+                                    List<Space> spaceList) {
     return new DrLuckyWorld(totalRows, totalColumns, worldName, targetCharacter,
-            spaceList, new CustomRandom(0), pet);
+            spaceList, new CustomRandom(0));
   }
 
   /**
@@ -81,7 +79,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree)),
-            new CustomRandom(1), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(1));
   }
 
   /**
@@ -92,7 +90,7 @@ public class DrLuckyWorldTest {
   public void testInvalidWorldDescriptionEmptyArrayList() {
     worldValidChecker(12, 12, "LuckyMansion",
             new GameCharacter(50, "Lucky", false),
-            null, new TargetCharacterPet("Dr Fortune Cat"));
+            null);
   }
 
   /**
@@ -103,7 +101,7 @@ public class DrLuckyWorldTest {
   public void testInvalidWorldDescriptionNegativeRows() {
     worldValidChecker(-12, 12, "LuckyMansion",
             new GameCharacter(50, "Lucky", false),
-            null, new TargetCharacterPet("Dr Fortune Cat"));
+            null);
   }
 
   /**
@@ -114,7 +112,7 @@ public class DrLuckyWorldTest {
   public void testInvalidWorldDescriptionNegativeColumns() {
     worldValidChecker(12, -8, "LuckyMansion",
             new GameCharacter(50, "Lucky", false),
-            null, new TargetCharacterPet("Dr Fortune Cat"));
+            null);
   }
 
   /**
@@ -125,7 +123,7 @@ public class DrLuckyWorldTest {
   public void testInvalidWorldDescriptionNullWorldName() {
     worldValidChecker(12, 8, "", new GameCharacter(50,
                     "Lucky", false),
-            null, new TargetCharacterPet("Dr Fortune Cat"));
+            null);
   }
 
   /**
@@ -135,7 +133,7 @@ public class DrLuckyWorldTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidWorldDescriptionNullTargetCharacter() {
     worldValidChecker(12, 8, "Lucky", null,
-            null, new TargetCharacterPet("Dr Fortune Cat"));
+            null);
   }
 
   /**
@@ -404,7 +402,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
     world.addSpaceToSpaceList(spaceFour);
     // Move the player to spaceOne
@@ -450,7 +448,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
     // Move the player to spaceOne
     // Create a player
     world.addHumanPlayer("Player1", 15, "Armory");
@@ -484,7 +482,7 @@ public class DrLuckyWorldTest {
     world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
     world.addComputerPlayer(3,0);
     assertTrue(spaceOne.equals(world.getCurrentPlayerSpace(world.getCurrentPlayer())));
   }
@@ -522,7 +520,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
 
     world.addHumanPlayer("Player1", 1, "Drawing Room");
@@ -552,7 +550,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
     world.addHumanPlayer("Player1", 1, "Armory");
 
@@ -570,10 +568,6 @@ public class DrLuckyWorldTest {
     stringBuilder.append("The target character is in this room: Character "
             + "Information (Character Name = Lucky, Character Health = 50, "
             + "Character is Target = true)").append("\n");
-    stringBuilder.append("The pet of target character is in this space: "
-            + "Name of the pet Dr Fortune Cat").append("\n");
-    stringBuilder.append("Pet space information").append("\n");
-    stringBuilder.append("Armory\n");
 
 
     String output = stringBuilder.toString();
@@ -602,7 +596,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
     world.addHumanPlayer("Player1", 1, "Armory");
 
@@ -660,7 +654,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
     world.addHumanPlayer("Player1", 1, "Drawing Room");
 
@@ -702,7 +696,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
     world.addHumanPlayer("Player1", 1, "Drawing Room");
     world.lookAround();
     world.moveTargetCharacter();
@@ -749,7 +743,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
     world.addHumanPlayer("Player1", 1, "Drawing Room");
     world.addHumanPlayer("Player2", 1, "Foyer");
 
@@ -783,64 +777,6 @@ public class DrLuckyWorldTest {
   }
 
 
-  @Test
-  public void testAttackHumanNoPlayersInNeigbhorPet() {
-    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-            new WorldPosition(23, 26));
-    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-            new WorldPosition(25, 18));
-
-    spaceThree = new DrLuckySpace("Dining Hall", new WorldPosition(12, 11),
-            new WorldPosition(21, 20));
-    spaceFour = new DrLuckySpace("Foyer", new WorldPosition(26, 13),
-            new WorldPosition(27, 18));
-    Space spaceFive = new DrLuckySpace("Trojan Room", new WorldPosition(3, 13),
-            new WorldPosition(5, 1));
-
-
-    itemOne = new DrLuckyItem("Billiard Cue", 2);
-    itemTwo = new DrLuckyItem("Letter Opener", 2);
-    itemThree = new DrLuckyItem("Soft Knife", 2);
-    spaceOne.addItemToSpace(itemOne);
-    spaceTwo.addItemToSpace(itemTwo);
-    spaceThree.addItemToSpace(itemThree);
-
-    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-            new GameCharacter(50,
-                    "Lucky", true),
-            new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
-    world.addHumanPlayer("Player1", 1, "Drawing Room");
-    world.addHumanPlayer("Player2", 1, "Foyer");
-
-
-    List<Space> ne = world.getNeighbors(spaceTwo);
-    assertTrue(ne.contains(spaceThree));
-    assertTrue(ne.contains(spaceFour));
-    assertFalse(ne.contains(spaceFive));
-
-
-    world.pickItem("Letter Opener");
-    world.moveTargetCharacter();
-    world.nextTurn();
-
-    world.petMove("Drawing Room");
-    world.moveTargetCharacter();
-    world.nextTurn();
-
-
-    world.attackHuman("Letter Opener");
-    world.moveTargetCharacter();
-    world.nextTurn();
-
-    StringBuilder sb = new StringBuilder();
-
-    sb.append("Name of the target character: Lucky  ");
-    sb.append("Target character is in room: Dining Hall").append("\n");
-    sb.append("Health 48");
-
-    assertEquals(sb.toString(), world.targetCharacterDetails());
-  }
 
   @Test
   public void testAttackTargetCharacterSpaceDifferent() {
@@ -862,7 +798,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
 
     world.addHumanPlayer("Player1", 1, "Drawing Room");
@@ -897,27 +833,7 @@ public class DrLuckyWorldTest {
 
   }
 
-  @Test
-  public void testSameRoomAsTargetOfPet() {
-    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-            new WorldPosition(25, 18));
 
-    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-            new WorldPosition(23, 26));
-
-    itemOne = new DrLuckyItem("Billiard Cue", 2);
-    itemTwo = new DrLuckyItem("Letter Opener", 2);
-    spaceOne.addItemToSpace(itemOne);
-    spaceTwo.addItemToSpace(itemTwo);
-
-    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-            new GameCharacter(50,
-                    "Lucky", true),
-            new ArrayList<>(Arrays.asList(spaceOne, spaceTwo)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
-
-    assertEquals(world.getPetSpace().toString(), world.getCurrentSpaceTargetIsIn().toString());
-  }
 
 
   @Test
@@ -955,7 +871,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
     // TODO add three players
 
     Player playerOne = new HumanControlledPlayer("v", 3);
@@ -973,264 +889,10 @@ public class DrLuckyWorldTest {
             + "Armory\nHealth 50", world.targetCharacterDetails());
   }
 
-  @Test
-  public void isPlayerSeenPetInSameSpace() {
-    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-            new WorldPosition(23, 26));
 
-    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-            new WorldPosition(25, 18));
 
-    spaceThree = new DrLuckySpace("Dining Hall", new WorldPosition(12, 11),
-            new WorldPosition(21, 20));
 
-    spaceFour = new DrLuckySpace("Foyer", new WorldPosition(26, 13),
-            new WorldPosition(27, 18));
 
-
-    itemOne = new DrLuckyItem("Letter Opener", 2);
-    itemTwo = new DrLuckyItem("Paint Brush", 3);
-    itemThree = new DrLuckyItem("Knife", 5);
-    itemFour = new DrLuckyItem("Trophy head", 4);
-
-    spaceOne.addItemToSpace(itemOne);
-    spaceTwo.addItemToSpace(itemTwo);
-    spaceThree.addItemToSpace(itemThree);
-    spaceFour.addItemToSpace(itemFour);
-
-    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-            new GameCharacter(50,
-                    "Lucky", true),
-            new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
-    // TODO add three players
-
-    world.addHumanPlayer("v", 3, "Drawing Room");
-    world.addHumanPlayer("a", 2, "Drawing Room");
-    world.addHumanPlayer("b", 5, "Foyer");
-
-    world.petMove("Drawing Room");
-    assertTrue(spaceTwo.equals(world.getPetSpace()));
-
-    assertEquals(true, world.isPlayerSeen());
-
-
-  }
-
-
-  @Test
-  public void isPlayerSeenPetInDifferentSpace() {
-    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-            new WorldPosition(23, 26));
-
-    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-            new WorldPosition(25, 18));
-
-    spaceThree = new DrLuckySpace("Dining Hall", new WorldPosition(12, 11),
-            new WorldPosition(21, 20));
-
-    spaceFour = new DrLuckySpace("Foyer", new WorldPosition(26, 13),
-            new WorldPosition(27, 18));
-
-
-    itemOne = new DrLuckyItem("Letter Opener", 2);
-    itemTwo = new DrLuckyItem("Paint Brush", 3);
-    itemThree = new DrLuckyItem("Knife", 5);
-    itemFour = new DrLuckyItem("Trophy head", 4);
-
-    spaceOne.addItemToSpace(itemOne);
-    spaceTwo.addItemToSpace(itemTwo);
-    spaceThree.addItemToSpace(itemThree);
-    spaceFour.addItemToSpace(itemFour);
-
-    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-            new GameCharacter(50,
-                    "Lucky", true),
-            new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
-    // TODO add three players
-
-    world.addHumanPlayer("v", 3, "Drawing Room");
-    world.addHumanPlayer("a", 2, "Drawing Room");
-    world.addHumanPlayer("b", 5, "Foyer");
-
-    assertTrue(spaceOne.equals(world.getPetSpace()));
-
-    assertEquals(true, world.isPlayerSeen());
-
-
-  }
-
-
-  @Test
-  public void isPlayerSeenPetNeighboringSpacePlayer() {
-    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-            new WorldPosition(23, 26));
-
-    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-            new WorldPosition(25, 18));
-
-    spaceThree = new DrLuckySpace("Dining Hall", new WorldPosition(12, 11),
-            new WorldPosition(21, 20));
-
-    spaceFour = new DrLuckySpace("Foyer", new WorldPosition(26, 13),
-            new WorldPosition(27, 18));
-
-
-    itemOne = new DrLuckyItem("Letter Opener", 2);
-    itemTwo = new DrLuckyItem("Paint Brush", 3);
-    itemThree = new DrLuckyItem("Knife", 5);
-    itemFour = new DrLuckyItem("Trophy head", 4);
-
-    spaceOne.addItemToSpace(itemOne);
-    spaceTwo.addItemToSpace(itemTwo);
-    spaceThree.addItemToSpace(itemThree);
-    spaceFour.addItemToSpace(itemFour);
-
-    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-            new GameCharacter(50,
-                    "Lucky", true),
-            new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
-    // TODO add three players
-
-    world.addHumanPlayer("v", 3, "Drawing Room");
-    world.addHumanPlayer("a", 2, "Dining Hall");
-    world.addHumanPlayer("b", 5, "Foyer");
-
-    assertTrue(spaceOne.equals(world.getPetSpace()));
-    world.petMove("Drawing Room");
-    assertTrue(spaceTwo.equals(world.getPetSpace()));
-    //TODO check if the spacetwo is neighbor
-    assertEquals(false, world.isPlayerSeen());
-
-
-  }
-
-  @Test
-  public void testPetMove() {
-    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-            new WorldPosition(23, 26));
-
-
-    Space spaceFive = new DrLuckySpace("Trophy Room",
-            new WorldPosition(10, 21),
-            new WorldPosition(15, 18));
-
-    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-            new WorldPosition(25, 18));
-
-    spaceThree = new DrLuckySpace("Dining Hall", new WorldPosition(12, 11),
-            new WorldPosition(21, 20));
-
-    spaceFour = new DrLuckySpace("Foyer", new WorldPosition(26, 13),
-            new WorldPosition(27, 18));
-
-
-    itemOne = new DrLuckyItem("Letter Opener", 2);
-    itemTwo = new DrLuckyItem("Paint Brush", 3);
-    itemThree = new DrLuckyItem("Knife", 5);
-    itemFour = new DrLuckyItem("Trophy head", 4);
-
-    spaceOne.addItemToSpace(itemOne);
-    spaceTwo.addItemToSpace(itemTwo);
-    spaceThree.addItemToSpace(itemThree);
-    spaceFour.addItemToSpace(itemFour);
-
-    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-            new GameCharacter(50,
-                    "Lucky", true),
-            new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
-
-    assertTrue(spaceOne.equals(world.getPetSpace()));
-
-    Player playerOne = new HumanControlledPlayer("v", 3);
-    Player playerTwo = new HumanControlledPlayer("a", 2);
-
-    world.addHumanPlayer("v", 3, "Drawing Room");
-    world.addHumanPlayer("a", 2, "Dining Hall");
-
-    assertEquals("Current player name: v  Current space name: Drawing Room\n",
-            world.displayCurrentPlayerInfo());
-    assertTrue(playerOne.equals(world.getCurrentPlayer()));
-    assertEquals(0, world.getNumberOfTurns());
-    world.petMove("Foyer");
-    world.nextTurn();
-    assertEquals("Current player name: a  Current space name: Dining Hall\n",
-            world.displayCurrentPlayerInfo());
-    assertTrue(playerTwo.equals(world.getCurrentPlayer()));
-    assertEquals(1, world.getNumberOfTurns());
-  }
-
-
-  @Test
-  public void testPetMovesWhenHumanPlayerMoves() {
-
-
-    StringBuilder stringBuilder = new StringBuilder();
-
-    stringBuilder.append("Name of the pet Dr Fortune Cat").append("\n");
-    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-            new WorldPosition(23, 26));
-
-
-    Space spaceFive = new DrLuckySpace("Trophy Room",
-            new WorldPosition(10, 21),
-            new WorldPosition(15, 18));
-
-    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-            new WorldPosition(25, 18));
-
-    spaceThree = new DrLuckySpace("Dining Hall", new WorldPosition(12, 11),
-            new WorldPosition(21, 20));
-
-    spaceFour = new DrLuckySpace("Foyer", new WorldPosition(26, 13),
-            new WorldPosition(27, 18));
-
-
-    itemOne = new DrLuckyItem("Letter Opener", 2);
-    itemTwo = new DrLuckyItem("Paint Brush", 3);
-    itemThree = new DrLuckyItem("Knife", 5);
-    itemFour = new DrLuckyItem("Trophy head", 4);
-
-    spaceOne.addItemToSpace(itemOne);
-    spaceTwo.addItemToSpace(itemTwo);
-    spaceThree.addItemToSpace(itemThree);
-    spaceFour.addItemToSpace(itemFour);
-
-    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-            new GameCharacter(50,
-                    "Lucky", true),
-            new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
-
-    assertTrue(spaceOne.equals(world.getPetSpace()));
-
-    Player playerOne = new HumanControlledPlayer("v", 3);
-    Player playerTwo = new HumanControlledPlayer("a", 2);
-
-    world.addHumanPlayer("v", 3, "Drawing Room");
-    world.addHumanPlayer("a", 2, "Dining Hall");
-    stringBuilder.append("Pet space information").append("\n");
-    stringBuilder.append("Armory");
-
-    String result = stringBuilder.toString();
-
-
-    assertEquals(result.toString(), world.getCurrentPetInfo());
-
-    world.petMove("Foyer");
-    world.nextTurn();
-
-    StringBuilder stringBuilderTwo = new StringBuilder();
-    stringBuilderTwo.append("Name of the pet Dr Fortune Cat").append("\n");
-    stringBuilderTwo.append("Pet space information").append("\n");
-    stringBuilderTwo.append("Foyer");
-
-    assertEquals(stringBuilderTwo.toString(), world.getCurrentPetInfo());
-    assertTrue(spaceFour.equals(world.getPetSpace()));
-  }
 
   @Test
   public void lookAroundPlayersInCurrentSpace() {
@@ -1266,7 +928,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
     Player playerOne = new HumanControlledPlayer("v", 3);
     Player playerTwo = new HumanControlledPlayer("a", 2);
@@ -1284,16 +946,26 @@ public class DrLuckyWorldTest {
     stringBuilder.append("Item Information (Item Name = Paint Brush, Damage Value = 3)")
             .append("\n\n");
 
-    stringBuilder.append("Space Info: Space Information (Space Name = Dining Hall, "
+    stringBuilder.append("Space Info: Space Information (Space Name = Armory, ")
+            .append("WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, ")
+            .append("WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, ")
+            .append("Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
+            .append("\n");
+    stringBuilder.append("Players: No players in this room").append("\n");
+    stringBuilder.append("The target character is in this room: Character Information ")
+            .append("(Character Name = Lucky, Character Health = 50, Character is Target = true)")
+            .append("\n");
+
+    stringBuilder.append("\nSpace Info: Space Information (Space Name = Dining Hall, "
             + "WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, "
             + "WorldPosition LowerRight Row = 21, WorldPosition LowerRight Column = 20, "
             + "Items = [Item Information (Item Name = Knife, Damage Value = 5)])").append("\n");
     stringBuilder.append("Players: No players in this room").append("\n\n");
 
     stringBuilder.append("Space Info: Space Information (Space Name = "
-            + "Foyer, WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, "
-            + "WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
-            + "Items = [Item Information (Item Name = Trophy head, Damage Value = 4)])")
+                    + "Foyer, WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, "
+                    + "WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
+                    + "Items = [Item Information (Item Name = Trophy head, Damage Value = 4)])")
             .append("\n");
     stringBuilder.append("Players: No players in this room\n");
 
@@ -1341,7 +1013,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
     Player playerOne = new HumanControlledPlayer("v", 3);
     Player playerTwo = new HumanControlledPlayer("a", 2);
@@ -1358,6 +1030,15 @@ public class DrLuckyWorldTest {
     stringBuilder.append("Item Information (Item Name = Paint Brush, Damage Value = 3)")
             .append("\n");
 
+    stringBuilder.append("\nSpace Info: Space Information (Space Name = Armory, ")
+            .append("WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, ")
+            .append("WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, ")
+            .append("Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
+            .append("\n");
+    stringBuilder.append("Players: No players in this room").append("\n");
+    stringBuilder.append("The target character is in this room: Character Information ")
+            .append("(Character Name = Lucky, Character Health = 50, Character is Target = true)")
+            .append("\n");
     stringBuilder.append("Space Info: Space Information (Space Name = Dining Hall, "
             + "WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, "
             + "WorldPosition LowerRight Row = 21, WorldPosition LowerRight Column = 20, "
@@ -1413,7 +1094,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
     Player playerOne = new HumanControlledPlayer("v", 3);
     Player playerTwo = new HumanControlledPlayer("a", 2);
@@ -1431,6 +1112,16 @@ public class DrLuckyWorldTest {
     stringBuilder.append("Item Information (Item Name = Paint Brush, Damage Value = 3)")
             .append("\n");
 
+    stringBuilder.append("\nSpace Info: Space Information (Space Name = Armory, ")
+            .append("WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, ")
+            .append("WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, ")
+            .append("Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
+            .append("\n");
+    stringBuilder.append("Players: No players in this room").append("\n");
+    stringBuilder.append("The target character is in this room: Character Information ")
+            .append("(Character Name = Lucky, Character Health = 50, Character is Target = true)")
+            .append("\n");
+
     stringBuilder.append("Space Info: Space Information (Space Name = Dining Hall, "
             + "WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, "
             + "WorldPosition LowerRight Row = 21, WorldPosition LowerRight Column = 20, "
@@ -1440,9 +1131,9 @@ public class DrLuckyWorldTest {
             + "Items in hand = [])").append("\n\n");
 
     stringBuilder.append("Space Info: Space Information (Space Name = Foyer, "
-            + "WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13,"
-            + " WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
-            + "Items = [Item Information (Item Name = Trophy head, Damage Value = 4)])")
+                    + "WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13,"
+                    + " WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
+                    + "Items = [Item Information (Item Name = Trophy head, Damage Value = 4)])")
             .append("\n");
 
     stringBuilder.append("Players in this room:").append("\n\n");
@@ -1491,7 +1182,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
     Player playerOne = new HumanControlledPlayer("v", 3);
     Player playerTwo = new HumanControlledPlayer("a", 2);
@@ -1505,6 +1196,17 @@ public class DrLuckyWorldTest {
     stringBuilder.append("There are no players in the room other than you.").append("\n");
     stringBuilder.append("The items that are currently laying in the room: ").append("\n");
     stringBuilder.append("Item Information (Item Name = Paint Brush, Damage Value = 3)")
+            .append("\n");
+
+    stringBuilder.append("\nSpace Info: Space Information (Space Name = Armory, ")
+            .append("WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, ")
+            .append("WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, ")
+            .append("Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
+            .append("\n");
+
+    stringBuilder.append("Players: No players in this room").append("\n");
+    stringBuilder.append("The target character is in this room: Character Information ")
+            .append("(Character Name = Lucky, Character Health = 50, Character is Target = true)")
             .append("\n");
 
     stringBuilder.append("\nSpace Info: Space Information (Space Name = Dining Hall, "
@@ -1548,7 +1250,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
 
     world.addHumanPlayer("v", 3, "Drawing Room");
@@ -1563,6 +1265,19 @@ public class DrLuckyWorldTest {
     stringBuilder.append("The items that are currently laying in the room: ").append("\n");
     stringBuilder.append("Item Information (Item Name = Paint Brush, Damage Value = 3)")
             .append("\n");
+
+
+    stringBuilder.append("\nSpace Info: Space Information (Space Name = Armory, ")
+            .append("WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, ")
+            .append("WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, ")
+            .append("Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
+            .append("\n");
+    stringBuilder.append("Players: No players in this room").append("\n");
+    stringBuilder.append("The target character is in this room: Character Information ")
+            .append("(Character Name = Lucky, Character Health = 50, Character is Target = true)")
+            .append("\n");
+
+
 
     stringBuilder.append("Space Info: Space Information (Space Name = Dining Hall, "
             + "WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, "
@@ -1612,7 +1327,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
 
     world.addHumanPlayer("v", 3, "Drawing Room");
@@ -1626,6 +1341,16 @@ public class DrLuckyWorldTest {
     stringBuilder.append("There are no players in the room other than you.").append("\n");
     stringBuilder.append("No items in your current room").append("\n");
 
+
+    stringBuilder.append("\nSpace Info: Space Information (Space Name = Armory, ")
+            .append("WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, ")
+            .append("WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, ")
+            .append("Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
+            .append("\n");
+    stringBuilder.append("Players: No players in this room").append("\n");
+    stringBuilder.append("The target character is in this room: Character Information ")
+            .append("(Character Name = Lucky, Character Health = 50, Character is Target = true)")
+            .append("\n");
 
     stringBuilder.append("Space Info: Space Information (Space Name = Dining Hall, "
             + "WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, "
@@ -1673,7 +1398,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
 
     world.addHumanPlayer("v", 3, "Drawing Room");
@@ -1696,7 +1421,15 @@ public class DrLuckyWorldTest {
             + "Information (Character Name = Lucky, Character Health = 50, "
             + "Character is Target = true)").append("\n\n");
 
-    stringBuilder.append("Space Info: Space Information (Space Name = Drawing Room, "
+    stringBuilder.append("Space Info: Space Information (Space Name = Armory, ")
+            .append("WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, ")
+            .append("WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, ")
+            .append("Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
+            .append("\n");
+    stringBuilder.append("Players: No players in this room").append("\n");
+
+
+    stringBuilder.append("\nSpace Info: Space Information (Space Name = Drawing Room, "
             + "WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, "
             + "WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, "
             + "Items = No Items)").append("\n");
@@ -1733,7 +1466,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
+            new CustomRandom(0));
 
 
     world.addHumanPlayer("v", 3, "Drawing Room");
@@ -1747,12 +1480,21 @@ public class DrLuckyWorldTest {
     StringBuilder stringBuilder = new StringBuilder();
 
 
+
+
     stringBuilder.append("The name of the space you are currently in: Dining Hall").append("\n");
     stringBuilder.append("There are no players in the room other than you.").append("\n");
     stringBuilder.append("The items that are currently laying in the room: ").append("\n");
     stringBuilder.append("Item Information (Item Name = Knife, Damage Value = 5)").append("\n\n");
 
-    stringBuilder.append("Space Info: Space Information (Space Name = Drawing Room, "
+    stringBuilder.append("Space Info: Space Information (Space Name = Armory, ")
+            .append("WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, ")
+            .append("WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, ")
+            .append("Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
+            .append("\n");
+    stringBuilder.append("Players: No players in this room").append("\n");
+
+    stringBuilder.append("\nSpace Info: Space Information (Space Name = Drawing Room, "
             + "WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 13, "
             + "WorldPosition LowerRight Row = 25, WorldPosition LowerRight Column = 18, "
             + "Items = No Items)").append("\n");
@@ -1767,76 +1509,6 @@ public class DrLuckyWorldTest {
   }
 
 
-  @Test
-  public void lookAroundTargetCharacterPetSameSpace() {
-    //neighboring spaces has items, one space has no items
-    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-            new WorldPosition(23, 26));
-
-    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-            new WorldPosition(25, 18));
-
-    spaceThree = new DrLuckySpace("Dining Hall", new WorldPosition(12, 11),
-            new WorldPosition(21, 20));
-
-    spaceFour = new DrLuckySpace("Foyer", new WorldPosition(26, 13),
-            new WorldPosition(27, 18));
-
-
-    itemOne = new DrLuckyItem("Letter Opener", 2);
-    itemThree = new DrLuckyItem("Knife", 5);
-
-    spaceOne.addItemToSpace(itemOne);
-    spaceThree.addItemToSpace(itemThree);
-
-    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-            new GameCharacter(50,
-                    "Lucky", true),
-            new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
-
-
-    world.addHumanPlayer("v", 3, "Drawing Room");
-
-
-    world.petMove("Drawing Room");
-    world.moveTargetCharacter();
-    world.nextTurn();
-    StringBuilder stringBuilder = new StringBuilder();
-
-    stringBuilder.append("The name of the space you are currently in: Drawing Room").append("\n");
-    stringBuilder.append("There are no players in the room other than you.").append("\n");
-    stringBuilder.append("No items in your current room").append("\n");
-    stringBuilder.append("The target character is in this room: Character Information "
-                    + "(Character Name = Lucky, Character Health = 50, Character is Target = true)")
-            .append("\n");
-    stringBuilder.append("The target character's pet is in this room! ").append("\n");
-    stringBuilder.append(" Name of the pet Dr Fortune Cat").append("\n");
-    stringBuilder.append("Pet space information").append("\n");
-    stringBuilder.append("Drawing Room").append("\n\n");
-
-    stringBuilder.append("Space Info: Space Information (Space Name = Armory, "
-                    + "WorldPosition UpperLeft Row = 22, WorldPosition UpperLeft Column = 19, "
-                    + "WorldPosition LowerRight Row = 23, WorldPosition LowerRight Column = 26, "
-                    + "Items = [Item Information (Item Name = Letter Opener, Damage Value = 2)])")
-            .append("\n");
-    stringBuilder.append("Players: No players in this room").append("\n\n");
-
-    stringBuilder.append("Space Info: Space Information (Space Name = Dining Hall, "
-            + "WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, "
-            + "WorldPosition LowerRight Row = 21, WorldPosition LowerRight Column = 20, "
-            + "Items = [Item Information (Item Name = Knife, Damage Value = 5)])").append("\n");
-    stringBuilder.append("Players: No players in this room").append("\n\n");
-
-    stringBuilder.append("Space Info: Space Information (Space Name = Foyer, "
-            + "WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, "
-            + "WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
-            + "Items = No Items)").append("\n");
-    stringBuilder.append("Players: No players in this room\n");
-
-    String result = stringBuilder.toString();
-    assertEquals(result.toString(), world.lookAround());
-  }
 
 //  @Test
 //  public void testComputerPickedMaxItemValue() {
