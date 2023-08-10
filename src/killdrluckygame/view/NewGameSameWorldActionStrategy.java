@@ -4,9 +4,9 @@ import killdrluckygame.view.WorldViewImpl;
 
 public class NewGameSameWorldActionStrategy implements MenuItemActionStrategy {
 
-  private WorldViewImpl view;
+  private WorldViewInterface view;
 
-  public NewGameSameWorldActionStrategy(WorldViewImpl view) {
+  public NewGameSameWorldActionStrategy(WorldViewInterface view) {
     this.view = view;
   }
 

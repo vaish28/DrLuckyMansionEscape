@@ -71,7 +71,6 @@ public interface World extends ReadOnlyWorldModel{
    */
   void addHumanPlayer(String playerName, int maxItemsCarry, String spaceName);
 
-
   /**
    * Moves the current player to the specified space.
    *
@@ -115,8 +114,6 @@ public interface World extends ReadOnlyWorldModel{
    * Advances the turn to the next player int the player list.
    */
   void nextTurn();
-
-
   /**
    * Returns a boolean value indicating if input is necessary from the user to take the next step.
    *
@@ -140,6 +137,21 @@ public interface World extends ReadOnlyWorldModel{
    */
   List<String> getNeighborsStrings();
 
+
+
+  /**
+   * Moves the pet to the specified space.
+   *
+   * @param petMoveToSpace The space to move the pet to.
+   */
+  void petMove(String petMoveToSpace);
+
+  /**
+   * return the space of the pet.
+   *
+   * @return a space object representing the location of the pet.
+   */
+  Space getPetSpace();
 
   /**
    * Performs a computer attack on the target character.
@@ -168,10 +180,6 @@ public interface World extends ReadOnlyWorldModel{
    * @return boolean value indicating if attack was successful.
    */
   boolean attackHuman(String itemName);
-
-
-
-
 
   void increaseNumberOfTurns();
 

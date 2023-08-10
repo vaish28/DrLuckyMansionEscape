@@ -1,7 +1,5 @@
 package killdrluckygame;
 
-import killdrluckygame.view.WorldViewInterface;
-
 public interface ControllerGuiInterface {
 
  // void playGame();
@@ -29,5 +27,14 @@ public interface ControllerGuiInterface {
 
   String movePlayerToRoom(Player currentPlayer, Space clickedRoom);
 
-  String getDsecription(Player currentPlayer);
+  String getPlayerDescription(String currentPlayerName);
+
+  void advanceTargetCharacter();
+
+  String simulateAction(Player currentPlayer);
+
+  String computerPlayerTurn();
+
+
+  String processInput(String action, String[] parameters);
 }

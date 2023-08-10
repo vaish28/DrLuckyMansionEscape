@@ -165,6 +165,12 @@ public interface ReadOnlyWorldModel {
    */
   ActionType getPrevActionOfComputer();
 
+  /**
+   * Returns the current information about the pet.
+   *
+   * @return The current pet information as a string.
+   */
+  String getCurrentPetInfo();
 
   Map<Space, List<Player>> getMappingOfSpaceAndPlayer();
 

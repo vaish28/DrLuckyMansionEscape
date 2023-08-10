@@ -262,10 +262,10 @@ public class GameController implements GameControllerInterface {
       while (!validInput) {
         out.append("Which room do you want to move in? Refer to the image:").append("\n");
         for (Space space : game.getSpaces()) {
-
+          if (!space.equals(game.getPetSpace())) {
             out.append(space.getSpaceName());
             out.append("\n");
-
+          }
         }
         spaceName = scan.nextLine();
         out.append(spaceName).append("\n");
@@ -452,6 +452,9 @@ public class GameController implements GameControllerInterface {
         display((game.targetCharacterDetails()));
         display("\n");
 
+        display("Target Character Pet Details: ");
+        display(game.getCurrentPetInfo());
+        display("\n");
 
         welcomeString.append("Enter the choice for the playing the game: ").append("\n")
                 .append("worldview: for viewing the graphical representation, ").append("\n")
@@ -562,6 +565,14 @@ public class GameController implements GameControllerInterface {
         game.changePrevAction(ActionType.LOOK_AROUND);
         result = performRandomAction(ActionType.LOOK_AROUND, currentPlayer, game);
         sb.append(result);
+        result = sb.toString();
+
+      } else {
+
+        game.changePrevAction(ActionType.MOVE_PET);
+        int spaceNumber = random.nextInt(0, game.getSpaces().size() - 1);
+        game.petMove(game.getSpaces().get(spaceNumber).getSpaceName());
+        sb.append("Performing pet move");
         result = sb.toString();
 
       }

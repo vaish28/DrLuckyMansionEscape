@@ -28,5 +28,17 @@ public class PetMoveCommand implements GameOperationCommand {
 
   @Override
   public void execute() {
+    String info = world.getCurrentPetInfo();
+    if (info != null) {
+      try {
+        out.append("Pet Information " + info).append("\n");
+        world.petMove(movePetToSpace);
+        out.append("Pet Information " + world.getCurrentPetInfo()).append("\n");
+        world.moveTargetCharacter();
+        world.nextTurn();
+      } catch (IOException ex) {
+        ex.getMessage();
+      }
+    }
   }
 }

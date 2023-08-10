@@ -6,9 +6,9 @@ import java.awt.event.ActionEvent;
 
 public class GameMenuItemFactory implements MenuItemFactory {
 
-  private WorldViewImpl parentView;
+  private WorldViewInterface parentView;
 
-  public GameMenuItemFactory(WorldViewImpl parentView) {
+  public GameMenuItemFactory(WorldViewInterface parentView) {
     this.parentView = parentView;
   }
 

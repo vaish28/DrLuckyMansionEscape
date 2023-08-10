@@ -558,6 +558,8 @@ public class ControllerTest {
 
     // Assert
 
+    assertTrue(out.toString().contains("Target Character Pet Details: "));
+
     assertTrue(modelLog.toString().contains("Getting target character details"));
 
     assertTrue(modelLog.toString().contains("Name of the target character: Doctor Lucky   "
@@ -596,7 +598,7 @@ public class ControllerTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0));
+            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
 
 
     systemUnderTest.gamePlay(model, 5);
@@ -698,7 +700,7 @@ public class ControllerTest {
             new GameCharacter(50,
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(0));
+            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
     systemUnderTest.gamePlay(model, 5);
 
 
@@ -707,6 +709,59 @@ public class ControllerTest {
 
   }
 
+  @Test
+  public void testMovePet() {
+    StringReader in = new StringReader("human\nAishwarya\n10\nDrawing Room\nmovepet\nArmory\nq");
+    GameControllerInterface systemUnderTest = new GameController(in, out, new CustomRandom());
+    World model = new MockWorldModel(modelLog, 0, true) {
+      @Override
+      public boolean isToPromptForInput() {
+        return true;
+      }
+
+      @Override
+      public List<Player> getPlayers() {
+        return new ArrayList<>(Arrays.asList(new
+                HumanControlledPlayer("aaai", 10)));
+      }
+
+      @Override
+      public Space getSpaceFromSpaceName(String spaceName) {
+        return new DrLuckySpace("Drawing Room", new WorldPosition(23, 24),
+                new WorldPosition(25, 26));
+      }
+
+
+      @Override
+      public Player getCurrentPlayer() {
+        Player player = new HumanControlledPlayer("Aishwarya", 10);
+        Space space = new DrLuckySpace("Drawing Room",
+                new WorldPosition(23, 24),
+                new WorldPosition(25, 26));
+        space.addItemToSpace(new DrLuckyItem("Revolver", 3));
+        addMappingOfSpaceAndPlayer(space, player);
+        return player;
+      }
+
+      @Override
+      public Player getPlayerByPlayerName(String playerName) {
+        return new HumanControlledPlayer("Aishwarya", 10);
+      }
+
+      @Override
+      public List<Space> getSpaces() {
+        return new ArrayList<>(Arrays.asList(new DrLuckySpace("Drawing Room",
+                new WorldPosition(23, 24),
+                new WorldPosition(25, 26))));
+      }
+
+
+    };
+    systemUnderTest.gamePlay(model, 5);
+    assertTrue(modelLog.toString().contains("Moving the pet"));
+    assertTrue(out.toString().contains("movepet\n"
+            + "Which room do you want to want to move the pet to?Armory"));
+  }
 
 
   @Test
@@ -787,7 +842,7 @@ public class ControllerTest {
     DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
-            random);
+            random, new TargetCharacterPet("Dr Fortune Cat"));
 
     // Add spaces to the world
     world.addSpaceToSpaceList(spaceOne);
@@ -840,7 +895,7 @@ public class ControllerTest {
     DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
-            random);
+            random, new TargetCharacterPet("Dr Fortune Cat"));
 
     // Add spaces to the world
     world.addSpaceToSpaceList(spaceOne);
@@ -891,7 +946,7 @@ public class ControllerTest {
     DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
-            new CustomRandom(0));
+            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
 
     // Add spaces to the world
     world.addSpaceToSpaceList(spaceOne);
@@ -932,7 +987,7 @@ public class ControllerTest {
     DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo)),
-            new CustomRandom(1));
+            new CustomRandom(1), new TargetCharacterPet("Dr Fortune Cat"));
 
     // Add spaces to the world
     world.addSpaceToSpaceList(spaceOne);
@@ -985,7 +1040,7 @@ public class ControllerTest {
     DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-            new CustomRandom(3));
+            new CustomRandom(3), new TargetCharacterPet("Dr Fortune Cat"));
 
     // Add spaces to the world
     world.addSpaceToSpaceList(spaceOne);
@@ -1035,7 +1090,7 @@ public class ControllerTest {
     DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree)),
-            new CustomRandom(2));
+            new CustomRandom(2), new TargetCharacterPet("Dr Fortune Cat"));
 
     // Add spaces to the world
     world.addSpaceToSpaceList(spaceOne);
@@ -1076,7 +1131,7 @@ public class ControllerTest {
     world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
-            new CustomRandom(0));
+            new CustomRandom(0), new TargetCharacterPet("Dr Fortune Cat"));
     world.addSpaceToSpaceList(spaceOne);
 
 
@@ -1119,7 +1174,7 @@ public class ControllerTest {
     DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree)),
-            random);
+            random, new TargetCharacterPet("Dr Fortune Cat"));
 
     // Add spaces to the world
     world.addSpaceToSpaceList(spaceOne);

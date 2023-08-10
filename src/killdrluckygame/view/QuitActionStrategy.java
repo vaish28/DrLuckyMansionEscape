@@ -3,18 +3,20 @@ package killdrluckygame.view;
 import javax.swing.JOptionPane;
 import killdrluckygame.view.WorldViewImpl;
 
+import java.awt.*;
+
 public class QuitActionStrategy implements MenuItemActionStrategy {
 
-  private WorldViewImpl view;
+  private WorldViewInterface view;
 
-  public QuitActionStrategy(WorldViewImpl view) {
+  public QuitActionStrategy(WorldViewInterface view) {
     this.view = view;
   }
 
   @Override
   public void executeAction() {
     int result = JOptionPane.showConfirmDialog(
-            view,
+            (Component) view,
             "Are you sure you want to quit?",
             "Quit Game",
             JOptionPane.YES_NO_OPTION,

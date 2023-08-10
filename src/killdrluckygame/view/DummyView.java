@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class WorldViewImpl extends JFrame implements WorldViewInterface {
+public class DummyView extends JFrame implements WorldViewInterface {
 
   private List<Space> spaceList;
   private int rows;
@@ -41,7 +41,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private MenuItemFactory menuItemFactory = new GameMenuItemFactory(this);
 
-  public WorldViewImpl(ReadOnlyWorldModel model) {
+  public DummyView(ReadOnlyWorldModel model) {
     this.model = model;
     initialize();
   }
@@ -128,7 +128,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private void showLookAroundMessage() {
     String lookAround = listener.lookAround();
     JOptionPane.showMessageDialog(
-            WorldViewImpl.this,
+            this,
             lookAround,
             "Look Around",
             JOptionPane.INFORMATION_MESSAGE);
@@ -140,7 +140,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
     String resultAttack = "";
     int result = JOptionPane.showConfirmDialog(
-            WorldViewImpl.this,
+            this,
             "Are you sure you want to attempt on the target character's life?",
             "Attempt on Target Character",
             JOptionPane.YES_NO_OPTION,
@@ -186,7 +186,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
       }
     }
     JOptionPane.showMessageDialog(
-            WorldViewImpl.this,
+            this,
             resultAttack,
             "Attacking now!",
             JOptionPane.INFORMATION_MESSAGE);
@@ -205,7 +205,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
     if (playerItemList.isEmpty()) {
       JOptionPane.showMessageDialog(
-              WorldViewImpl.this,
+              this,
               "There are no items to pick.",
               "No Items Available",
               JOptionPane.INFORMATION_MESSAGE);
@@ -223,7 +223,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
 
     String selectedItem = (String) JOptionPane.showInputDialog(
-            WorldViewImpl.this,
+            this,
             "Select an item to pick:",
             "Pick Item",
             JOptionPane.PLAIN_MESSAGE,
@@ -305,8 +305,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
   private void showAddComputerPlayer() {
- //   listener.processComputerClick();
-    listener.processInput("computer", new String[]{});
+    listener.processComputerClick();
     updateDisplay();
   }
 
@@ -381,13 +380,12 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
     if (result == JOptionPane.OK_OPTION) {
       String name = nameField.getText();
-      //int maxCapacity = Integer.parseInt(maxCapacityField.getText());
+      int maxCapacity = Integer.parseInt(maxCapacityField.getText());
       String nameOfRoom = roomNameField.getText();
 
       // Check if the selected room is not the same as the target character's starting room
       if (!nameOfRoom.equals(model.getCurrentSpaceTargetIsIn().getSpaceName())) {
-      //  listener.processHumanUserInfoClick(name, maxCapacity, nameOfRoom);
-        listener.processInput("human", new String[]{name, maxCapacityField.getText(), nameOfRoom});
+        listener.processHumanUserInfoClick(name, maxCapacity, nameOfRoom);
         updateDisplay();
       } else {
         JOptionPane.showMessageDialog(
@@ -504,7 +502,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
             // Clicked on a room with the current player, show the player's description
             String description = listener.getPlayerDescription(currentPlayer.getName()); // Replace with your description logic
             JOptionPane.showMessageDialog(
-                    WorldViewImpl.this,
+                    this,
                     description,
                     "Player Description",
                     JOptionPane.INFORMATION_MESSAGE);
