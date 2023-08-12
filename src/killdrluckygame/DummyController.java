@@ -18,15 +18,15 @@ public class DummyController implements ControllerGuiInterface {
   private CustomRandomInterface random;
   private final Map<String, Function<Scanner, GameOperationCommand>> supportedOperations;
   private String filePath;
+
   public DummyController(CustomRandomInterface random,
-                           World worldModel, WorldViewInterface worldView, int maxTurns, String filePath) {
+                         World worldModel, WorldViewInterface worldView, int maxTurns, String filePath) {
     this.worldModel = worldModel;
     this.worldView = worldView;
     this.random = random;
     this.maxTurns = maxTurns;
     this.filePath = filePath;
     this.supportedOperations = new HashMap<>();
-    initializeListeners();
     worldView.addListener(this);
     initialise();
   }
@@ -34,7 +34,7 @@ public class DummyController implements ControllerGuiInterface {
   private void initialise() {
 
     this.supportedOperations.put("human", (Scanner sc) -> {
-    //  validateHumanPlayerInformation(game, sc);
+      //  validateHumanPlayerInformation(game, sc);
       GameOperationCommand command = new AddHumanPlayerCommand(worldModel, sc.nextLine(), Integer.parseInt(sc.nextLine()),
               sc.nextLine(), System.out);
       //playAfterInput = true;
@@ -54,10 +54,12 @@ public class DummyController implements ControllerGuiInterface {
 
     this.supportedOperations.put("playerinfo", (Scanner sc) -> {
 
-    //  String playerName = validatePlayerName(game, sc);
+      //  String playerName = validatePlayerName(game, sc);
       GameOperationCommand command = new DisplayPlayerInformationCommand(worldModel, sc.nextLine(), System.out);
       return command;
     });
+
+//    this.supportedOperations.put()
 
 
 //    this.supportedOperations.put("move", (Scanner sc) -> {
@@ -153,97 +155,16 @@ public class DummyController implements ControllerGuiInterface {
   public void playGame() {
 
   }
-  private void initializeListeners() {
 
-  }
-
-  // Implement methods to handle different user actions based on the GUI interactions
-  // For example:
-  private void moveButtonClicked() {
-    // Logic to handle moving the player in the world
-    // Call methods from the game model to update the player's position
-    // Update the GUI to reflect the changes in the world
-
-  }
-
-  private void pickUpButtonClicked() {
-    // Logic to handle picking up an item in the world
-    // Call methods from the game model to pick up the item
-    // Update the GUI to reflect the changes in the world
-  }
-
-  private void handleMouseClick(int x, int y) {
-    // Logic to handle mouse click events
-    // Determine the action based on the clicked position in the world
-    // Call methods from the game model to update the game state
-    // Update the GUI to reflect the changes in the world
-  }
-
-  private void handleKeyPress(int keyCode) {
-    // Logic to handle key press events
-    // Determine the action based on the pressed key
-    // Call methods from the game model to update the game state
-    // Update the GUI to reflect the changes in the world
-  }
-
-  public void processHumanUserInfoClick(String name, int maxCapacity, String roomName) {
-
-
-    worldModel.addHumanPlayer(name, maxCapacity, roomName);
-
-    Map<Space, List<Player>> mapping = worldModel.getMappingOfSpaceAndPlayer();
-
-    if (mapping != null) {
-      // Iterate through the mapping and display the details
-      for (Map.Entry<Space, List<Player>> entry : mapping.entrySet()) {
-        Space space = entry.getKey();
-        List<Player> players = entry.getValue();
-
-        // Iterate through the list of players for the current space
-        for (Player currentplayer : players) {
-          System.out.println("Space: " + space.getSpaceName() + " | Player: " +
-                  currentplayer.getName());
-        }
-      }
-    }
-  }
-
-
-  public void processComputerClick() {
-    // Do something with the user input, e.g., create a new player with the provided data
-    // and add it to the model.
-    // Example:
-    int maxCapacity = generateRandomMaxCapacity();
-    int spaceRandomIndex = generateRandomFirstSpace();
-    worldModel.addComputerPlayer(maxCapacity,spaceRandomIndex);
-
-
-    Map<Space, List<Player>> mapping = worldModel.getMappingOfSpaceAndPlayer();
-
-    if (mapping != null) {
-      // Iterate through the mapping and display the details
-      for (Map.Entry<Space, List<Player>> entry : mapping.entrySet()) {
-        Space space = entry.getKey();
-        List<Player> players = entry.getValue();
-
-        // Iterate through the list of players for the current space
-        for (Player currentplayer : players) {
-          System.out.println("Space: " + space.getSpaceName() + " | Player: " +
-                  currentplayer.getName());
-        }
-      }
-    }
-  }
 
   @Override
   public String pickItem(String pickedItem) {
-    if(worldModel!=null) {
-      if(worldModel.pickItem(pickedItem)) {
+    if (worldModel != null) {
+      if (worldModel.pickItem(pickedItem)) {
         worldModel.moveTargetCharacter();
         worldModel.nextTurn();
         return "Item picked successfully";
-      }
-      else {
+      } else {
         return "Item not picked successfully";
       }
     }
@@ -253,13 +174,13 @@ public class DummyController implements ControllerGuiInterface {
 
   @Override
   public String lookAround() {
-    if(worldModel!=null) {
-      if(worldModel.lookAround()!=null) {
-        worldModel.moveTargetCharacter();
-        worldModel.nextTurn();
-        return worldModel.lookAround();
-      }
-      else {
+    if (worldModel != null) {
+      String lookAround = worldModel.lookAround();
+      worldModel.moveTargetCharacter();
+      worldModel.nextTurn();
+      if (lookAround != null) {
+        return lookAround;
+      } else {
         return "Look around not successful";
       }
     }
@@ -268,13 +189,12 @@ public class DummyController implements ControllerGuiInterface {
 
   @Override
   public String attemptOnTargetCharacter(String itemName) {
-    if(worldModel!=null) {
-      if(worldModel.attackHuman(itemName)) {
+    if (worldModel != null) {
+      if (worldModel.attackHuman(itemName)) {
         worldModel.moveTargetCharacter();
         worldModel.nextTurn();
         return "Attack successful";
-      }
-      else {
+      } else {
         return "Attack not successful! Target Character not in same room";
       }
     }
@@ -304,8 +224,8 @@ public class DummyController implements ControllerGuiInterface {
   }
 
   @Override
-  public String movePlayerToRoom(Player currentPlayer, Space clickedRoom) {
-    if(worldModel.move(clickedRoom.getSpaceName())){
+  public String movePlayerToRoom(String clickedRoom) {
+    if (worldModel.move(clickedRoom)) {
       worldModel.moveTargetCharacter();
       worldModel.nextTurn();
       return "moved successfully";
@@ -388,12 +308,15 @@ public class DummyController implements ControllerGuiInterface {
   }
 
   public String computerPlayerTurn() {
-    String result="";
-    if(worldModel.getCurrentPlayer().isComputerControlled()) {
+    String result = "";
+    Player currentPlayer = worldModel.getCurrentPlayer();
+    if (worldModel.getCurrentPlayer().isComputerControlled()) {
       result = simulateAction(worldModel.getCurrentPlayer());
       System.out.println(result);
+      advanceTargetCharacter();
+      return result;
     }
-    advanceTargetCharacter();
+
     return result;
   }
 
@@ -405,6 +328,15 @@ public class DummyController implements ControllerGuiInterface {
         Scanner sc = new Scanner(additionalParameters);
         if (action.toLowerCase().equals("playerinfo")) {
           return worldModel.getPlayerDescriptionFromUsername(sc.nextLine());
+        } else if (action.toLowerCase().equals("pickitem")) {
+          String[] pick = additionalParameters.split("\n");
+          return pickItem(pick[0]);
+        } else if (action.toLowerCase().equals("attack")) {
+          String[] attack = additionalParameters.split("\n");
+          return attemptOnTargetCharacter(attack[0]);
+        } else if (action.toLowerCase().equals("move")) {
+          String[] move = additionalParameters.split("\n");
+          return movePlayerToRoom(move[0]);
         } else {
           GameOperationCommand command = this.supportedOperations.get(action).apply(sc);
           command.execute();
@@ -414,8 +346,9 @@ public class DummyController implements ControllerGuiInterface {
       }
     } else {
       // end the game
+      worldView.gameEnd();
     }
-    return  "";
+    return "";
   }
 
 

@@ -27,7 +27,7 @@ public class AttackPlayerCommand implements GameOperationCommand {
   }
 
   @Override
-  public void execute() {
+  public String execute() {
     boolean attackSuccessful = false;
     try {
       if (("").equals(option)) {
@@ -51,7 +51,7 @@ public class AttackPlayerCommand implements GameOperationCommand {
     } catch (IOException ex) {
       ex.getMessage();
     }
-
+    return "";
   }
 }
 

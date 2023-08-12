@@ -36,17 +36,21 @@ public class MovePlayerCommand implements GameOperationCommand {
    * thrown.
    */
   @Override
-  public void execute() {
+  public String execute() {
+    StringBuilder sb = new StringBuilder();
     if (!world.move(this.spaceName)) {
       throw new IllegalArgumentException("Invalid space name entered!");
     } else {
       try {
         out.append("Player moved successfully");
+        sb.append("Player moved successfully");
         if (world.getPlayers().size() != 0) {
           out.append(world.getCurrentPlayer().getPlayerDescription());
+          sb.append(world.getCurrentPlayer().getPlayerDescription());
           world.moveTargetCharacter();
           world.nextTurn();
           out.append(world.displayCurrentPlayerInfo());
+          sb.append(world.displayCurrentPlayerInfo());
         }
 
       } catch (IOException ex) {
@@ -55,5 +59,6 @@ public class MovePlayerCommand implements GameOperationCommand {
       }
 
     }
+    return sb.toString();
   }
 }

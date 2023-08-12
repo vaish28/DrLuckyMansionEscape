@@ -90,7 +90,7 @@ abstract class AbstractPlayer implements Player {
    */
   @Override
   public boolean isComputerControlled() {
-    return true;
+    return false;
   }
 
 

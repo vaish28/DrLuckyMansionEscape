@@ -28,14 +28,21 @@ public class DisplaySpaceInformationCommand implements GameOperationCommand {
     this.out = out;
   }
 
+
+
   @Override
-  public void execute() throws IllegalArgumentException {
+  public String execute() throws IllegalArgumentException {
+
+    StringBuilder sb = new StringBuilder();
     String info = world.getSpaceInfoWithPlayer(this.spaceName);
     if (info != null) {
       try {
         out.append(spaceName).append("\n");
+        sb.append(spaceName).append("\n");
         out.append("The Space information ");
+        sb.append("\nThe Space information\n ");
         out.append(info).append("\n");
+        sb.append(info).append("\n");
         out.append("\n");
       } catch (IOException ex) {
         ex.getMessage();
@@ -43,5 +50,6 @@ public class DisplaySpaceInformationCommand implements GameOperationCommand {
     } else {
       throw new IllegalArgumentException();
     }
+    return sb.toString();
   }
 }

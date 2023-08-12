@@ -30,11 +30,12 @@ public class DisplayPlayerInformationCommand implements GameOperationCommand {
    * Executes the command to display information about the specified player.
    */
   @Override
-  public void execute() {
+  public String execute() {
 
+    StringBuilder sb = new StringBuilder();
     if (world.getPlayerByPlayerName(playerName) != null) {
       try {
-        StringBuilder sb = new StringBuilder("Current player information ");
+        sb.append("\nCurrent player information \n");
         sb.append(world.getPlayerDescriptionFromUsername(playerName));
         sb.append("\n");
         out.append(sb.toString());
@@ -49,5 +50,6 @@ public class DisplayPlayerInformationCommand implements GameOperationCommand {
       }
 
     }
+    return sb.toString();
   }
 }

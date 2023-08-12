@@ -62,54 +62,6 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     // Update the GUI to reflect the changes in the world
   }
 
-  public void processHumanUserInfoClick(String name, int maxCapacity, String roomName) {
-
-
-    worldModel.addHumanPlayer(name, maxCapacity, roomName);
-
-    Map<Space, List<Player>> mapping = worldModel.getMappingOfSpaceAndPlayer();
-
-    if (mapping != null) {
-      // Iterate through the mapping and display the details
-      for (Map.Entry<Space, List<Player>> entry : mapping.entrySet()) {
-        Space space = entry.getKey();
-        List<Player> players = entry.getValue();
-
-        // Iterate through the list of players for the current space
-        for (Player currentplayer : players) {
-          System.out.println("Space: " + space.getSpaceName() + " | Player: " +
-                  currentplayer.getName());
-        }
-      }
-    }
-  }
-
-
-  public void processComputerClick() {
-    // Do something with the user input, e.g., create a new player with the provided data
-    // and add it to the model.
-    // Example:
-    int maxCapacity = generateRandomMaxCapacity();
-    int spaceRandomIndex = generateRandomFirstSpace();
-    worldModel.addComputerPlayer(maxCapacity,spaceRandomIndex);
-
-
-    Map<Space, List<Player>> mapping = worldModel.getMappingOfSpaceAndPlayer();
-
-    if (mapping != null) {
-      // Iterate through the mapping and display the details
-      for (Map.Entry<Space, List<Player>> entry : mapping.entrySet()) {
-        Space space = entry.getKey();
-        List<Player> players = entry.getValue();
-
-        // Iterate through the list of players for the current space
-        for (Player currentplayer : players) {
-          System.out.println("Space: " + space.getSpaceName() + " | Player: " +
-                  currentplayer.getName());
-        }
-      }
-    }
-  }
 
   @Override
   public String pickItem(String pickedItem) {
@@ -180,8 +132,8 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   }
 
   @Override
-  public String movePlayerToRoom(Player currentPlayer, Space clickedRoom) {
-    if(worldModel.move(clickedRoom.getSpaceName())){
+  public String movePlayerToRoom(String clickedRoom) {
+    if(worldModel.move(clickedRoom)){
       worldModel.moveTargetCharacter();
       worldModel.nextTurn();
       return "moved successfully";

@@ -29,6 +29,11 @@ public class HumanControlledPlayer extends AbstractPlayer {
     return true;
   }
 
+  @Override
+  public boolean isComputerControlled() {
+    return false;
+  }
+
 
   @Override
   public String getPlayerDescription() {

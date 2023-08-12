@@ -35,6 +35,11 @@ public class ComputerControlledPlayer extends AbstractPlayer {
     return true;
   }
 
+  @Override
+  public boolean isHumanControlled() {
+    return false;
+  }
+
   /**
    * Returns a description of the computer-controlled player.
    *

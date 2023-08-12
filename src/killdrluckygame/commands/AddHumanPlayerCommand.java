@@ -39,13 +39,17 @@ public class AddHumanPlayerCommand implements GameOperationCommand {
   }
 
   @Override
-  public void execute() {
+  public String execute() {
 
+    StringBuilder sb = new StringBuilder();
     try {
       world.addHumanPlayer(playerName, maxItems, spaceName);
       out.append("Player has been added successfully").append("\n");
+      sb.append("\nPlayer has been added successfully").append("\n");
     } catch (IOException ex) {
       ex.getMessage();
     }
+
+    return sb.toString();
   }
 }

@@ -36,15 +36,18 @@ public class PickItemCommand implements GameOperationCommand {
    */
 
   @Override
-  public void execute() {
+  public String execute() {
+    StringBuilder sb = new StringBuilder();
     if (hasItems) {
       if (!world.pickItem(this.itemName)) {
         throw new IllegalArgumentException("Invalid item name entered or max capacity exhausted!");
       } else {
         try {
           out.append("Item picked successfully");
+          sb.append("Item picked successfully");
           if (world.getPlayers().size() != 0) {
             out.append(world.getCurrentPlayer().getPlayerDescription());
+            sb.append(world.getCurrentPlayer().getPlayerDescription());
             world.moveTargetCharacter();
             world.nextTurn();
           }
@@ -57,12 +60,13 @@ public class PickItemCommand implements GameOperationCommand {
     } else {
       try {
         out.append("No items to pick in this space!");
+        sb.append("No items to pick in this space!");
         world.moveTargetCharacter();
         world.nextTurn();
       } catch (IOException ex) {
         ex.getMessage();
       }
     }
-
+  return sb.toString();
   }
 }

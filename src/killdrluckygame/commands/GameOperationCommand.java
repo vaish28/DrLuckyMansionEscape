@@ -17,5 +17,5 @@ public interface GameOperationCommand {
    * It is expected that the execution of the command will have an effect on the game or its
    * components.
    */
-  void execute();
+  String execute();
 }

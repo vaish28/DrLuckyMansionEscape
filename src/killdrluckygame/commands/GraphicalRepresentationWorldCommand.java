@@ -32,17 +32,19 @@ public class GraphicalRepresentationWorldCommand implements GameOperationCommand
    * Executes the command to display the graphical representation of the game world.
    */
   @Override
-  public void execute() {
-
+  public String execute() {
+  StringBuilder sb = new StringBuilder();
     try {
       out.append("Displaying the world now!!").append("\n");
-      out.append("Follow the graphical representation of the world of space information")
+      sb.append("Displaying the world now!!").append("\n");
+      out.append("Follow the graphical representation of the world of space information");
+      sb.append("Follow the graphical representation of the world of space information")
               .append("\n");
       world.createImage();
     } catch (IOException ex) {
       ex.getMessage();
     }
-
+  return sb.toString();
 
   }
 }

@@ -174,10 +174,11 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         for (int i = 0; i < radioButtons.length; i++) {
           if (radioButtons[i].isSelected()) {
             if (radioButtons[i].isSelected() && i == 0) {
-              resultAttack = listener.attemptOnTargetCharacter("");
+              resultAttack = listener.processInput("attack",new String[]{});
+
             } else {
               String item = items.get(i - 1).getItemName();
-              resultAttack = listener.attemptOnTargetCharacter(item);
+              resultAttack = listener.processInput("attack",new String[]{item});
               break;
             }
 
@@ -231,9 +232,18 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
             itemNames,
             itemNames[0]);
 
+    String resultPick = "";
     if (selectedItem != null) {
-      listener.pickItem(selectedItem); // Call the pickItem function in the controller with the selected item
+//      listener.pickItem(selectedItem); // Call the pickItem function in the controller with the selected item
+      resultPick  = listener.processInput("pickitem", new String[]{selectedItem} );
     }
+
+    JOptionPane.showMessageDialog(
+            WorldViewImpl.this,
+            resultPick,
+            "Attacking now!",
+            JOptionPane.INFORMATION_MESSAGE);
+    updateDisplay();
     updateDisplay();
     listener.computerPlayerTurn();
   }
@@ -371,13 +381,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
             JOptionPane.PLAIN_MESSAGE
     );
 
-//    if (result == JOptionPane.OK_OPTION) {
-//      String name = nameField.getText();
-//      int maxCapacity = Integer.parseInt(maxCapacityField.getText());
-//      String nameOfRoom = roomNameField.getText();
-//      listener.processHumanUserInfoClick(name, maxCapacity, nameOfRoom);
-//      updateDisplay();
-//    }
 
     if (result == JOptionPane.OK_OPTION) {
       String name = nameField.getText();
@@ -469,6 +472,24 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     worldScrollablePanel.repaint();
   }
 
+  @Override
+  public void gameEnd() {
+    if (model.getTargetHealth() == 0) {
+      JOptionPane.showMessageDialog(
+              this,
+              "Congratulations! You have successfully defeated the target character.\nYou win!",
+              "Game Over - Victory!",
+              JOptionPane.INFORMATION_MESSAGE);
+    } else {
+      JOptionPane.showMessageDialog(
+              this,
+              "Oh no! The turns are exhausted and the target character is still alive.\nYou lose!",
+              "Game Over - Defeat!",
+              JOptionPane.ERROR_MESSAGE);
+      System.exit(0);
+    }
+  }
+
 
   private class GridPanel extends JPanel {
 
@@ -502,14 +523,21 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         if (currentPlayer.isHumanControlled()) { // Check if the current player is human-controlled
           if (playersInClickedRoom != null && playersInClickedRoom.contains(currentPlayer)) {
             // Clicked on a room with the current player, show the player's description
-            String description = listener.getPlayerDescription(currentPlayer.getName()); // Replace with your description logic
+            String description = listener.processInput("playerinfo",new String[]{model.getCurrentPlayer().getName()}); // Replace with your description logic
             JOptionPane.showMessageDialog(
                     WorldViewImpl.this,
                     description,
                     "Player Description",
                     JOptionPane.INFORMATION_MESSAGE);
           } else {
-            listener.movePlayerToRoom(currentPlayer, clickedRoom);
+            String resultMove = listener.processInput("move", new String[]{clickedRoom.getSpaceName()});
+            JOptionPane.showMessageDialog(
+                    WorldViewImpl.this,
+                    resultMove,
+                    "Player Description",
+                    JOptionPane.INFORMATION_MESSAGE);
+            listener.advanceTargetCharacter();
+            listener.computerPlayerTurn();
             updateDisplay();
           }
         }
@@ -548,18 +576,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
       g.setColor(Color.white);
       g.fillRect(0, 0, worldWidth, worldHeight);
 
-//      g.setColor(Color.BLACK);
-//
-//      for (int col = 0; col <= numCols; col++) {
-//        int x = col * cellWidth;
-//        g.drawLine(x, 0, x, worldHeight);
-//      }
-//
-//      // Draw horizontal grid lines
-//      for (int row = 0; row <= numRows; row++) {
-//        int y = row * cellHeight;
-//        g.drawLine(0, y, worldWidth, y);
-//      }
 
       for (Space room : spaceList) {
         int roomRow = room.getUpperLeftPosition().getRow();
@@ -573,11 +589,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         int roomHeight = (room.getLowerRightPosition().getRow()
                 - room.getUpperLeftPosition().getRow() + 1) * cellHeight;
 
-//        // Generate a random color for each room
-//        Color roomColor = Color.BLUE;//new Color((int) (Math.random() * 0x1000000));
-//        g.setColor(roomColor);
-//
-//        g.fillRect(roomX, roomY, roomWidth, roomHeight);
         g.setColor(Color.BLACK);
         g.drawRect(roomX, roomY, roomWidth, roomHeight);
         g.setColor(new Color(144, 238, 175));

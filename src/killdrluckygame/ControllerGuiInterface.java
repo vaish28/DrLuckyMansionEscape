@@ -6,14 +6,11 @@ public interface ControllerGuiInterface {
 
   void playGame();
 
-  void processHumanUserInfoClick(String name, int maxCapacity, String nameOfRoom);
-
   int generateRandomMaxCapacity();
   
 
   int generateRandomFirstSpace();
 
-  void processComputerClick();
 
   String lookAround();
 
@@ -25,7 +22,7 @@ public interface ControllerGuiInterface {
 
   void resetGame();
 
-  String movePlayerToRoom(Player currentPlayer, Space clickedRoom);
+  String movePlayerToRoom(String clickedRoom);
 
   String getPlayerDescription(String currentPlayerName);
 

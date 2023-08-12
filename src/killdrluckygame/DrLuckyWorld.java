@@ -524,7 +524,7 @@ public class DrLuckyWorld implements World {
   @Override
   public String lookAround() {
     Player currentPlayer = playerList.get(currentTurn);
-    increaseNumberOfTurns();
+
     if (currentPlayer.isHumanControlled()) {
       return lookAroundString(currentPlayer);
     }

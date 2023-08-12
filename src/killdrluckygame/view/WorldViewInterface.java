@@ -19,4 +19,6 @@ public interface WorldViewInterface  {
   void startNewGameWithSameWorld();
 
   void refresh(String... args);
+
+  void gameEnd();
 }

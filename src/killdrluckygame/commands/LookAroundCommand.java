@@ -31,11 +31,15 @@ public class LookAroundCommand implements GameOperationCommand {
    * The information is printed to the console.
    */
   @Override
-  public void execute() {
+  public String execute() {
     String lookAroundString = world.lookAround();
+    StringBuilder sb = new StringBuilder();
     try {
       out.append("Looking around neighbours").append("\n");
+      sb.append("Looking around neighbours").append("\n");
       out.append(lookAroundString);
+      sb.append(lookAroundString);
+      world.increaseNumberOfTurns();
       world.moveTargetCharacter();
       world.nextTurn();
 
@@ -43,6 +47,6 @@ public class LookAroundCommand implements GameOperationCommand {
       ex.getMessage();
     }
 
-
+    return sb.toString();
   }
 }
