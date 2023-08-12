@@ -47,10 +47,10 @@ public class MovePlayerCommand implements GameOperationCommand {
         if (world.getPlayers().size() != 0) {
           out.append(world.getCurrentPlayer().getPlayerDescription());
           sb.append(world.getCurrentPlayer().getPlayerDescription());
-          world.moveTargetCharacter();
-          world.nextTurn();
           out.append(world.displayCurrentPlayerInfo());
           sb.append(world.displayCurrentPlayerInfo());
+          world.moveTargetCharacter();
+          world.nextTurn();
         }
 
       } catch (IOException ex) {

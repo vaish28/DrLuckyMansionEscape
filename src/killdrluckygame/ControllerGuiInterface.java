@@ -7,24 +7,12 @@ public interface ControllerGuiInterface {
   void playGame();
 
   int generateRandomMaxCapacity();
-  
 
   int generateRandomFirstSpace();
-
-
-  String lookAround();
-
-  String pickItem(String pickedItem);
-
-  String attemptOnTargetCharacter(String itemName);
 
   void loadNewGame(String worldFileName);
 
   void resetGame();
-
-  String movePlayerToRoom(String clickedRoom);
-
-  String getPlayerDescription(String currentPlayerName);
 
   void advanceTargetCharacter();
 

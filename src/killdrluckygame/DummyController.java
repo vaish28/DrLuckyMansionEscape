@@ -1,15 +1,20 @@
 package killdrluckygame;
 
-import killdrluckygame.commands.*;
-import killdrluckygame.view.WorldViewInterface;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
+import killdrluckygame.commands.AddComputerPlayerCommand;
+import killdrluckygame.commands.AddHumanPlayerCommand;
+import killdrluckygame.commands.AttackPlayerCommand;
+import killdrluckygame.commands.DisplayPlayerInformationCommand;
+import killdrluckygame.commands.GameOperationCommand;
+import killdrluckygame.commands.LookAroundCommand;
+import killdrluckygame.commands.MovePlayerCommand;
+import killdrluckygame.commands.PickItemCommand;
+import killdrluckygame.view.WorldViewInterface;
 
 public class DummyController implements ControllerGuiInterface {
   private World worldModel;
@@ -34,10 +39,9 @@ public class DummyController implements ControllerGuiInterface {
   private void initialise() {
 
     this.supportedOperations.put("human", (Scanner sc) -> {
-      //  validateHumanPlayerInformation(game, sc);
-      GameOperationCommand command = new AddHumanPlayerCommand(worldModel, sc.nextLine(), Integer.parseInt(sc.nextLine()),
+      GameOperationCommand command = new AddHumanPlayerCommand(worldModel, sc.nextLine(),
+              Integer.parseInt(sc.nextLine()),
               sc.nextLine(), System.out);
-      //playAfterInput = true;
       return command;
 
     });
@@ -46,159 +50,47 @@ public class DummyController implements ControllerGuiInterface {
 
       int maxCapacity = generateRandomMaxCapacity();
       int spaceRandomIndex = generateRandomFirstSpace();
-      GameOperationCommand command = new AddComputerPlayerCommand(worldModel, System.out, maxCapacity,
-              spaceRandomIndex);
+      GameOperationCommand command = new AddComputerPlayerCommand(worldModel, System.out,
+              maxCapacity, spaceRandomIndex);
       return command;
     });
-
 
     this.supportedOperations.put("playerinfo", (Scanner sc) -> {
-
-      //  String playerName = validatePlayerName(game, sc);
-      GameOperationCommand command = new DisplayPlayerInformationCommand(worldModel, sc.nextLine(), System.out);
+      GameOperationCommand command = new DisplayPlayerInformationCommand(worldModel, sc.nextLine(),
+              System.out);
       return command;
     });
 
-//    this.supportedOperations.put()
+    this.supportedOperations.put("move", (Scanner sc) -> {
+      GameOperationCommand command = new MovePlayerCommand(worldModel, sc.nextLine(), System.out);
+      return command;
+    });
 
 
-//    this.supportedOperations.put("move", (Scanner sc) -> {
-//      GameOperationCommand command = null;
-//
-//      if (playAfterInput) {
-//
-//        if (validateMoveInformation(game, out, sc)) {
-//          command = new MovePlayerCommand(game, spaceName, out);
-//        } else {
-//          throw new IllegalArgumentException("Cannot move to this space:! Enter valid space name");
-//        }
-//      } else {
-//        throw new IllegalStateException("Player not added yet!");
-//      }
-//      return command;
-//    });
-//
-//    this.supportedOperations.put("pickitem", (Scanner sc) -> {
-//
-//      GameOperationCommand command = null;
-//
-//      if (playAfterInput) {
-//        if (checkSpaceHasItems(game)) {
-//          if (validateItemInformation(game, out, sc)) {
-//            command = new PickItemCommand(game, itemName, out, true);
-//          } else {
-//            throw new IllegalArgumentException("Cannot pick this item! Enter valid item name");
-//          }
-//        } else {
-//          command = new PickItemCommand(game, itemName, out, false);
-//        }
-//
-//      } else {
-//        throw new IllegalStateException("Player not added yet!");
-//      }
-//      return command;
-//    });
-//
-//    this.supportedOperations.put("lookaround", (Scanner sc) -> {
-//      GameOperationCommand command = null;
-//      if (playAfterInput) {
-//        if (game.getCurrentPlayer().isHumanControlled()) {
-//          command = new LookAroundCommand(game, out);
-//        } else {
-//          throw new IllegalArgumentException("Cannot look around from current space");
-//        }
-//      } else {
-//        throw new IllegalStateException("Player not added yet");
-//      }
-//      return command;
-//    });
-//
-//    this.supportedOperations.put("movepet", (Scanner sc) -> {
-//      GameOperationCommand command = null;
-//      if (playAfterInput) {
-//        String spaceName = validPetMoveSpaceName(game, sc);
-//        if (spaceName != null) {
-//          command = new PetMoveCommand(game, out, spaceName);
-//        } else {
-//          throw new IllegalArgumentException("Cannot move the pet");
-//        }
-//      } else {
-//        throw new IllegalStateException("Player not added successfully");
-//      }
-//      return command;
-//    });
-//    this.supportedOperations.put("attack", (Scanner sc) -> {
-//      GameOperationCommand command = null;
-//      if (playAfterInput) {
-//        if (game.getCurrentPlayer().isHumanControlled()) {
-//          if (game.getCurrentPlayer().getItems().size() != 0) {
-//            String itemToAttack = attackByItem(game, sc);
-//            if (itemToAttack != null) {
-//              command = new AttackPlayerCommand(game, itemToAttack, out);
-//            } else {
-//              throw new IllegalArgumentException("Illegal Argument Exception");
-//            }
-//          } else {
-//            command = new AttackPlayerCommand(game, "", out);
-//          }
-//        }
-//
-//      } else {
-//        throw new IllegalStateException("Player not added ");
-//      }
-//      return command;
-//    });
+    this.supportedOperations.put("pickitem", (Scanner sc) -> {
+      GameOperationCommand command = new PickItemCommand(worldModel, sc.nextLine(), System.out,
+              true);
+      return command;
+    });
+
+    this.supportedOperations.put("attack", (Scanner sc) -> {
+      GameOperationCommand command = new AttackPlayerCommand(worldModel, sc.nextLine(), System.out);
+      return command;
+    });
+
+    this.supportedOperations.put("lookaround", (Scanner sc) -> {
+      GameOperationCommand command = new LookAroundCommand(worldModel, System.out);
+      return command;
+    });
 
   }
 
   @Override
   public void playGame() {
 
-  }
-
-
-  @Override
-  public String pickItem(String pickedItem) {
-    if (worldModel != null) {
-      if (worldModel.pickItem(pickedItem)) {
-        worldModel.moveTargetCharacter();
-        worldModel.nextTurn();
-        return "Item picked successfully";
-      } else {
-        return "Item not picked successfully";
-      }
-    }
-
-    return "";
-  }
-
-  @Override
-  public String lookAround() {
-    if (worldModel != null) {
-      String lookAround = worldModel.lookAround();
-      worldModel.moveTargetCharacter();
-      worldModel.nextTurn();
-      if (lookAround != null) {
-        return lookAround;
-      } else {
-        return "Look around not successful";
-      }
-    }
-    return "";
-  }
-
-  @Override
-  public String attemptOnTargetCharacter(String itemName) {
-    if (worldModel != null) {
-      if (worldModel.attackHuman(itemName)) {
-        worldModel.moveTargetCharacter();
-        worldModel.nextTurn();
-        return "Attack successful";
-      } else {
-        return "Attack not successful! Target Character not in same room";
-      }
-    }
-    return "";
+    // TODO make the controller initialise or start the view according to the MVC principles.
+    worldView.setVisibleAboutDialog();
+    worldView.setVisibleMain();
   }
 
   @Override
@@ -223,21 +115,6 @@ public class DummyController implements ControllerGuiInterface {
     worldView.setWorld(worldModel);
   }
 
-  @Override
-  public String movePlayerToRoom(String clickedRoom) {
-    if (worldModel.move(clickedRoom)) {
-      worldModel.moveTargetCharacter();
-      worldModel.nextTurn();
-      return "moved successfully";
-    }
-
-    return "move not successful";
-  }
-
-  @Override
-  public String getPlayerDescription(String currentPlayerName) {
-    return worldModel.getPlayerDescriptionFromUsername(currentPlayerName);
-  }
 
   @Override
   public void advanceTargetCharacter() {
@@ -326,23 +203,33 @@ public class DummyController implements ControllerGuiInterface {
       try {
         String additionalParameters = String.join("\n", parameters);
         Scanner sc = new Scanner(additionalParameters);
-        if (action.toLowerCase().equals("playerinfo")) {
-          return worldModel.getPlayerDescriptionFromUsername(sc.nextLine());
-        } else if (action.toLowerCase().equals("pickitem")) {
-          String[] pick = additionalParameters.split("\n");
-          return pickItem(pick[0]);
-        } else if (action.toLowerCase().equals("attack")) {
-          String[] attack = additionalParameters.split("\n");
-          return attemptOnTargetCharacter(attack[0]);
-        } else if (action.toLowerCase().equals("move")) {
-          String[] move = additionalParameters.split("\n");
-          return movePlayerToRoom(move[0]);
-        } else {
-          GameOperationCommand command = this.supportedOperations.get(action).apply(sc);
-          command.execute();
-        }
+//        if (action.toLowerCase().equals("playerinfo")) {
+//          GameOperationCommand command = new DisplayPlayerInformationCommand
+//                  (worldModel,sc.nextLine(), System.out);
+//          return  command.execute();
+////          return worldModel.getPlayerDescriptionFromUsername(sc.nextLine());
+//        } else if (action.toLowerCase().equals("pickitem")) {
+//          String[] pick = additionalParameters.split("\n");
+//          GameOperationCommand command = new PickItemCommand(worldModel, pick[0], System.out, true);
+//          return command.execute();
+////          return pickItem(pick[0]);
+//        } else if (action.toLowerCase().equals("attack")) {
+//          String[] attack = additionalParameters.split("\n");
+//          GameOperationCommand command = new AttackPlayerCommand(worldModel, attack[0],System.out);
+//          return command.execute();
+//        } else if (action.toLowerCase().equals("move")) {
+//          String[] move = additionalParameters.split("\n");
+//          GameOperationCommand command = new MovePlayerCommand(worldModel,move[0],System.out);
+//          return command.execute();
+//        } else if (action.toLowerCase().equals("lookaround")) {
+//          GameOperationCommand command = new LookAroundCommand(worldModel,System.out);
+//          return command.execute();
+//        } else {
+        GameOperationCommand command = this.supportedOperations.get(action).apply(sc);
+        return command.execute();
+//        }
       } catch (Exception ex) {
-
+          System.out.println(ex.getMessage());
       }
     } else {
       // end the game

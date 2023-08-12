@@ -259,6 +259,26 @@ public class MockWorldModel implements World {
     return null;
   }
 
+  /**
+   * Moves the pet to the specified space.
+   *
+   * @param petMoveToSpace The space to move the pet to.
+   */
+  @Override
+  public void petMove(String petMoveToSpace) {
+
+  }
+
+  /**
+   * return the space of the pet.
+   *
+   * @return a space object representing the location of the pet.
+   */
+  @Override
+  public Space getPetSpace() {
+    return null;
+  }
+
 
   @Override
   public Map<Space, List<Player>> getMappingOfSpaceAndPlayer() {
@@ -300,6 +320,16 @@ public class MockWorldModel implements World {
 
   @Override
   public ActionType getPrevActionOfComputer() {
+    return null;
+  }
+
+  /**
+   * Returns the current information about the pet.
+   *
+   * @return The current pet information as a string.
+   */
+  @Override
+  public String getCurrentPetInfo() {
     return null;
   }
 

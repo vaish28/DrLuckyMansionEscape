@@ -50,8 +50,7 @@ public class DrLuckyWorld implements World {
    */
   public DrLuckyWorld(int totalRows, int totalColumns, String worldName,
                       Character targetCharacter,
-                      List<Space> spaceList, CustomRandomInterface random,
-                      TargetCharacterPetInterface pet)
+                      List<Space> spaceList, CustomRandomInterface random)
           throws IllegalArgumentException {
 
     if (totalRows <= 0 || totalColumns < 0
@@ -175,10 +174,11 @@ public class DrLuckyWorld implements World {
 
     List<String> neighNames = new ArrayList<>();
     for (Space space : neigh) {
-      //TODO pet space invisible
-      if (!getPetSpace().equals(space)) {
-        neighNames.add(space.getSpaceName());
-      }
+//
+//      if (!getPetSpace().equals(space)) {
+//
+//      }
+      neighNames.add(space.getSpaceName());
     }
     return neighNames;
   }
@@ -402,10 +402,11 @@ public class DrLuckyWorld implements World {
   public String displayPotentialListOfSpaces() {
     StringBuilder sb = new StringBuilder();
     for (Space space : spaceList) {
-      if (!space.equals(getPetSpace())) {
-        sb.append(space.getSpaceName());
-        sb.append("\n");
-      }
+      sb.append(space.getSpaceName());
+      sb.append("\n");
+//      if (!space.equals(getPetSpace())) {
+//
+//      }
     }
     return sb.toString();
   }
@@ -563,7 +564,7 @@ public class DrLuckyWorld implements World {
     }
 
     if (itemList.size() != 0) {
-      //TODO print items in the room
+
       sb.append("The items that are currently laying in the room: \n");
       for (Item item : itemList) {
         sb.append(item.toString());
@@ -574,26 +575,27 @@ public class DrLuckyWorld implements World {
       sb.append("No items in your current room\n");
     }
 
-    // TODO check target character in the current space
+
     if ((currentPlayerSpace != null) && (currentPlayerSpace.equals(getCurrentSpaceTargetIsIn()))) {
       sb.append(String.format("The target character is in this room: %s\n", targetCharacter,
               "\n"));
     }
 
 
-    //TODO check if pet is in the same space:
-    if (currentPlayerSpace.equals(getPetSpace())) {
-      sb.append("The target character's pet is in this room! \n ");
-      sb.append(getCurrentPetInfo());
-      sb.append("\n");
-    }
+//
+//    if (currentPlayerSpace.equals(getPetSpace())) {
+//      sb.append("The target character's pet is in this room! \n ");
+//      sb.append(getCurrentPetInfo());
+//      sb.append("\n");
+//    }
 
     // TODO Neighboring spaces
     if (neList != null) {
       for (Space space : neList) {
-        if (!space.equals(getPetSpace())) {
-          sb.append(this.printSpaceInfo(space));
-        }
+        sb.append(this.printSpaceInfo(space));
+//        if (!space.equals(getPetSpace())) {
+//
+//        }
       }
     }
     return sb.toString();
@@ -627,10 +629,10 @@ public class DrLuckyWorld implements World {
                 "\n"));
       }
 
-      if ((space != null) && (space.equals(getPetSpace()))) {
-        sb.append(String.format("The pet of target character is in this space: %s\n",
-                getCurrentPetInfo(), "\n"));
-      }
+//      if ((space != null) && (space.equals(getPetSpace()))) {
+//        sb.append(String.format("The pet of target character is in this space: %s\n",
+//                getCurrentPetInfo(), "\n"));
+//      }
     } else {
       sb.append("\n");
       sb.append(String.format("Space Info: %s\nPlayers: No players in this room", space))
@@ -639,14 +641,12 @@ public class DrLuckyWorld implements World {
         sb.append(String.format("The target character is in this room: %s\n", targetCharacter,
                 "\n"));
       }
-      if ((space != null) && (space.equals(getPetSpace()))) {
-        sb.append(String.format("The pet of target character is in this space: %s\n",
-                getCurrentPetInfo(), "\n"));
-      }
+//      if ((space != null) && (space.equals(getPetSpace()))) {
+//        sb.append(String.format("The pet of target character is in this space: %s\n",
+//                getCurrentPetInfo(), "\n"));
+//      }
     }
 
-
-    // TODO add neighbors display
     // here those spaces that are adjacent and do not have a pet will be visible.
 
     return sb.toString();
@@ -747,7 +747,7 @@ public class DrLuckyWorld implements World {
 
 
       for (Space space : neighboringSpaces) {
-        if (!space.equals(getPetSpace())) {
+
           int score = 0;
           for (Item item : space.getItems()) {
             score += item.getDamageValue();
@@ -756,7 +756,7 @@ public class DrLuckyWorld implements World {
             bestScore = score;
             bestSpaceToMove = space;
           }
-        }
+
       }
     }
     changeSpacePlayerMapping(player, bestSpaceToMove);
@@ -961,7 +961,7 @@ public class DrLuckyWorld implements World {
 
       //create the luckyworld object
       return new DrLuckyWorld(gridDimensions.get(0), gridDimensions.get(1),
-              worldName, target, spaceList, new CustomRandom(), pet);
+              worldName, target, spaceList, new CustomRandom());
 
     }
 

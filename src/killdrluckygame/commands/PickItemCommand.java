@@ -60,7 +60,7 @@ public class PickItemCommand implements GameOperationCommand {
     } else {
       try {
         out.append("No items to pick in this space!");
-        sb.append("No items to pick in this space!");
+        sb.append("Item not picked successfully");
         world.moveTargetCharacter();
         world.nextTurn();
       } catch (IOException ex) {

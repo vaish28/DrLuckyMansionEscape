@@ -29,9 +29,11 @@ public class AttackPlayerCommand implements GameOperationCommand {
   @Override
   public String execute() {
     boolean attackSuccessful = false;
+    StringBuilder sb = new StringBuilder();
     try {
-      if (("").equals(option)) {
+      if (("poke").equals(option)) {
         out.append("No item to pick up hence poking!");
+        sb.append("No item to pick up hence poking!");
         attackSuccessful = world.attackHuman(option);
       } else {
         if (world.getCurrentPlayer().isHumanControlled()) {
@@ -41,17 +43,34 @@ public class AttackPlayerCommand implements GameOperationCommand {
 
       if (attackSuccessful) {
         out.append("Attack successful!").append("\n");
+        sb.append("Attack successful!").append("\n");
         world.moveTargetCharacter();
         world.nextTurn();
 
+      } else if((world.isPlayerSeen())
+              && (!(world.getCurrentPlayerSpace(world.getCurrentPlayer())
+              .equals(world.getCurrentSpaceTargetIsIn())))) {
+        out.append("Attack not successful! Target Character not in same room").append("\n");
+        sb.append("Attack not successful!").append("\n");
+        sb.append("Target Character not in same room").append("\n");
+        sb.append("Player is also seen by other players!").append("\n");
+        world.moveTargetCharacter();
+        world.nextTurn();
+      } else if((world.isPlayerSeen())) {
+        sb.append("Player is seen by other players!").append("\n");
+        world.moveTargetCharacter();
+        world.nextTurn();
       } else {
-        out.append("Attack unsuccessful!").append("\n");
+        sb.append("Attack not successful!").append("\n");
+        sb.append("Target Character not in same room").append("\n");
+        world.moveTargetCharacter();
+        world.nextTurn();
       }
 
     } catch (IOException ex) {
       ex.getMessage();
     }
-    return "";
+    return sb.toString();
   }
 }
 

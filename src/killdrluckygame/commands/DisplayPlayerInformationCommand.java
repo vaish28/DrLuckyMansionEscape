@@ -35,7 +35,6 @@ public class DisplayPlayerInformationCommand implements GameOperationCommand {
     StringBuilder sb = new StringBuilder();
     if (world.getPlayerByPlayerName(playerName) != null) {
       try {
-        sb.append("\nCurrent player information \n");
         sb.append(world.getPlayerDescriptionFromUsername(playerName));
         sb.append("\n");
         out.append(sb.toString());

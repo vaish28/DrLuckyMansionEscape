@@ -14,7 +14,8 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   private CustomRandomInterface random;
   private String filePath;
   public ControllerGuiImpl(CustomRandomInterface random,
-                           World worldModel, WorldViewInterface worldView, int maxTurns, String filePath) {
+                           World worldModel, WorldViewInterface worldView,
+                           int maxTurns, String filePath) {
     this.worldModel = worldModel;
     this.worldView = worldView;
     this.random = random;
@@ -63,51 +64,6 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   }
 
 
-  @Override
-  public String pickItem(String pickedItem) {
-    if(worldModel!=null) {
-      if(worldModel.pickItem(pickedItem)) {
-        worldModel.moveTargetCharacter();
-        worldModel.nextTurn();
-        return "Item picked successfully";
-      }
-      else {
-        return "Item not picked successfully";
-      }
-    }
-
-    return "";
-  }
-
-  @Override
-  public String lookAround() {
-    if(worldModel!=null) {
-      if(worldModel.lookAround()!=null) {
-        worldModel.moveTargetCharacter();
-        worldModel.nextTurn();
-        return worldModel.lookAround();
-      }
-      else {
-        return "Look around not successful";
-      }
-    }
-    return "";
-  }
-
-  @Override
-  public String attemptOnTargetCharacter(String itemName) {
-    if(worldModel!=null) {
-      if(worldModel.attackHuman(itemName)) {
-        worldModel.moveTargetCharacter();
-        worldModel.nextTurn();
-        return "Attack successful";
-      }
-      else {
-        return "Attack not successful! Target Character not in same room";
-      }
-    }
-    return "";
-  }
 
   @Override
   public void loadNewGame(String worldFileName) {
@@ -131,21 +87,6 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     worldView.setWorld(worldModel);
   }
 
-  @Override
-  public String movePlayerToRoom(String clickedRoom) {
-    if(worldModel.move(clickedRoom)){
-      worldModel.moveTargetCharacter();
-      worldModel.nextTurn();
-      return "moved successfully";
-    }
-
-    return "move not successful";
-  }
-
-  @Override
-  public String getPlayerDescription(String currentPlayerName) {
-    return worldModel.getPlayerDescriptionFromUsername(currentPlayerName);
-  }
 
   @Override
   public void advanceTargetCharacter() {

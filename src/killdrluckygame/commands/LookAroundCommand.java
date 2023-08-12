@@ -34,19 +34,24 @@ public class LookAroundCommand implements GameOperationCommand {
   public String execute() {
     String lookAroundString = world.lookAround();
     StringBuilder sb = new StringBuilder();
-    try {
-      out.append("Looking around neighbours").append("\n");
-      sb.append("Looking around neighbours").append("\n");
-      out.append(lookAroundString);
-      sb.append(lookAroundString);
-      world.increaseNumberOfTurns();
-      world.moveTargetCharacter();
-      world.nextTurn();
+    if(lookAroundString!=null) {
+      try {
+        out.append("Looking around neighbours").append("\n");
+        sb.append("Looking around neighbours").append("\n");
+        out.append(lookAroundString);
+        sb.append(lookAroundString);
+        world.increaseNumberOfTurns();
+        world.moveTargetCharacter();
+        world.nextTurn();
 
-    } catch (IOException ex) {
-      ex.getMessage();
+      } catch (IOException ex) {
+        ex.getMessage();
+      }
+    }else {
+      sb.append("Look around not successful");
+//      world.moveTargetCharacter();
+//      world.nextTurn();
     }
-
     return sb.toString();
   }
 }

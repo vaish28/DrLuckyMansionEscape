@@ -5,9 +5,10 @@ import killdrluckygame.ControllerGuiInterface;
 import killdrluckygame.ReadOnlyWorldModel;
 import killdrluckygame.World;
 
+import java.awt.*;
 import java.awt.event.KeyListener;
 
-public interface WorldViewInterface  {
+public interface WorldViewInterface {
   void addListener(ControllerGuiInterface listener);
 
   void startNewGameWithNewWorld();
@@ -21,4 +22,8 @@ public interface WorldViewInterface  {
   void refresh(String... args);
 
   void gameEnd();
+
+  void setVisibleMain();
+
+  void setVisibleAboutDialog();
 }
