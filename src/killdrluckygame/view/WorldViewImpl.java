@@ -36,7 +36,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import killdrluckygame.ControllerGuiInterface;
 import killdrluckygame.Item;
 import killdrluckygame.Player;
@@ -65,12 +64,10 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private BufferedImage humanPlayerImage;
   private KeyListener keyListener;
   private JScrollPane worldScrollablePanel;
-  private boolean ignoreMouseEvents = false;
 
   private BufferedImage targetCharacterImage;
-  private JLabel instructionsLabel;
 
-  private MenuItemFactory menuItemFactory = new GameMenuItemFactory(this);
+  private MenuItemFactory menuItemFactory;
 
   public WorldViewImpl(ReadOnlyWorldModel model) {
     this.model = model;
@@ -78,6 +75,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
   private void initialize() {
+
     this.rows = model.getRows();
     this.columns = model.getColumns();
     this.spaceList = model.getSpaces();
@@ -95,6 +93,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     this.keyListener = new ListenKey();
     this.worldScrollablePanel = new JScrollPane(mainPanel);
     gridPanel.addKeyListener(this.keyListener);
+    this.menuItemFactory = new GameMenuItemFactory(this);
 
     initializeMenu();
     loadPlayerImage();
@@ -105,16 +104,23 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
   private void instructionsLabel() {
-    JLabel instructionLabel1 = new JLabel("Instructions: " +
-            "Click on human player to view description of the player");
-    JLabel instructionLabel2 = new JLabel("Click on the room " +
-            "you wish to move to by clicking on the room");
-    JLabel instructionLabel3 = new JLabel("Press 'P' to pick an item, " +
-            "'L' to look around, 'A' to attempt on the target character.");
-//if()
-    this.infoDisplayPanel.add(instructionLabel1);
-    this.infoDisplayPanel.add(instructionLabel2);
-    this.infoDisplayPanel.add(instructionLabel3);
+    StringBuilder instructionLabel1 = new StringBuilder("Click on a human player to view their description.");
+    StringBuilder instructionLabel2 = new StringBuilder("Click on a room to move there.");
+    StringBuilder instructionLabel3 = new StringBuilder("Press 'P' to pick an item.");
+    StringBuilder instructionLabel4 = new StringBuilder("Press 'L' to look around.");
+    StringBuilder instructionLabel5 = new StringBuilder("Press 'A' to attempt on the target character.");
+
+    JLabel label1 = new JLabel(instructionLabel1.toString());
+    JLabel label2 = new JLabel(instructionLabel2.toString());
+    JLabel label3 = new JLabel(instructionLabel3.toString());
+    JLabel label4 = new JLabel(instructionLabel4.toString());
+    JLabel label5 = new JLabel(instructionLabel5.toString());
+
+    this.infoDisplayPanel.add(label1);
+    this.infoDisplayPanel.add(label2);
+    this.infoDisplayPanel.add(label3);
+    this.infoDisplayPanel.add(label4);
+    this.infoDisplayPanel.add(label5);
   }
 
 
@@ -169,7 +175,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
   private void showInCorrectKeyDialog() {
-
+    String message = "Incorrect Key selected!";
+    String messageTitle = "Incorrect Key!";
+    displayErrorDialog(messageTitle, message);
   }
 
   private void showLookAroundMessage() {
@@ -206,14 +214,16 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private void attemptOnTargetCharacter() {
 
     String resultAttack = "";
+    String message = "Are you sure you want to attempt on the target character's life?";
+    String messageTitle = "Attempt on Target Character";
     int result = JOptionPane.showConfirmDialog(
             this,
-            "Are you sure you want to attempt on the target character's life?",
-            "Attempt on Target Character",
+            message,
+            messageTitle,
             JOptionPane.YES_NO_OPTION,
             JOptionPane.WARNING_MESSAGE);
-//    displayMessageDialog();
-//
+
+
     if (result == JOptionPane.YES_OPTION) {
 
       Player currentPlayer = model.getCurrentPlayer();
@@ -271,11 +281,10 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     List<Item> playerItemList = model.getCurrentPlayerSpace(model.getCurrentPlayer()).getItems();
 
     if (playerItemList.isEmpty()) {
-      JOptionPane.showMessageDialog(
-              this,
-              "There are no items to pick.",
-              "No Items Available",
-              JOptionPane.INFORMATION_MESSAGE);
+
+      String messageTitle = "No Items Available";
+      String message = "There are no items to pick.";
+      displayMessageDialog(messageTitle, message);
       listener.advanceTargetCharacter();
       updateDisplay();
       listener.computerPlayerTurn();
@@ -289,28 +298,23 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     }
 
 
-    String selectedItem = (String) JOptionPane.showInputDialog(
+    String selectedItem = JOptionPane.showInputDialog(
             this,
             "Select an item to pick:",
             "Pick Item",
             JOptionPane.PLAIN_MESSAGE,
             null,
             itemNames,
-            itemNames[0]);
+            itemNames[0]).toString();
 
     String resultPick = "";
     if (selectedItem != null) {
-// Call the pickItem function in the controller with the selected item
       resultPick = listener.processInput("pickitem", new String[]{selectedItem});
     }
 
-    JOptionPane.showMessageDialog(
-            this,
-            resultPick,
-            "Attacking now!",
-            JOptionPane.INFORMATION_MESSAGE);
+    String messageTitle = "Attacking now!";
+    displayMessageDialog(messageTitle, resultPick);
     updateDisplay();
-
     computerTurn();
   }
 
@@ -318,7 +322,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private void loadPlayerImage() {
     try {
       humanPlayerImage = ImageIO.read(new File("res/images.jpg"));
-      System.out.println("Player image loaded successfully!");
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -327,7 +330,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private void initializeGui() {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setTitle("Dr Lucky World Game");
-
 
 
     JPanel infoGridPanel = new JPanel(new BorderLayout(2, 2));
@@ -388,6 +390,11 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     showAboutDialog();
   }
 
+
+  //  @Override
+//  public void displayMessageDialogWithJPane(String title, String message, ) {
+//
+//  }
   @Override
   public void displayMessageDialog(String title, String message) {
     JOptionPane.showMessageDialog(this,
@@ -452,8 +459,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
     currentPlayerLabel.setText(sb.toString());
   }
-
-
 
 
   private void showInputDialog() {
@@ -608,7 +613,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
       String message = sb.toString();
       String messageTitle = "Game Over - Defeat!";
-      displayMessageDialog(messageTitle,message);
+      displayMessageDialog(messageTitle, message);
 
     } else {
       StringBuilder sb = new StringBuilder();
@@ -617,12 +622,10 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
       String message = sb.toString();
       String messageTitle = "Game Over - Defeat!";
-      displayErrorDialog(messageTitle,message);
+      displayErrorDialog(messageTitle, message);
       System.exit(0);
     }
   }
-
-
 
 
   private class GridPanel extends JPanel {
@@ -663,7 +666,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
                     description,
                     "Player Description",
                     JOptionPane.INFORMATION_MESSAGE);
-          } else if(listener.isValidMove(model.getCurrentPlayer(), clickedRoom)) {
+          } else if (listener.isValidMove(model.getCurrentPlayer(), clickedRoom)) {
             String resultMove = listener.processInput("move",
                     new String[]{clickedRoom.getSpaceName()});
             JOptionPane.showMessageDialog(
@@ -673,9 +676,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
                     JOptionPane.INFORMATION_MESSAGE);
             computerTurn();
             updateDisplay();
-          }
-
-          else {
+          } else {
             String resultMove = "Invalid move! The space is not your neighbor";
             JOptionPane.showMessageDialog(
                     this,

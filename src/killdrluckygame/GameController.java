@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Function;
+
 import killdrluckygame.commands.AddComputerPlayerCommand;
 import killdrluckygame.commands.AddHumanPlayerCommand;
 import killdrluckygame.commands.AttackPlayerCommand;
@@ -19,7 +20,6 @@ import killdrluckygame.commands.LookAroundCommand;
 import killdrluckygame.commands.MovePlayerCommand;
 import killdrluckygame.commands.PetMoveCommand;
 import killdrluckygame.commands.PickItemCommand;
-
 
 
 /**
@@ -567,20 +567,11 @@ public class GameController implements GameControllerInterface {
         sb.append(result);
         result = sb.toString();
 
-      } else {
-
-        game.changePrevAction(ActionType.MOVE_PET);
-        int spaceNumber = random.nextInt(0, game.getSpaces().size() - 1);
-        game.petMove(game.getSpaces().get(spaceNumber).getSpaceName());
-        sb.append("Performing pet move");
-        result = sb.toString();
-
       }
     }
 
     return result;
   }
-
 
 
   private String performRandomAction(ActionType action, Player player, World game) {

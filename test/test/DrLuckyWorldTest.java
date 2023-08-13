@@ -1539,7 +1539,7 @@ public class DrLuckyWorldTest {
 //            new GameCharacter(50,
 //                    "Lucky", true),
 //            new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-//            new CustomRandom(1), new TargetCharacterPet("Dr Fortune Cat"));
+//            new CustomRandom(1), new Pet("Dr Fortune Cat"));
 //
 //
 //    world.addHumanPlayer("v", 3, "Foyer");

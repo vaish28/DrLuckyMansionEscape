@@ -1,6 +1,7 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
+
 import killdrluckygame.World;
 
 /**
@@ -27,7 +28,6 @@ public class DisplaySpaceInformationCommand implements GameOperationCommand {
     this.spaceName = spaceName;
     this.out = out;
   }
-
 
 
   @Override

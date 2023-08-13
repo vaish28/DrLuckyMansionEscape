@@ -23,7 +23,7 @@ public class DrLuckyItemTest {
    * @param itemName    the name of the item
    * @param damageValue the damage value of the item
    * @return a new instance of the Item class with the specified itemName and
-   *         damageValue
+   * damageValue
    */
   protected Item itemValidChecker(String itemName,
                                   int damageValue) {

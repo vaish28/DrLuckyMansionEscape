@@ -1,6 +1,7 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
+
 import killdrluckygame.World;
 
 /**
@@ -47,7 +48,7 @@ public class AttackPlayerCommand implements GameOperationCommand {
         world.moveTargetCharacter();
         world.nextTurn();
 
-      } else if((world.isPlayerSeen())
+      } else if ((world.isPlayerSeen())
               && (!(world.getCurrentPlayerSpace(world.getCurrentPlayer())
               .equals(world.getCurrentSpaceTargetIsIn())))) {
         out.append("Attack not successful! Target Character not in same room").append("\n");
@@ -56,7 +57,7 @@ public class AttackPlayerCommand implements GameOperationCommand {
         sb.append("Player is also seen by other players!").append("\n");
         world.moveTargetCharacter();
         world.nextTurn();
-      } else if((world.isPlayerSeen())) {
+      } else if ((world.isPlayerSeen())) {
         sb.append("Player is seen by other players!").append("\n");
         world.moveTargetCharacter();
         world.nextTurn();

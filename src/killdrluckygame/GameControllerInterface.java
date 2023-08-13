@@ -12,9 +12,27 @@ public interface GameControllerInterface {
    */
   void gamePlay(World game, int maxTurns);
 
+  /**
+   * Simulates the computer player turn.
+   *
+   * @param currentPlayer indicates the current computer player
+   * @param game          the world object
+   * @return a string value indicating the action computer took
+   */
   String simulateAction(Player currentPlayer, World game);
 
+  /**
+   * Returns the random generated capacity.
+   *
+   * @return an integer value indicating the random capacity
+   */
   int generateRandomMaxCapacity();
 
+  /**
+   * Generates the random first space.
+   *
+   * @param game the world object
+   * @return random integer corresponding to the random first space.
+   */
   int generateRandomFirstSpace(World game);
 }

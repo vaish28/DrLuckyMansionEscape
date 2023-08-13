@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.io.StringReader;
+
 import killdrluckygame.DrLuckyWorld;
 import killdrluckygame.Space;
 import killdrluckygame.World;
@@ -32,7 +33,6 @@ public class InputTest {
 
     stringBuilder.append("36 30 Doctor Lucky's Mansion\n");
     stringBuilder.append("50 Doctor Lucky\n");
-    stringBuilder.append("Fortune Dr Lucky Cat\n");
     stringBuilder.append("21\n");
     stringBuilder.append("22 19 23 26 Armory\n");
     stringBuilder.append("16 21 21 28 Billiard Room\n");

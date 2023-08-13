@@ -1,6 +1,7 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
+
 import killdrluckygame.World;
 
 
@@ -38,7 +39,7 @@ public class AddComputerPlayerCommand implements GameOperationCommand {
     try {
       out.append("Now adding a computer controlled player!").append("\n");
       sb.append("\nNow adding a computer controlled player!").append("\n");
-      world.addComputerPlayer(maxCapacity,spaceIndex);
+      world.addComputerPlayer(maxCapacity, spaceIndex);
       out.append("Player has been added successfully").append("\n");
       sb.append("\nPlayer has been added successfully").append("\n");
     } catch (IOException ex) {

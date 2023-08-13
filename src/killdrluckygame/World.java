@@ -8,7 +8,7 @@ import java.util.List;
  * It implements methods required for the game play mechanics, getter methods for displaying the
  * world details.
  */
-public interface World extends ReadOnlyWorldModel{
+public interface World extends ReadOnlyWorldModel {
 
   /**
    * Adds a space to the space list of the world.
@@ -89,6 +89,7 @@ public interface World extends ReadOnlyWorldModel{
 
   /**
    * Checks if the space has any items to pick.
+   *
    * @param space the space for which the item is to be checked.
    * @return a true or false value indicating if item can be picked.
    */
@@ -114,6 +115,7 @@ public interface World extends ReadOnlyWorldModel{
    * Advances the turn to the next player int the player list.
    */
   void nextTurn();
+
   /**
    * Returns a boolean value indicating if input is necessary from the user to take the next step.
    *
@@ -129,8 +131,6 @@ public interface World extends ReadOnlyWorldModel{
    */
 
   List<String> printNeighbors(List<Space> neigh);
-
-
 
 
   /**
@@ -175,14 +175,25 @@ public interface World extends ReadOnlyWorldModel{
    */
   boolean attackHuman(String itemName);
 
+  /**
+   * Increases the number of turns in the game.
+   */
   void increaseNumberOfTurns();
 
+  /**
+   * Checks if the target character exists in the same room as that of the current player.
+   *
+   * @param player current player object
+   * @return returns true or false depending on the condition
+   */
   boolean checkIfTargetCharacterInSameSpace(Player player);
 
+  /**
+   * Changes the previous action to new Action.
+   *
+   * @param newAction sets the new action
+   */
   void changePrevAction(ActionType newAction);
-
-
-
 
 
 }

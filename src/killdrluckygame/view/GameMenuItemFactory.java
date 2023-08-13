@@ -1,7 +1,7 @@
 package killdrluckygame.view;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
+import javax.swing.JMenuItem;
 
 
 public class GameMenuItemFactory implements MenuItemFactory {

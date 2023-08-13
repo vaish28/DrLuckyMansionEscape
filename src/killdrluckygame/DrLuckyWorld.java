@@ -30,9 +30,9 @@ public class DrLuckyWorld implements World {
   private Map<Space, List<Player>> mappingSpaceToPlayers;
   private final CustomRandomInterface random;
   private int numberOfTurns;
- // private Space petSpace;
+  // private Space petSpace;
   private List<Item> evidenceList;
-  //private final TargetCharacterPetInterface pet;
+  //private final PetInterface pet;
   private int computerPlayerCount;
 
 
@@ -65,11 +65,11 @@ public class DrLuckyWorld implements World {
     this.targetCharacter = targetCharacter;
     this.worldName = worldName;
     this.spaceList = spaceList;
-  //  this.pet = pet;
+    //  this.pet = pet;
 
     this.currentTurn = 0;
     this.currentSpaceIndex = 0;
-  //  this.petSpace = spaceList.get(currentSpaceIndex); //set starting position of pet
+    //  this.petSpace = spaceList.get(currentSpaceIndex); //set starting position of pet
 
     this.cmPlayer = null;
     this.prevAction = null;
@@ -314,7 +314,7 @@ public class DrLuckyWorld implements World {
     //TODO name , space  only.
     Player player = this.getCurrentPlayer();
     StringBuilder sb = new StringBuilder();
-    if(player!=null) {
+    if (player != null) {
       sb.append("Current player name: ");
       sb.append(player.getName());
       sb.append("  ");
@@ -375,7 +375,7 @@ public class DrLuckyWorld implements World {
 
   @Override
   public String getCurrentPetInfo() {
-    return  "";
+    return "";
 //    return String.format("Name of the pet: " + pet.getPetName() + "\n  Pet space information: \n"
 //            + petSpace.getSpaceName());
     // only the name of the space.
@@ -677,7 +677,6 @@ public class DrLuckyWorld implements World {
   }
 
 
-
   @Override
   public boolean isContainsNeighbor(String spaceName, List<String> neighNames) {
     return neighNames.contains(spaceName);
@@ -745,17 +744,16 @@ public class DrLuckyWorld implements World {
     if (neighboringSpaces.size() != 0) {
 
 
-
       for (Space space : neighboringSpaces) {
 
-          int score = 0;
-          for (Item item : space.getItems()) {
-            score += item.getDamageValue();
-          }
-          if (score > bestScore) {
-            bestScore = score;
-            bestSpaceToMove = space;
-          }
+        int score = 0;
+        for (Item item : space.getItems()) {
+          score += item.getDamageValue();
+        }
+        if (score > bestScore) {
+          bestScore = score;
+          bestSpaceToMove = space;
+        }
 
       }
     }
@@ -953,8 +951,6 @@ public class DrLuckyWorld implements World {
 
       //create the target character
       Character target = new GameCharacter(targetHealth[0], targetName.toString(), true);
-
-      TargetCharacterPetInterface pet = new TargetCharacterPet(petName.toString().trim());
 
 
       String worldName = dimensionName.toString().trim();

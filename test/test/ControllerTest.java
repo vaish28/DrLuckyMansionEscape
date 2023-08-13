@@ -154,6 +154,7 @@ public class ControllerTest {
         return new DrLuckySpace("Armory", new WorldPosition(23, 25),
                 new WorldPosition(12, 13));
       }
+
       @Override
       public List<Space> getSpaces() {
         return new ArrayList<>(Arrays.asList(new DrLuckySpace("Armory", new WorldPosition(23, 25),
@@ -706,7 +707,6 @@ public class ControllerTest {
             + "Current player name: V  Current space name: Billiard Room"));
 
   }
-
 
 
   @Test

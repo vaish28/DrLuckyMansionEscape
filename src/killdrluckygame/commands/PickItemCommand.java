@@ -1,6 +1,7 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
+
 import killdrluckygame.World;
 
 /**
@@ -67,6 +68,6 @@ public class PickItemCommand implements GameOperationCommand {
         ex.getMessage();
       }
     }
-  return sb.toString();
+    return sb.toString();
   }
 }

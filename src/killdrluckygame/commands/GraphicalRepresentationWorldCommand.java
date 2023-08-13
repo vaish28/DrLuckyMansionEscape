@@ -1,6 +1,7 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
+
 import killdrluckygame.World;
 
 
@@ -33,7 +34,7 @@ public class GraphicalRepresentationWorldCommand implements GameOperationCommand
    */
   @Override
   public String execute() {
-  StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder();
     try {
       out.append("Displaying the world now!!").append("\n");
       sb.append("Displaying the world now!!").append("\n");
@@ -44,7 +45,7 @@ public class GraphicalRepresentationWorldCommand implements GameOperationCommand
     } catch (IOException ex) {
       ex.getMessage();
     }
-  return sb.toString();
+    return sb.toString();
 
   }
 }

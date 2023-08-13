@@ -34,6 +34,7 @@ public class CustomRandom implements CustomRandomInterface {
 
   /**
    * Constructs a CustomRandom object with predictable double numbers.
+   *
    * @param predictableNumbers the array of predictable double numbers.
    */
   public CustomRandom(double... predictableNumbers) {

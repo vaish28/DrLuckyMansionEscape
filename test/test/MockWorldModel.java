@@ -95,7 +95,6 @@ public class MockWorldModel implements World {
   }
 
 
-
   @Override
   public String evaluateLookAround(Space currentSpace, Player player) {
     return null;
@@ -206,7 +205,6 @@ public class MockWorldModel implements World {
   }
 
 
-
   @Override
   public Player getCurrentPlayer() {
     Player player = new HumanControlledPlayer("Neha", 6);
@@ -284,7 +282,6 @@ public class MockWorldModel implements World {
   public Map<Space, List<Player>> getMappingOfSpaceAndPlayer() {
     return null;
   }
-
 
 
   @Override

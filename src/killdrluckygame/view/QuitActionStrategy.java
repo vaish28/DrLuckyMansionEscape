@@ -1,29 +1,34 @@
 package killdrluckygame.view;
 
 import javax.swing.JOptionPane;
-import killdrluckygame.view.WorldViewImpl;
 
-import java.awt.*;
-
+/**
+ * The QuitActionStrategy class implements the MenuItemActionStrategy interface
+ * and represents a strategy for executing the action of quitting the game.
+ */
 public class QuitActionStrategy implements MenuItemActionStrategy {
 
   private WorldViewInterface view;
 
+  /**
+   * Constructs a QuitActionStrategy instance.
+   *
+   * @param view The WorldViewInterface instance associated with the strategy.
+   */
   public QuitActionStrategy(WorldViewInterface view) {
     this.view = view;
   }
 
   @Override
   public void executeAction() {
-    int result = JOptionPane.showConfirmDialog(
-            (Component) view,
-            "Are you sure you want to quit?",
+    JOptionPane.showMessageDialog(
+            null,
+            "Quitting the game now.",
             "Quit Game",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE);
+            JOptionPane.INFORMATION_MESSAGE);
 
-    if (result == JOptionPane.YES_OPTION) {
-      System.exit(0);
-    }
+    System.exit(0);
   }
 }
+
+

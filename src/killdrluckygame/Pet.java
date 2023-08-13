@@ -3,7 +3,7 @@ package killdrluckygame;
 /**
  * A class representing the target character's pet and implement the target character pet interface.
  */
-public class TargetCharacterPet implements TargetCharacterPetInterface {
+public class Pet implements PetInterface {
 
   private final String petName;
 
@@ -11,7 +11,7 @@ public class TargetCharacterPet implements TargetCharacterPetInterface {
    * A constructor for initialising the name of the target character.
    * @param petName the name of the pet.
    */
-  public TargetCharacterPet(String petName) {
+  public Pet(String petName) {
     this.petName = petName;
   }
 

@@ -19,8 +19,6 @@ public enum ActionType {
    */
   LOOK_AROUND,
 
-  MOVE_PET,
-
   /**
    * Represents the action of attacking the target character in the game.
    */

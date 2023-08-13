@@ -1,11 +1,9 @@
 package killdrluckygame;
 
 import killdrluckygame.view.WorldViewInterface;
-
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+
 
 public class ControllerGuiImpl implements ControllerGuiInterface {
   private World worldModel;
@@ -13,6 +11,7 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   private final int maxTurns;
   private CustomRandomInterface random;
   private String filePath;
+
   public ControllerGuiImpl(CustomRandomInterface random,
                            World worldModel, WorldViewInterface worldView,
                            int maxTurns, String filePath) {
@@ -30,6 +29,7 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   public void playGame() {
 
   }
+
   private void initializeListeners() {
 
   }
@@ -62,7 +62,6 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     // Call methods from the game model to update the game state
     // Update the GUI to reflect the changes in the world
   }
-
 
 
   @Override
@@ -157,8 +156,8 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   }
 
   public String computerPlayerTurn() {
-    String result="";
-    if(worldModel.getCurrentPlayer().isComputerControlled()) {
+    String result = "";
+    if (worldModel.getCurrentPlayer().isComputerControlled()) {
       result = simulateAction(worldModel.getCurrentPlayer());
       System.out.println(result);
     }

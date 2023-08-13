@@ -1,6 +1,7 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
+
 import killdrluckygame.World;
 
 
@@ -34,7 +35,7 @@ public class LookAroundCommand implements GameOperationCommand {
   public String execute() {
     String lookAroundString = world.lookAround();
     StringBuilder sb = new StringBuilder();
-    if(lookAroundString!=null) {
+    if (lookAroundString != null) {
       try {
         out.append("Looking around neighbours").append("\n");
         sb.append("Looking around neighbours").append("\n");
@@ -47,7 +48,7 @@ public class LookAroundCommand implements GameOperationCommand {
       } catch (IOException ex) {
         ex.getMessage();
       }
-    }else {
+    } else {
       sb.append("Look around not successful");
 //      world.moveTargetCharacter();
 //      world.nextTurn();

@@ -1,14 +1,22 @@
 package killdrluckygame.view;
 
-import killdrluckygame.view.WorldViewImpl;
-
+/**
+ * The NewGameActionStrategy class implements the MenuItemActionStrategy interface and represents
+ * a strategy for executing the action of starting a new game with a new world specification.
+ */
 public class NewGameActionStrategy implements MenuItemActionStrategy {
 
   private WorldViewInterface view;
 
+  /**
+   * Constructs a NewGameActionStrategy instance.
+   *
+   * @param view The WorldViewInterface instance associated with the strategy.
+   */
   public NewGameActionStrategy(WorldViewInterface view) {
     this.view = view;
   }
+
 
   @Override
   public void executeAction() {

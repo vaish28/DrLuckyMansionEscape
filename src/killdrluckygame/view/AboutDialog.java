@@ -1,19 +1,21 @@
 package killdrluckygame.view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.BoxLayout;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
 
 public class AboutDialog extends JDialog {
 
   public AboutDialog(JFrame parentFrame) {
     super(parentFrame, "About Dr. Lucky Game", true);
 
-    // Set the layout and other properties of the dialog
-
-    // Create and add components (labels, buttons, etc.) for the welcome message and credits
-
-
-    // Example:
     JLabel welcomeLabel = new JLabel("Welcome to Dr. Lucky Game!");
     JLabel creditsLabel = new JLabel("Developed by: Vaishnavi Sunil Madhekar");
 
