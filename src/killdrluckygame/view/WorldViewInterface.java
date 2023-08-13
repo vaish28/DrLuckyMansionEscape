@@ -26,4 +26,8 @@ public interface WorldViewInterface {
   void setVisibleMain();
 
   void setVisibleAboutDialog();
+
+  void displayMessageDialog(String title, String message);
+
+  void displayErrorDialog(String title, String message);
 }

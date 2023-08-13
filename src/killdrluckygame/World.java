@@ -130,12 +130,6 @@ public interface World extends ReadOnlyWorldModel{
 
   List<String> printNeighbors(List<Space> neigh);
 
-  /**
-   * Returns a list of string representations of the neighbors of the current space.
-   *
-   * @return a list of string representations of the neighbors.
-   */
-  List<String> getNeighborsStrings();
 
 
 

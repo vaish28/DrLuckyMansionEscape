@@ -66,7 +66,7 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
 
 
   @Override
-  public void loadNewGame(String worldFileName) {
+  public void loadNewGame(String worldFileName, int numberOfTurns) {
     try {
       this.worldModel = new DrLuckyWorld.Input().readInput(new FileReader(worldFileName));
     } catch (IOException e) {
@@ -169,6 +169,11 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   @Override
   public String processInput(String action, String[] parameters) {
     return null;
+  }
+
+  @Override
+  public boolean isValidMove(Player currentPlayer, Space clickedRoom) {
+    return false;
   }
 
 

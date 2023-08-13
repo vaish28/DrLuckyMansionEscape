@@ -180,4 +180,13 @@ public interface ReadOnlyWorldModel {
    * @return The current player information as a string.
    */
   String displayCurrentPlayerInfo();
+
+
+
+  /**
+   * Returns a list of string representations of the neighbors of the current space.
+   *
+   * @return a list of string representations of the neighbors.
+   */
+  List<String> getNeighborsStrings();
 }

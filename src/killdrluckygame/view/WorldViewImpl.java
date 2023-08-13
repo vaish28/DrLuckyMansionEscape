@@ -25,6 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -388,6 +389,21 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     showAboutDialog();
   }
 
+  @Override
+  public void displayMessageDialog(String title, String message) {
+
+  }
+
+  @Override
+  public void displayErrorDialog(String title, String message) {
+    JOptionPane.showMessageDialog(
+            this,
+            message,
+            title,
+            JOptionPane.ERROR_MESSAGE
+    );
+  }
+
   private void showAddComputerPlayer() {
 
     listener.processInput("computer", new String[]{});
@@ -422,16 +438,32 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
   private void displayCurrentPlayerInfo() {
+    StringBuilder sb = new StringBuilder();
     if (model != null) {
-      currentPlayerLabel.setText(model.displayCurrentPlayerInfo());
+      sb.append(model.displayCurrentPlayerInfo());
+      sb.append("\n");
+
+      Player currentPlayer = model.getCurrentPlayer();
+      if (currentPlayer != null && currentPlayer.isHumanControlled()) {
+        List<String> neighNames = model.getNeighborsStrings();
+
+        if (!neighNames.isEmpty()) {
+          sb.append("  ");
+          sb.append("Neighbors you can move into:\n");
+          for (String neighbor : neighNames) {
+            sb.append("    ").append(neighbor).append("\n");
+          }
+        } else {
+          sb.append("No neighbors available to move into.\n");
+        }
+      }
     }
+
+    currentPlayerLabel.setText(sb.toString());
   }
 
-  private void displayTargetCharacterPetInfo() {
-    if (model != null) {
-      petInfoLabel.setText(model.getCurrentPetInfo());
-    }
-  }
+
+
 
   private void showInputDialog() {
     nameField = new JTextField(10);
@@ -484,26 +516,56 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   @Override
   public void startNewGameWithNewWorld() {
-    String worldFileName = JOptionPane.showInputDialog(
-            this, // Parent component
-            "Enter the name of the new world file:", // Message
-            "New Game with New World", // Dialog title
-            JOptionPane.PLAIN_MESSAGE // Message type
-    );
+    JFileChooser fileChooser = new JFileChooser();
+    int result = fileChooser.showOpenDialog(this); // Show the file chooser dialog
 
-    if (worldFileName != null && !worldFileName.trim().isEmpty()) {
-      try {
-        // Load the new world from the specified file
-        listener.loadNewGame(worldFileName);
-      } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Error loading the new world: " + ex.getMessage(),
-                "Error", JOptionPane.ERROR_MESSAGE);
+    if (result == JFileChooser.APPROVE_OPTION) {
+      File selectedFile = fileChooser.getSelectedFile();
+
+      // Create a JPanel to hold the input components
+      JPanel inputPanel = new JPanel();
+      inputPanel.setLayout(new GridLayout(2, 2));
+
+      JTextField maxTurnsField = new JTextField(10);
+      inputPanel.add(new JLabel("Maximum Number of Turns:"));
+      inputPanel.add(maxTurnsField);
+
+      int inputResult = JOptionPane.showConfirmDialog(
+              this,
+              inputPanel,
+              "Enter New Game Information",
+              JOptionPane.OK_CANCEL_OPTION,
+              JOptionPane.PLAIN_MESSAGE
+      );
+
+      if (inputResult == JOptionPane.OK_OPTION) {
+        String maxTurnsInput = maxTurnsField.getText();
+        if (maxTurnsInput.isEmpty() || !maxTurnsInput.matches("\\d+")) {
+          JOptionPane.showMessageDialog(
+                  this,
+                  "Please enter a valid maximum number of turns.",
+                  "Invalid Input",
+                  JOptionPane.ERROR_MESSAGE
+          );
+          return;
+        }
+
+        int maxTurns = Integer.parseInt(maxTurnsInput);
+
+        try {
+          // Load the new world from the selected file and start the game with maxTurns
+          listener.loadNewGame(selectedFile.getAbsolutePath(), maxTurns);
+        } catch (Exception ex) {
+          JOptionPane.showMessageDialog(this, "Error loading the new world: " + ex.getMessage(),
+                  "Error", JOptionPane.ERROR_MESSAGE);
+        }
       }
     } else {
-      JOptionPane.showMessageDialog(this, "Please input a valid file name.",
+      JOptionPane.showMessageDialog(this, "No file selected.",
               "Error", JOptionPane.ERROR_MESSAGE);
     }
   }
+
 
   @Override
   public void setWorld(ReadOnlyWorldModel world) {
@@ -605,8 +667,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
                     description,
                     "Player Description",
                     JOptionPane.INFORMATION_MESSAGE);
-          } else {
-            String resultMove = listener.processInput("move", new String[]{clickedRoom.getSpaceName()});
+          } else if(listener.isValidMove(model.getCurrentPlayer(), clickedRoom)) {
+            String resultMove = listener.processInput("move",
+                    new String[]{clickedRoom.getSpaceName()});
             JOptionPane.showMessageDialog(
                     this,
                     resultMove,
@@ -614,6 +677,15 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
                     JOptionPane.INFORMATION_MESSAGE);
             computerTurn();
             updateDisplay();
+          }
+
+          else {
+            String resultMove = "Invalid move! The space is not your neighbor";
+            JOptionPane.showMessageDialog(
+                    this,
+                    resultMove,
+                    "Player Description",
+                    JOptionPane.INFORMATION_MESSAGE);
           }
         }
       }

@@ -10,7 +10,7 @@ public interface ControllerGuiInterface {
 
   int generateRandomFirstSpace();
 
-  void loadNewGame(String worldFileName);
+  void loadNewGame(String worldFileName,int maxTurns);
 
   void resetGame();
 
@@ -20,6 +20,7 @@ public interface ControllerGuiInterface {
 
   String computerPlayerTurn();
 
-
   String processInput(String action, String[] parameters);
+
+  boolean isValidMove(Player currentPlayer, Space clickedRoom);
 }

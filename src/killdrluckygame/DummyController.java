@@ -2,24 +2,16 @@ package killdrluckygame;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Function;
-import killdrluckygame.commands.AddComputerPlayerCommand;
-import killdrluckygame.commands.AddHumanPlayerCommand;
-import killdrluckygame.commands.AttackPlayerCommand;
-import killdrluckygame.commands.DisplayPlayerInformationCommand;
-import killdrluckygame.commands.GameOperationCommand;
-import killdrluckygame.commands.LookAroundCommand;
-import killdrluckygame.commands.MovePlayerCommand;
-import killdrluckygame.commands.PickItemCommand;
+
+import killdrluckygame.commands.*;
 import killdrluckygame.view.WorldViewInterface;
 
 public class DummyController implements ControllerGuiInterface {
   private World worldModel;
   private WorldViewInterface worldView;
-  private final int maxTurns;
+  private int maxTurns;
   private CustomRandomInterface random;
   private final Map<String, Function<Scanner, GameOperationCommand>> supportedOperations;
   private String filePath;
@@ -36,53 +28,74 @@ public class DummyController implements ControllerGuiInterface {
     initialise();
   }
 
+
+  private GameOperationCommand processAddHumanPlayerAction(Scanner sc) {
+    GameOperationCommand command = null;
+    try {
+      String name = sc.nextLine();
+      int maxTurns = Integer.parseInt(sc.nextLine());
+      String roomName = sc.nextLine();
+      command = new AddHumanPlayerCommand(worldModel, name, maxTurns,
+              roomName, System.out);
+    } catch (NoSuchElementException ex) {
+      throw new IllegalArgumentException("Enter valid values!");
+    } catch (NumberFormatException ex) {
+      throw new IllegalArgumentException("Enter a valid value for max capacity!");
+    }
+    return command;
+  }
+
+  private GameOperationCommand processAddComputerPlayerAction(Scanner sc) {
+    int maxCapacity = generateRandomMaxCapacity();
+    int spaceRandomIndex = generateRandomFirstSpace();
+    GameOperationCommand command = new AddComputerPlayerCommand(worldModel, System.out,
+            maxCapacity, spaceRandomIndex);
+    return command;
+  }
+
+  private GameOperationCommand processDisplayPlayerInformation(Scanner sc) {
+    GameOperationCommand command = new DisplayPlayerInformationCommand(worldModel, sc.nextLine(),
+            System.out);
+    return command;
+  }
+
+  private GameOperationCommand processMoveHumanPlayer(Scanner sc) {
+    GameOperationCommand command = new MovePlayerCommand(worldModel, sc.nextLine(), System.out);
+    return command;
+  }
+
+  private GameOperationCommand processPickItem(Scanner sc) {
+    GameOperationCommand command = new PickItemCommand(worldModel, sc.nextLine(), System.out,
+            true);
+    return command;
+  }
+
+  private GameOperationCommand processAttack(Scanner sc) {
+    GameOperationCommand command = new AttackPlayerCommand(worldModel, sc.nextLine(), System.out);
+    return command;
+  }
+
+  private GameOperationCommand processLookAround(Scanner sc) {
+    GameOperationCommand command = new LookAroundCommand(worldModel, System.out);
+    return command;
+  }
+
+
   private void initialise() {
 
-    this.supportedOperations.put("human", (Scanner sc) -> {
-      GameOperationCommand command = new AddHumanPlayerCommand(worldModel, sc.nextLine(),
-              Integer.parseInt(sc.nextLine()),
-              sc.nextLine(), System.out);
-      return command;
+    this.supportedOperations.put("human", (Scanner sc) -> processAddHumanPlayerAction(sc));
 
-    });
+    this.supportedOperations.put("computer", (Scanner sc) -> processAddComputerPlayerAction(sc));
 
-    this.supportedOperations.put("computer", (Scanner sc) -> {
+    this.supportedOperations.put("playerinfo", (Scanner sc) -> processDisplayPlayerInformation(sc));
 
-      int maxCapacity = generateRandomMaxCapacity();
-      int spaceRandomIndex = generateRandomFirstSpace();
-      GameOperationCommand command = new AddComputerPlayerCommand(worldModel, System.out,
-              maxCapacity, spaceRandomIndex);
-      return command;
-    });
+    this.supportedOperations.put("move", (Scanner sc) -> processMoveHumanPlayer(sc));
 
-    this.supportedOperations.put("playerinfo", (Scanner sc) -> {
-      GameOperationCommand command = new DisplayPlayerInformationCommand(worldModel, sc.nextLine(),
-              System.out);
-      return command;
-    });
+    this.supportedOperations.put("pickitem", (Scanner sc) -> processPickItem(sc));
 
-    this.supportedOperations.put("move", (Scanner sc) -> {
-      GameOperationCommand command = new MovePlayerCommand(worldModel, sc.nextLine(), System.out);
-      return command;
-    });
+    this.supportedOperations.put("attack", (Scanner sc) -> processAttack(sc));
 
-
-    this.supportedOperations.put("pickitem", (Scanner sc) -> {
-      GameOperationCommand command = new PickItemCommand(worldModel, sc.nextLine(), System.out,
-              true);
-      return command;
-    });
-
-    this.supportedOperations.put("attack", (Scanner sc) -> {
-      GameOperationCommand command = new AttackPlayerCommand(worldModel, sc.nextLine(), System.out);
-      return command;
-    });
-
-    this.supportedOperations.put("lookaround", (Scanner sc) -> {
-      GameOperationCommand command = new LookAroundCommand(worldModel, System.out);
-      return command;
-    });
-
+    this.supportedOperations.put("lookaround", (Scanner sc) -> processLookAround(sc));
   }
 
   @Override
@@ -94,7 +107,8 @@ public class DummyController implements ControllerGuiInterface {
   }
 
   @Override
-  public void loadNewGame(String worldFileName) {
+  public void loadNewGame(String worldFileName, int maxTurns) {
+    this.maxTurns = maxTurns;
     try {
       this.worldModel = new DrLuckyWorld.Input().readInput(new FileReader(worldFileName));
     } catch (IOException e) {
@@ -203,33 +217,13 @@ public class DummyController implements ControllerGuiInterface {
       try {
         String additionalParameters = String.join("\n", parameters);
         Scanner sc = new Scanner(additionalParameters);
-//        if (action.toLowerCase().equals("playerinfo")) {
-//          GameOperationCommand command = new DisplayPlayerInformationCommand
-//                  (worldModel,sc.nextLine(), System.out);
-//          return  command.execute();
-////          return worldModel.getPlayerDescriptionFromUsername(sc.nextLine());
-//        } else if (action.toLowerCase().equals("pickitem")) {
-//          String[] pick = additionalParameters.split("\n");
-//          GameOperationCommand command = new PickItemCommand(worldModel, pick[0], System.out, true);
-//          return command.execute();
-////          return pickItem(pick[0]);
-//        } else if (action.toLowerCase().equals("attack")) {
-//          String[] attack = additionalParameters.split("\n");
-//          GameOperationCommand command = new AttackPlayerCommand(worldModel, attack[0],System.out);
-//          return command.execute();
-//        } else if (action.toLowerCase().equals("move")) {
-//          String[] move = additionalParameters.split("\n");
-//          GameOperationCommand command = new MovePlayerCommand(worldModel,move[0],System.out);
-//          return command.execute();
-//        } else if (action.toLowerCase().equals("lookaround")) {
-//          GameOperationCommand command = new LookAroundCommand(worldModel,System.out);
-//          return command.execute();
-//        } else {
+
         GameOperationCommand command = this.supportedOperations.get(action).apply(sc);
         return command.execute();
-//        }
+      } catch (IllegalArgumentException ex) {
+        worldView.displayErrorDialog("ERROR", ex.getMessage());
       } catch (Exception ex) {
-          System.out.println(ex.getMessage());
+        System.out.println(ex.getMessage());
       }
     } else {
       // end the game
@@ -238,6 +232,18 @@ public class DummyController implements ControllerGuiInterface {
     return "";
   }
 
+  @Override
+  public boolean isValidMove(Player currentPlayer, Space clickedRoom) {
+    Space currentPlayerSpace = worldModel.getCurrentPlayerSpace(currentPlayer);
+    List<String> neighNames = worldModel.getNeighborsStrings();
+    if (worldModel.isContainsNeighbor(clickedRoom.getSpaceName(), neighNames)) {
+      return true;
+    }
+
+    return false;
+
+
+  }
 
   private String performRandomAction(ActionType action, Player player, World game) {
     String result = "";
