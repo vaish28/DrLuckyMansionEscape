@@ -58,6 +58,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private JPanel gridPanel;
   private JButton addHumanPlayer;
   private JButton addComputerPlayer;
+  private JButton viewSpaceInfoButton;
   private JTextField nameField;
   private JTextField maxCapacityField;
   private JTextField roomNameField;
@@ -68,6 +69,8 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private BufferedImage targetCharacterImage;
 
   private MenuItemFactory menuItemFactory;
+  private boolean humanPlayerAdded;
+
 
   public WorldViewImpl(ReadOnlyWorldModel model) {
     this.model = model;
@@ -76,6 +79,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private void initialize() {
 
+    this.humanPlayerAdded = false;
     this.rows = model.getRows();
     this.columns = model.getColumns();
     this.spaceList = model.getSpaces();
@@ -353,10 +357,14 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     mainPanel.add(infoGridPanel, BorderLayout.CENTER);
 
     JPanel buttonPanel = new JPanel(new FlowLayout());
-    addHumanPlayer.addActionListener(e -> showInputDialog());
+    addHumanPlayer.addActionListener(e -> showHumanPlayerInputDialog());
     addComputerPlayer.addActionListener(e -> showAddComputerPlayer());
+    viewSpaceInfoButton = new JButton("View Space Information");
+    viewSpaceInfoButton.addActionListener(e -> showViewSpaceInfoDialog());
+
     buttonPanel.add(addHumanPlayer);
     buttonPanel.add(addComputerPlayer);
+    buttonPanel.add(viewSpaceInfoButton);
     constraints.gridx = 0;
     constraints.gridy = 1;
     constraints.insets = new Insets(20, 0, 0, 0);
@@ -373,6 +381,27 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     setLocationRelativeTo(null); // Center the frame on the screen
     setSize(600, 600);
 
+  }
+
+
+
+  private void showViewSpaceInfoDialog() {
+    // Create an input dialog to get the room name
+    String selectedSpace = JOptionPane.showInputDialog(
+            this,
+            "Enter the room name to view information:",
+            "View Space Information",
+            JOptionPane.PLAIN_MESSAGE);
+
+    if (selectedSpace != null && !selectedSpace.trim().isEmpty()) {
+      String spaceInfo = listener.processInput("spaceinfo", new String[]{selectedSpace});
+      String messageTitle = "Space Information - " + selectedSpace;
+      displayMessageDialog(messageTitle, spaceInfo);
+    } else {
+      String message = "Please enter a valid room name.";
+      String messageTitle = "Invalid Input";
+      displayErrorDialog(messageTitle, message);
+    }
   }
 
   private void showAboutDialog() {
@@ -415,7 +444,14 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private void showAddComputerPlayer() {
 
-    listener.processInput("computer", new String[]{});
+    if (humanPlayerAdded) {
+      listener.processInput("computer", new String[]{});
+      updateDisplay();
+    } else {
+      String message = "Please add a human player before adding a computer player.";
+      String messageTitle = "Invalid Action";
+      displayErrorDialog(messageTitle, message);
+    }
     updateDisplay();
   }
 
@@ -461,7 +497,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
 
-  private void showInputDialog() {
+  private void showHumanPlayerInputDialog() {
     nameField = new JTextField(10);
     maxCapacityField = new JTextField(10);
     roomNameField = new JTextField(20);
@@ -486,13 +522,13 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
     if (result == JOptionPane.OK_OPTION) {
       String name = nameField.getText();
-      //int maxCapacity = Integer.parseInt(maxCapacityField.getText());
       String nameOfRoom = roomNameField.getText();
 
       // Check if the selected room is not the same as the target character's starting room
       if (!nameOfRoom.equals(model.getCurrentSpaceTargetIsIn().getSpaceName())) {
         //  listener.processHumanUserInfoClick(name, maxCapacity, nameOfRoom);
         listener.processInput("human", new String[]{name, maxCapacityField.getText(), nameOfRoom});
+        humanPlayerAdded = true;
         updateDisplay();
       } else {
         String message = "You cannot enter the room where the target character starts.";
@@ -654,42 +690,31 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
       Space clickedRoom = getClickedRoom(roomRow, roomCol);
 
       if (clickedRoom != null) {
-        Player currentPlayer = model.getCurrentPlayer();
-        List<Player> playersInClickedRoom = model.getMappingOfSpaceAndPlayer().get(clickedRoom);
 
-        if (currentPlayer.isHumanControlled()) { // Check if the current player is human-controlled
-          if (playersInClickedRoom != null && playersInClickedRoom.contains(currentPlayer)) {
-            // Clicked on a room with the current player, show the player's description
-            String description = listener.processInput("playerinfo", new String[]{model.getCurrentPlayer().getName()}); // Replace with your description logic
-            JOptionPane.showMessageDialog(
-                    this,
-                    description,
-                    "Player Description",
-                    JOptionPane.INFORMATION_MESSAGE);
+//        if (model.getCurrentPlayer().isHumanControlled()) { // Check if the current player is human-controlled
+          if (listener.checkIfPlayerDescription(clickedRoom)) {
+
+            String description = listener.processInput("playerinfo",
+                    new String[]{model.getCurrentPlayer().getName()}); // Replace with your description logic
+
+            String messageTitle = "Player Description";
+            displayMessageDialog(messageTitle,description);
+
           } else if (listener.isValidMove(model.getCurrentPlayer(), clickedRoom)) {
             String resultMove = listener.processInput("move",
                     new String[]{clickedRoom.getSpaceName()});
-            JOptionPane.showMessageDialog(
-                    this,
-                    resultMove,
-                    "Player Description",
-                    JOptionPane.INFORMATION_MESSAGE);
+            String messageTitle = "Moving player";
+            displayMessageDialog(messageTitle,resultMove);
             computerTurn();
             updateDisplay();
           } else {
             String resultMove = "Invalid move! The space is not your neighbor";
-            JOptionPane.showMessageDialog(
-                    this,
-                    resultMove,
-                    "Player Description",
-                    JOptionPane.INFORMATION_MESSAGE);
+            String messageTitle = "Invalid move!";
+            displayMessageDialog(messageTitle,resultMove);
           }
-        }
+//        }
       }
     }
-
-
-    //&& model.isValidMove(model.getCurrentPlayer(), clickedRoom)
 
     private Space getClickedRoom(int row, int col) {
       for (Space room : spaceList) {

@@ -77,4 +77,6 @@ public interface ControllerGuiInterface {
    * @return True if the move is valid, false otherwise.
    */
   boolean isValidMove(Player currentPlayer, Space clickedRoom);
+
+  boolean checkIfPlayerDescription(Space clickedRoom);
 }

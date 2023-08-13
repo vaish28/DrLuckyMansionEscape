@@ -175,6 +175,11 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     return false;
   }
 
+  @Override
+  public boolean checkIfPlayerDescription(Space clickedRoom) {
+    return false;
+  }
+
 
   private String performRandomAction(ActionType action, Player player, World game) {
     String result = "";

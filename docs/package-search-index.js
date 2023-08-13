@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"killdrluckygame"},{"l":"killdrluckygame.commands"},{"l":"killdrluckygame.view"},{"l":"test"}];updateSearchResults();

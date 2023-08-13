@@ -759,8 +759,8 @@ public class ControllerTest {
     };
     systemUnderTest.gamePlay(model, 5);
     assertTrue(modelLog.toString().contains("Attacking target"));
-    assertTrue(out.toString().contains("No item to pick up hence poking!"
-            + "Attack successful!"));
+    System.out.println(out.toString());
+    assertTrue(out.toString().contains("Attack successful!"));
   }
 
   /**

@@ -8,14 +8,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Function;
-import killdrluckygame.commands.AddComputerPlayerCommand;
-import killdrluckygame.commands.AddHumanPlayerCommand;
-import killdrluckygame.commands.AttackPlayerCommand;
-import killdrluckygame.commands.DisplayPlayerInformationCommand;
-import killdrluckygame.commands.GameOperationCommand;
-import killdrluckygame.commands.LookAroundCommand;
-import killdrluckygame.commands.MovePlayerCommand;
-import killdrluckygame.commands.PickItemCommand;
+
+import killdrluckygame.commands.*;
 import killdrluckygame.view.WorldViewInterface;
 
 public class DummyController implements ControllerGuiInterface {
@@ -103,6 +97,18 @@ public class DummyController implements ControllerGuiInterface {
     return command;
   }
 
+  private GameOperationCommand processViewSpaceInformation(Scanner sc) {
+
+    GameOperationCommand command = null;
+    try {
+      String spaceName = sc.nextLine();
+      command = new DisplaySpaceInformationCommand(worldModel,spaceName, out);
+
+    } catch(IllegalArgumentException ex) {
+      throw new IllegalArgumentException("Enter valid space name");
+    }
+    return command;
+  }
 
   private void initialise() {
 
@@ -119,6 +125,8 @@ public class DummyController implements ControllerGuiInterface {
     this.supportedOperations.put("attack", (Scanner sc) -> processAttack(sc));
 
     this.supportedOperations.put("lookaround", (Scanner sc) -> processLookAround(sc));
+
+    this.supportedOperations.put("spaceinfo", (Scanner sc) -> processViewSpaceInformation(sc));
   }
 
   @Override
@@ -295,6 +303,20 @@ public class DummyController implements ControllerGuiInterface {
     }
 
     return result;
+  }
+
+  @Override
+  public boolean checkIfPlayerDescription(Space clickedRoom) {
+    Player currentPlayer = worldModel.getCurrentPlayer();
+    List<Player> playersInClickedRoom = worldModel.getMappingOfSpaceAndPlayer().get(clickedRoom);
+
+    if(currentPlayer.isHumanControlled()) {
+      if(playersInClickedRoom != null &&(playersInClickedRoom.contains(currentPlayer))) {
+        return true;
+      }
+    }
+    return false;
+
   }
 
 
