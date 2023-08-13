@@ -197,11 +197,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private void computerTurn() {
     String resultComputer = listener.computerPlayerTurn();
     if (resultComputer != null && (!resultComputer.equals(""))) {
-      JOptionPane.showMessageDialog(this,
-              resultComputer,
-              "Computer Turn",
-              JOptionPane.INFORMATION_MESSAGE);
+      displayMessageDialog("Computer Turn", resultComputer);
     }
+
 
   }
 
@@ -214,7 +212,8 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
             "Attempt on Target Character",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.WARNING_MESSAGE);
-
+//    displayMessageDialog();
+//
     if (result == JOptionPane.YES_OPTION) {
 
       Player currentPlayer = model.getCurrentPlayer();
@@ -391,7 +390,10 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   @Override
   public void displayMessageDialog(String title, String message) {
-
+    JOptionPane.showMessageDialog(this,
+            message,
+            title,
+            JOptionPane.INFORMATION_MESSAGE);
   }
 
   @Override
@@ -419,17 +421,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     this.keyListener = new ListenKey();
     gridPanel.addKeyListener(this.keyListener);
   }
-
-//  private void updateInstructionsLabel() {
-//    Player currentPlayer = model.getCurrentPlayer();
-//    if (currentPlayer != null) {
-//      if (currentPlayer.isHumanControlled()) {
-//        instructionsLabel.setText("Instructions: Your turn. Press 'P' to pick an item, 'L' to look around, 'A' to attempt on the target character.");
-//      } else {
-//        instructionsLabel.setText("Instructions: Computer's turn. Wait for your turn.");
-//      }
-//    }
-//  }
 
   private void displayTargetCharacterInfo() {
     if (model != null) {
@@ -499,12 +490,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         listener.processInput("human", new String[]{name, maxCapacityField.getText(), nameOfRoom});
         updateDisplay();
       } else {
-        JOptionPane.showMessageDialog(
-                this,
-                "You cannot enter the room where the target character starts.",
-                "Invalid Room",
-                JOptionPane.ERROR_MESSAGE
-        );
+        String message = "You cannot enter the room where the target character starts.";
+        String messageTitle = "Invalid Room";
+        displayErrorDialog(messageTitle, message);
       }
     }
   }
@@ -561,8 +549,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         }
       }
     } else {
-      JOptionPane.showMessageDialog(this, "No file selected.",
-              "Error", JOptionPane.ERROR_MESSAGE);
+      String message = "No file selected!";
+      String messageTitle = "Error";
+      displayErrorDialog(messageTitle, message);
     }
   }
 
@@ -573,8 +562,10 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
       this.model = world;
       moveToGame(); // Move to the game view
     } else {
-      JOptionPane.showMessageDialog(this, "Failed to load the new world.",
-              "Error", JOptionPane.ERROR_MESSAGE);
+      String message = "Failed to load the new world!";
+      String messageTitle = "Error";
+      displayErrorDialog(messageTitle, message);
+
     }
   }
 
@@ -611,17 +602,22 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   @Override
   public void gameEnd() {
     if (model.getTargetHealth() == 0) {
-      JOptionPane.showMessageDialog(
-              this,
-              "Congratulations! You have successfully defeated the target character.\nYou win!",
-              "Game Over - Victory!",
-              JOptionPane.INFORMATION_MESSAGE);
+      StringBuilder sb = new StringBuilder();
+      sb.append("Congratulations! You have successfully defeated the target character.");
+      sb.append("\nYou win!");
+
+      String message = sb.toString();
+      String messageTitle = "Game Over - Defeat!";
+      displayMessageDialog(messageTitle,message);
+
     } else {
-      JOptionPane.showMessageDialog(
-              this,
-              "Oh no! The turns are exhausted and the target character is still alive.\nYou lose!",
-              "Game Over - Defeat!",
-              JOptionPane.ERROR_MESSAGE);
+      StringBuilder sb = new StringBuilder();
+      sb.append("Oh no! The turns are exhausted and the target character is still alive.");
+      sb.append("\nYou lose!");
+
+      String message = sb.toString();
+      String messageTitle = "Game Over - Defeat!";
+      displayErrorDialog(messageTitle,message);
       System.exit(0);
     }
   }

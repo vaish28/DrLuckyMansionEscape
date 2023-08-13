@@ -201,8 +201,8 @@ public class DummyController implements ControllerGuiInterface {
   public String computerPlayerTurn() {
     String result = "";
     Player currentPlayer = worldModel.getCurrentPlayer();
-    if (worldModel.getCurrentPlayer().isComputerControlled()) {
-      result = simulateAction(worldModel.getCurrentPlayer());
+    if (currentPlayer.isComputerControlled()) {
+      result = simulateAction(currentPlayer);
       System.out.println(result);
       advanceTargetCharacter();
       return result;
@@ -213,6 +213,7 @@ public class DummyController implements ControllerGuiInterface {
 
   @Override
   public String processInput(String action, String[] parameters) {
+
     if (!worldModel.hasGameEnded(this.maxTurns)) {
       try {
         String additionalParameters = String.join("\n", parameters);
@@ -222,8 +223,6 @@ public class DummyController implements ControllerGuiInterface {
         return command.execute();
       } catch (IllegalArgumentException ex) {
         worldView.displayErrorDialog("ERROR", ex.getMessage());
-      } catch (Exception ex) {
-        System.out.println(ex.getMessage());
       }
     } else {
       // end the game
