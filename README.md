@@ -155,31 +155,86 @@ To use the "Dr. Lucky World Game" program, follow these instructions to interact
 
 ### Example Runs
 
-List any example runs that you have in res/ directory and provide a description of what each example represents or does. Make sure that your example runs are provided as *plain text files*.
 
+The example run for the Milestone 4 is the video demo which will demo the working of the game
+with four players in total. 
+
+
+There are some important example run files present in the res directory for Milestone 3:
+1. EffectOfPet
+2. playerwinningthegame
+3. TargetCharacterRunningForLife
+4. ComputerplayerWinningTheGame
+
+The first example run shows the effect of pet on the spaces. The pet situated in a space makes it invisible.
+Therefore, it makes the Lilac Room invisible.
+
+The second example run captures the behaviour of human player making an attempt on the target character's life and human
+player winning the game by killing the target character.
+
+The third example captures the behaviour of target character escaping with his life and the game ending.
+
+The example run four captures the behaviour of computer controlled player winning the game by killing the target
+character and thus making an attempt on the target character life/health.
+
+Rest of the example runs are sample runs demonstrating the game play.
 
 
 ### Design/Model Changes
 
-Document what changes you have made from earlier designs. Why did you make those changes? Keep an on-going list using some form of versioning so it is clear when these changes occurred.
-
-
+- During Milestone 1, only the model was created and was used to find neighboring spaces adding
+  spaces, displaying graphical representation and reading input.
+- During Milestone 2, a synchronous controller was added and  model changes were made to add a human player and
+  computer player. The allowed actions in Milestone 2 were to pick up an item, move a player to space, add a
+  computer player and a human player, displaying space and player information, lookaround the world and
+  displaying graphical representation.
+- During Milestone 3, a class was added for the pet of the target character, classes for the command design pattern were 
+  also added. 
+  - The important changes made to the design are as follows:
+    - The players are not associated with spaces and vice versa.
+    - The players do not maintain the current space to track the location in order to maintain the SRP.
+    - The mapping between players and spaces are moved to hashmap.
+    - The items are not associated with the world but with spaces
+    - Each space and player maintains it's own list of items.
+    - The DrLuckyWorldReadInput is made an inner class of the DrLuckyWorld class.
+- For Milestone 4, the following model changes were done:-
+  - The computer action was moved from the model to the controller.
+  - The controller is now responsible for controlling the players.
+  - A new function in the model class is added for loading the world specification from a file.
+  - The view has been added and it supports all the functionalities of previous milestones.
 
 ### Assumptions
 
-List any assumptions that you made during program development and implementations. Be sure that these do not conflict with the requirements of the project.
+1. The world is initially created with all the necessary spaces, and all the items are available
+   at the beginning in a readable format.
 
-
+2. The human player is included in the game before the computer player.
 
 ### Limitations
 
-What limitations exist in your program. This should include any requirements that were *not* implemented or were not working correctly (including something that might work some of the time).
+1. The generation of rooms and items is not dynamically handled, meaning new rooms and items
+   cannot be created during gameplay.
 
-
+2. The gameplay requires the human player to be added to the gameplay before a computer player.
 
 ### Citations
 
-Be sure to cite your sources. A good guideline is if you take more than three lines of code from some source, you must include the information on where it came from. Citations should use proper [IEEE citation guidelines](https://ieee-dataport.org/sites/default/files/analysis/27/IEEE Citation Guidelines.pdf) and should include references (websites, papers, books, or other) for ***any site that you used to research a solution***. For websites, this includes name of website, title of the article, the url, and the date of retrieval**.** Citations should also include a qualitative description of what you used, and what you changed/contributed.
+1. Tutorialspoint. (n.d.). Java - Buffered Image.
+   Retrieved from https://www.tutorialspoint.com/java_dip/java_buffered_image.htm [02/06/2023]
 
+2. GeeksforGeeks. "Collections.nCopies() in Java."
+   Available: https://www.geeksforgeeks.org/collections-ncopies-java/. [30/05/2023]
+
+3. GeeksforGeeks. "Java Program to Remove Nulls from a List/Container."
+   Available: https://www.geeksforgeeks.org/java-program-to-remove-nulls-from-a-list-container/.
+   [31/05/2023].
+
+4. Javatpoint. "Java static nested classes."
+   Available: https://www.javatpoint.com/static-nested-class/ .
+   [23/06/2023]
+
+5. Tutorialspoint. "SWING Tutorial."
+   Available: https://www.tutorialspoint.com/swing/index.htm .
+   [01/08/2023] [02/08/2023] [31/07/2023]
 
 

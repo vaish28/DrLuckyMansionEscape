@@ -907,6 +907,11 @@ public class DrLuckyWorld implements World {
     prevAction = newAction;
   }
 
+  @Override
+  public World reload(Readable readable) {
+    return new Input().readInput(readable);
+  }
+
   /**
    * This class is for reading and parsing the input from the file.
    */
@@ -938,7 +943,7 @@ public class DrLuckyWorld implements World {
     }
 
     /**
-     * Reads the input from a Readable object and generates the DrLuckyWorld object.
+     * Reads the ainput from a Readable object and generates the DrLuckyWorld object.
      *
      * @param readable The Readable object containing the input.
      * @return The DrLuckyWorld object generated from the input.

@@ -49,7 +49,7 @@ public class DummyController implements ControllerGuiInterface {
       }
 
       command = new AddHumanPlayerCommand(worldModel, name, maxTurns,
-              roomName, System.out);
+              roomName, out);
     } catch (NoSuchElementException ex) {
       throw new NoSuchElementException("Enter valid values!");
     } catch (NumberFormatException ex) {
@@ -137,11 +137,13 @@ public class DummyController implements ControllerGuiInterface {
     worldView.setVisibleMain();
   }
 
+
   @Override
   public void loadNewGame(String worldFileName, int maxTurns) {
     this.maxTurns = maxTurns;
     try {
-      this.worldModel = new DrLuckyWorld.Input().readInput(new FileReader(worldFileName));
+      Readable readable = new FileReader(worldFileName);
+      this.worldModel = this.worldModel.reload(readable); //new DrLuckyWorld.Input().readInput(new FileReader(worldFileName));
     } catch (IOException e) {
       // Handle file reading or parsing errors
       String.format("An error occurred while reading the file: " + e.getMessage());
@@ -153,8 +155,11 @@ public class DummyController implements ControllerGuiInterface {
   @Override
   public void resetGame() {
 
+
     try {
-      this.worldModel = new DrLuckyWorld.Input().readInput(new FileReader(filePath));
+      Readable readable = new FileReader(filePath);
+      this.worldModel = this.worldModel.reload(readable);
+//              new DrLuckyWorld.Input().readInput(new FileReader(filePath));
     } catch (IOException e) {
       String.format(e.getMessage());
     }

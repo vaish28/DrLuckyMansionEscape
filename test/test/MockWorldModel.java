@@ -345,4 +345,9 @@ public class MockWorldModel implements World {
 
   }
 
+  @Override
+  public World reload(Readable readable) {
+    return null;
+  }
+
 }

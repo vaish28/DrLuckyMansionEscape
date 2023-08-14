@@ -195,6 +195,7 @@ public interface World extends ReadOnlyWorldModel {
    */
   void changePrevAction(ActionType newAction);
 
+  World reload(Readable readable);
 
 }
 
