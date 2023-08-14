@@ -141,7 +141,7 @@ public class DrLuckyWorld implements World {
   @Override
   public Space getSpaceFromSpaceName(String spaceName) {
     for (Space space : spaceList) {
-      if (space.getSpaceName().equals(spaceName)) {
+      if (space.getSpaceName().equalsIgnoreCase(spaceName)) {
         return space;
       }
     }
@@ -504,7 +504,7 @@ public class DrLuckyWorld implements World {
       }
       return false;
     }
-    return true;
+    return false;
   }
 
 

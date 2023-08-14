@@ -2,14 +2,11 @@ package test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
 import killdrluckygame.*;
-import killdrluckygame.view.WorldViewImpl;
 import killdrluckygame.view.WorldViewInterface;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,7 +69,7 @@ public class ControllerViewTest {
       }
     };
 
-    ControllerGuiInterface controller = new DummyController(random, world, view, 4, ""
+    ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4, ""
             , out);
     controller.loadNewGame("res/mansion.txt", 3);
 
@@ -108,7 +105,7 @@ public class ControllerViewTest {
       }
     };
 
-    ControllerGuiInterface controller = new DummyController(random, world, view, 4,
+    ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
             "", out);
     controller.processInput("human",new String[]{"Neha","6","Billiard Room"});
 
@@ -152,7 +149,7 @@ public class ControllerViewTest {
     };
 
     WorldViewInterface view = new MockView(viewLog);
-    ControllerGuiInterface controller = new DummyController(random, world, view, 4, ""
+    ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4, ""
             , out);
     controller.processInput("computer",new String[]{});
     assertTrue(modelLog.toString().contains("Adding a computer player"));
@@ -212,7 +209,7 @@ public class ControllerViewTest {
     };
 
     WorldViewInterface view = new MockView(viewLog);
-    ControllerGuiInterface controller = new DummyController(random, world, view, 4, ""
+    ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4, ""
             , out);
     controller.processInput("playerinfo",new String[]{"Aishwarya"});
 
@@ -221,6 +218,68 @@ public class ControllerViewTest {
     assertTrue(out.toString().contains("Getting player description from username!"));
 
   }
+
+  @Test
+  public void testSpaceInformation() {
+
+    CustomRandomInterface random = new CustomRandom();
+
+    World world = new MockWorldModel(modelLog, 1, true) {
+
+
+      @Override
+      public boolean isToPromptForInput() {
+        return true;
+      }
+
+      @Override
+      public List<Player> getPlayers() {
+        return new ArrayList<>(Arrays.asList(new
+                HumanControlledPlayer("aaai", 10)));
+      }
+
+      @Override
+      public Space getSpaceFromSpaceName(String spaceName) {
+        return new DrLuckySpace("Drawing Room", new WorldPosition(23, 24),
+                new WorldPosition(25, 26));
+      }
+
+
+      @Override
+      public Player getCurrentPlayer() {
+        Player player = new HumanControlledPlayer("Aishwarya", 10);
+        Space space = new DrLuckySpace("Drawing Room",
+                new WorldPosition(23, 24),
+                new WorldPosition(25, 26));
+        space.addItemToSpace(new DrLuckyItem("Revolver", 3));
+        addMappingOfSpaceAndPlayer(space, player);
+        return player;
+      }
+
+      @Override
+      public Player getPlayerByPlayerName(String playerName) {
+        return new HumanControlledPlayer("Aishwarya", 10);
+      }
+
+      @Override
+      public List<Space> getSpaces() {
+        return new ArrayList<>(Arrays.asList(new DrLuckySpace("Drawing Room",
+                new WorldPosition(23, 24),
+                new WorldPosition(25, 26))));
+      }
+    };
+
+    WorldViewInterface view = new MockView(viewLog);
+    ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4, ""
+            , out);
+    controller.processInput("spaceinfo",new String[]{"Drawing Room"});
+
+
+    System.out.println(modelLog.toString());
+    System.out.println(out.toString());
+
+  }
+
 
 
   @Test
@@ -257,7 +316,7 @@ public class ControllerViewTest {
     WorldViewInterface view = new MockView(viewLog);
 
     ControllerGuiInterface systemUnderTest = new ControllerGuiImpl(random,world,view,
-            3,"res/mansion.txt");
+            3,"res/mansion.txt",out);
     int maxCapacity = systemUnderTest.generateRandomMaxCapacity();
     int spaceIndex = systemUnderTest.generateRandomFirstSpace();
     // Add a computer player
@@ -297,7 +356,7 @@ public class ControllerViewTest {
     WorldViewInterface view = new MockView(viewLog);
 
     ControllerGuiInterface systemUnderTest = new ControllerGuiImpl(random,world,view,
-            3,"res/mansion.txt");
+            3,"res/mansion.txt", out);
 
     int maxCapacity = systemUnderTest.generateRandomMaxCapacity();
     int spaceIndex = systemUnderTest.generateRandomFirstSpace();
@@ -350,7 +409,7 @@ public class ControllerViewTest {
     WorldViewInterface view = new MockView(viewLog);
 
     ControllerGuiInterface systemUnderTest = new ControllerGuiImpl(random,world,view,
-            3,"res/mansion.txt");
+            3,"res/mansion.txt",out);
 
     int maxCapacity = systemUnderTest.generateRandomMaxCapacity();
     int spaceIndex = systemUnderTest.generateRandomFirstSpace();
@@ -405,7 +464,7 @@ public class ControllerViewTest {
     WorldViewInterface view = new MockView(viewLog);
 
     ControllerGuiInterface systemUnderTest = new ControllerGuiImpl(random,world,view,
-            3,"res/mansion.txt");
+            3,"res/mansion.txt",out);
 
     int maxCapacity = systemUnderTest.generateRandomMaxCapacity();
     int spaceIndex = systemUnderTest.generateRandomFirstSpace();
@@ -452,7 +511,7 @@ public class ControllerViewTest {
     WorldViewInterface view = new MockView(viewLog);
 
     ControllerGuiInterface systemUnderTest = new ControllerGuiImpl(random,world,view,
-            3,"res/mansion.txt");
+            3,"res/mansion.txt",out);
     int maxCapacity = systemUnderTest.generateRandomMaxCapacity();
     int spaceIndex = systemUnderTest.generateRandomFirstSpace();
     // Add a computer player
@@ -506,7 +565,7 @@ public class ControllerViewTest {
     WorldViewInterface view = new MockView(viewLog);
 
     ControllerGuiInterface systemUnderTest = new ControllerGuiImpl(random,world,view,
-            3,"res/mansion.txt");
+            3,"res/mansion.txt",out);
 
     int maxCapacity = systemUnderTest.generateRandomMaxCapacity();
     int spaceIndex = systemUnderTest.generateRandomFirstSpace();
@@ -561,7 +620,7 @@ public class ControllerViewTest {
     WorldViewInterface view = new MockView(viewLog);
 
     ControllerGuiInterface systemUnderTest = new ControllerGuiImpl(random,world,view,
-            3,"res/mansion.txt");
+            3,"res/mansion.txt",out);
     int maxCapacity = systemUnderTest.generateRandomMaxCapacity();
     int spaceIndex = systemUnderTest.generateRandomFirstSpace();
     // Add a computer player
@@ -607,7 +666,7 @@ public class ControllerViewTest {
     WorldViewInterface view = new MockView(viewLog);
 
     ControllerGuiInterface systemUnderTest = new ControllerGuiImpl(random,world,view,
-            3,"res/mansion.txt");
+            3,"res/mansion.txt",out);
     int maxCapacity = systemUnderTest.generateRandomMaxCapacity();
     int spaceIndex = systemUnderTest.generateRandomFirstSpace();
     // Add a computer player

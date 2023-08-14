@@ -70,7 +70,7 @@ public class DrLuckyWorldDriver {
       // Create the game view
       WorldViewInterface worldView = new WorldViewImpl(game);
       random = new CustomRandom();
-      ControllerGuiInterface play = new DummyController(random, game, worldView,
+      ControllerGuiInterface play = new ControllerGuiImpl(random, game, worldView,
               maxTurns, filePath, System.out);
       play.playGame();
     } catch (IOException e) {

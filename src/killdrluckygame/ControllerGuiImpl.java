@@ -1,73 +1,152 @@
 package killdrluckygame;
 
-import killdrluckygame.view.WorldViewInterface;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.util.function.Function;
 
+import killdrluckygame.commands.*;
+import killdrluckygame.view.WorldViewInterface;
 
 public class ControllerGuiImpl implements ControllerGuiInterface {
   private World worldModel;
+  private final Appendable out;
   private WorldViewInterface worldView;
-  private final int maxTurns;
+  private int maxTurns;
   private CustomRandomInterface random;
+  private final Map<String, Function<Scanner, GameOperationCommand>> supportedOperations;
   private String filePath;
 
   public ControllerGuiImpl(CustomRandomInterface random,
-                           World worldModel, WorldViewInterface worldView,
-                           int maxTurns, String filePath) {
+                           World worldModel, WorldViewInterface worldView, int maxTurns,
+                           String filePath, Appendable out) {
     this.worldModel = worldModel;
     this.worldView = worldView;
     this.random = random;
     this.maxTurns = maxTurns;
     this.filePath = filePath;
-    initializeListeners();
+    this.out = out;
+    this.supportedOperations = new HashMap<>();
     worldView.addListener(this);
+    initialise();
   }
 
+
+  private GameOperationCommand processAddHumanPlayerAction(Scanner sc) {
+    GameOperationCommand command = null;
+    try {
+      String name = sc.nextLine();
+      int maxTurns = Integer.parseInt(sc.nextLine());
+      String roomName = sc.nextLine();
+
+      // Check if the room name exists in the space list
+      if (worldModel.getSpaceFromSpaceName(roomName) == null) {
+        throw new IllegalArgumentException("Room does not exist: " + roomName);
+      }
+
+      command = new AddHumanPlayerCommand(worldModel, name, maxTurns,
+              roomName, out);
+    } catch (NoSuchElementException ex) {
+      throw new NoSuchElementException("Enter valid values!");
+    } catch (NumberFormatException ex) {
+      throw new IllegalArgumentException("Enter a valid value for max capacity!");
+    } catch (IllegalArgumentException ex) {
+      throw new IllegalArgumentException("Enter valid room name");
+    }
+    return command;
+  }
+
+
+  private GameOperationCommand processAddComputerPlayerAction(Scanner sc) {
+    int maxCapacity = generateRandomMaxCapacity();
+    int spaceRandomIndex = generateRandomFirstSpace();
+    GameOperationCommand command = new AddComputerPlayerCommand(worldModel, out,
+            maxCapacity, spaceRandomIndex);
+    return command;
+  }
+
+  private GameOperationCommand processDisplayPlayerInformation(Scanner sc) {
+    String playerName = sc.nextLine();
+    GameOperationCommand command = new DisplayPlayerInformationCommand(worldModel, playerName,
+            out);
+    return command;
+  }
+
+  private GameOperationCommand processMoveHumanPlayer(Scanner sc) {
+    GameOperationCommand command = new MovePlayerCommand(worldModel, sc.nextLine(), out);
+    return command;
+  }
+
+  private GameOperationCommand processPickItem(Scanner sc) {
+    GameOperationCommand command = new PickItemCommand(worldModel, sc.nextLine(), out,
+            true);
+    return command;
+  }
+
+  private GameOperationCommand processAttack(Scanner sc) {
+    GameOperationCommand command = new AttackPlayerCommand(worldModel, sc.nextLine(), out);
+    return command;
+  }
+
+  private GameOperationCommand processLookAround(Scanner sc) {
+    GameOperationCommand command = new LookAroundCommand(worldModel, out);
+    return command;
+  }
+
+  private GameOperationCommand processViewSpaceInformation(Scanner sc) {
+
+    GameOperationCommand command = null;
+    try {
+      String spaceName = sc.nextLine();
+      if(worldModel.getSpaceFromSpaceName(spaceName)==null) {
+        throw new IllegalArgumentException("Enter valid space name");
+      }
+      command = new DisplaySpaceInformationCommand(worldModel,spaceName, out);
+
+    } catch(IllegalArgumentException ex) {
+      throw ex;
+    }
+    return command;
+  }
+
+  private void initialise() {
+
+    this.supportedOperations.put("human", (Scanner sc) -> processAddHumanPlayerAction(sc));
+
+    this.supportedOperations.put("computer", (Scanner sc) -> processAddComputerPlayerAction(sc));
+
+    this.supportedOperations.put("playerinfo", (Scanner sc) -> processDisplayPlayerInformation(sc));
+
+    this.supportedOperations.put("move", (Scanner sc) -> processMoveHumanPlayer(sc));
+
+    this.supportedOperations.put("pickitem", (Scanner sc) -> processPickItem(sc));
+
+    this.supportedOperations.put("attack", (Scanner sc) -> processAttack(sc));
+
+    this.supportedOperations.put("lookaround", (Scanner sc) -> processLookAround(sc));
+
+    this.supportedOperations.put("spaceinfo", (Scanner sc) -> processViewSpaceInformation(sc));
+  }
 
   @Override
   public void playGame() {
 
-  }
-
-  private void initializeListeners() {
-
-  }
-
-  // Implement methods to handle different user actions based on the GUI interactions
-  // For example:
-  private void moveButtonClicked() {
-    // Logic to handle moving the player in the world
-    // Call methods from the game model to update the player's position
-    // Update the GUI to reflect the changes in the world
-
-  }
-
-  private void pickUpButtonClicked() {
-    // Logic to handle picking up an item in the world
-    // Call methods from the game model to pick up the item
-    // Update the GUI to reflect the changes in the world
-  }
-
-  private void handleMouseClick(int x, int y) {
-    // Logic to handle mouse click events
-    // Determine the action based on the clicked position in the world
-    // Call methods from the game model to update the game state
-    // Update the GUI to reflect the changes in the world
-  }
-
-  private void handleKeyPress(int keyCode) {
-    // Logic to handle key press events
-    // Determine the action based on the pressed key
-    // Call methods from the game model to update the game state
-    // Update the GUI to reflect the changes in the world
+    // TODO make the controller initialise or start the view according to the MVC principles.
+    worldView.setVisibleAboutDialog();
+    worldView.setVisibleMain();
   }
 
 
   @Override
-  public void loadNewGame(String worldFileName, int numberOfTurns) {
+  public void loadNewGame(String worldFileName, int maxTurns) {
+    this.maxTurns = maxTurns;
     try {
-      this.worldModel = new DrLuckyWorld.Input().readInput(new FileReader(worldFileName));
+      Readable readable = new FileReader(worldFileName);
+      this.worldModel = this.worldModel.reload(readable); //new DrLuckyWorld.Input().readInput(new FileReader(worldFileName));
     } catch (IOException e) {
       // Handle file reading or parsing errors
       String.format("An error occurred while reading the file: " + e.getMessage());
@@ -76,10 +155,14 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     worldView.setWorld(worldModel);
   }
 
+  @Override
   public void resetGame() {
 
+
     try {
-      this.worldModel = new DrLuckyWorld.Input().readInput(new FileReader(filePath));
+      Readable readable = new FileReader(filePath);
+      this.worldModel = this.worldModel.reload(readable);
+//              new DrLuckyWorld.Input().readInput(new FileReader(filePath));
     } catch (IOException e) {
       String.format(e.getMessage());
     }
@@ -155,31 +238,56 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     return result;
   }
 
+  @Override
   public String computerPlayerTurn() {
     String result = "";
-    if (worldModel.getCurrentPlayer().isComputerControlled()) {
-      result = simulateAction(worldModel.getCurrentPlayer());
+    Player currentPlayer = worldModel.getCurrentPlayer();
+    if (currentPlayer.isComputerControlled()) {
+      result = simulateAction(currentPlayer);
       System.out.println(result);
+      advanceTargetCharacter();
+      return result;
     }
-    advanceTargetCharacter();
+
     return result;
   }
 
   @Override
   public String processInput(String action, String[] parameters) {
-    return null;
+
+    if (!worldModel.hasGameEnded(this.maxTurns)) {
+      try {
+        String additionalParameters = String.join("\n", parameters);
+        Scanner sc = new Scanner(additionalParameters);
+
+        GameOperationCommand command = this.supportedOperations.get(action).apply(sc);
+        return command.execute();
+      } catch (NumberFormatException ex) {
+        worldView.displayErrorDialog("ERROR", ex.getMessage());
+      } catch (IllegalArgumentException ex) {
+        worldView.displayErrorDialog("ERROR", ex.getMessage());
+      } catch (NoSuchElementException ex) {
+        worldView.displayErrorDialog("ERROR", ex.getMessage());
+      }
+    } else {
+      // end the game
+      worldView.gameEnd();
+    }
+    return "";
   }
 
   @Override
   public boolean isValidMove(Player currentPlayer, Space clickedRoom) {
-    return false;
-  }
+    Space currentPlayerSpace = worldModel.getCurrentPlayerSpace(currentPlayer);
+    List<String> neighNames = worldModel.getNeighborsStrings();
+    if (worldModel.isContainsNeighbor(clickedRoom.getSpaceName(), neighNames)) {
+      return true;
+    }
 
-  @Override
-  public boolean checkIfPlayerDescription(Space clickedRoom) {
     return false;
-  }
 
+
+  }
 
   private String performRandomAction(ActionType action, Player player, World game) {
     String result = "";
@@ -203,6 +311,20 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     }
 
     return result;
+  }
+
+  @Override
+  public boolean checkIfPlayerDescription(Space clickedRoom) {
+    Player currentPlayer = worldModel.getCurrentPlayer();
+    List<Player> playersInClickedRoom = worldModel.getMappingOfSpaceAndPlayer().get(clickedRoom);
+
+    if(currentPlayer.isHumanControlled()) {
+      if(playersInClickedRoom != null &&(playersInClickedRoom.contains(currentPlayer))) {
+        return true;
+      }
+    }
+    return false;
+
   }
 
 

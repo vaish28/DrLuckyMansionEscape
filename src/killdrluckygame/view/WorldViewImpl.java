@@ -141,8 +141,10 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     JMenuBar menuBar = new JMenuBar();
 
     JMenu fileMenu = new JMenu("Game");
-    JMenuItem newGame = menuItemFactory.createMenuItem("New Game (New World)", "NewGame");
-    JMenuItem newGameSameWorld = menuItemFactory.createMenuItem("New Game (Same World)", "NewGameSameWorld");
+    JMenuItem newGame = menuItemFactory.
+            createMenuItem("New Game (New World)", "NewGame");
+    JMenuItem newGameSameWorld = menuItemFactory.
+            createMenuItem("New Game (Same World)", "NewGameSameWorld");
     JMenuItem quit = menuItemFactory.createMenuItem("Quit", "Quit");
 
     fileMenu.add(newGame);
@@ -267,12 +269,17 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
           }
         }
       }
+      messageTitle = "Attacking Now!";
+      displayMessageDialog(messageTitle,resultAttack);
     }
-    JOptionPane.showMessageDialog(
-            this,
-            resultAttack,
-            "Attacking now!",
-            JOptionPane.INFORMATION_MESSAGE);
+    else {
+      messageTitle = "Attack cancelled";
+      message = "You cancelled the attack";
+      displayMessageDialog(messageTitle,message);
+    }
+
+
+
     updateDisplay();
     computerTurn();
     updateDisplay();
@@ -314,10 +321,15 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     String resultPick = "";
     if (selectedItem != null) {
       resultPick = listener.processInput("pickitem", new String[]{selectedItem});
+      if(!("").equals(resultPick)) {
+        String messageTitle = "Picked item now!";
+        displayMessageDialog(messageTitle, resultPick);
+      }
+
     }
 
-    String messageTitle = "Attacking now!";
-    displayMessageDialog(messageTitle, resultPick);
+
+
     updateDisplay();
     computerTurn();
   }

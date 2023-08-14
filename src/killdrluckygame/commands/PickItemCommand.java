@@ -41,7 +41,7 @@ public class PickItemCommand implements GameOperationCommand {
     StringBuilder sb = new StringBuilder();
     if (hasItems) {
       if (!world.pickItem(this.itemName)) {
-        throw new IllegalArgumentException("Invalid item name entered or max capacity exhausted!");
+        throw new IllegalArgumentException("Max capacity exhausted!");
       } else {
         try {
           out.append("Item picked successfully");
