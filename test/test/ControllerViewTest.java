@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -94,7 +95,7 @@ public class ControllerViewTest {
     };
 
     ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
-            "", out);
+            "res/mansion.txt", out);
     controller.loadNewGame("res/mansion.txt", 3);
 
     assertTrue(viewLog.toString().contains("Adding new world specification !"));
@@ -135,7 +136,7 @@ public class ControllerViewTest {
     };
 
     ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
-            "", out);
+            "res/mansion.txt", out);
     controller.advanceTargetCharacter();
 
     assertTrue(modelLog.toString().contains("called advance target charactercalled next turn!"));
@@ -279,8 +280,7 @@ public class ControllerViewTest {
     controller.processInput("human", new String[]{"v", "-3", "Billiard Room"});
 
     assertTrue(viewLog.toString().contains("ERROR"));
-    assertTrue(viewLog.toString().contains("Max capacity cannot be negative!"));
-    System.out.println(viewLog.toString());
+    assertTrue(viewLog.toString().contains("Max items must be a positive value"));
 
   }
 
@@ -340,7 +340,7 @@ public class ControllerViewTest {
             "res/mansion.txt", out);
     controller.processInput("human", new String[]{"", "3", "Billiard Room"});
 
-    assertTrue(viewLog.toString().contains("Username cannot be empty!"));
+    assertTrue(viewLog.toString().contains("Player name cannot be null or empty"));
 
   }
 
@@ -512,30 +512,132 @@ public class ControllerViewTest {
 
     ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
             "res/mansion.txt", out);
-    controller.isValidMove(new HumanControlledPlayer("abc", 1), spaceOne);
+    boolean value = controller.isValidMove(new HumanControlledPlayer("abc",
+            1), spaceOne);
 
+    assertTrue(value);
     assertTrue(modelLog.toString().contains("getting neighbors!Checking valid move!"));
   }
 
-  @Test
-  public void testGameEnded() {
 
+  @Test
+  public void testIsInValidMove() {
+
+    World world = new MockWorldModel(modelLog, 1, true) {
+      @Override
+      public Space getCurrentPlayerSpace(Player currentPlayer) {
+        modelLog.append("Model reset");
+        return new DrLuckySpace("Drawing Room", new WorldPosition(15, 23),
+                new WorldPosition(13, 25));
+      }
+
+      @Override
+      public List<String> getNeighborsStrings() {
+        List<String> neighbors = new ArrayList<>();
+        neighbors.add("Billiard Room");
+        neighbors.add("Armory");
+        modelLog.append("getting neighbors!");
+        return neighbors;
+      }
+
+      @Override
+      public boolean isContainsNeighbor(String spaceName, List<String> list) {
+        modelLog.append("Checking invalid move!");
+        return false;
+      }
+
+    };
+
+    CustomRandomInterface random = new CustomRandom();
+
+    WorldViewInterface view = new MockView(viewLog) {
+      @Override
+      public void setWorld(ReadOnlyWorldModel world) {
+        viewLog.append("Resetting the game!");
+      }
+
+      @Test
+      public void displayErrorDialog(String title, String message) {
+        viewLog.append(title);
+        viewLog.append(message);
+      }
+
+
+    };
+
+    ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
+            "res/mansion.txt", out);
+    boolean value = controller.isValidMove(new HumanControlledPlayer("abc",
+            1), spaceOne);
+
+    assertFalse(value);
+    assertTrue(modelLog.toString().contains("getting neighbors!Checking invalid move!"));
   }
+
 
   @Test
   public void testIfClickIsPlayerDescription() {
+    World world = new MockWorldModel(modelLog, 1, true) {
+      @Override
+      public World reload(Readable readable) {
+        modelLog.append("Model reset");
+        return new MockWorldModel(modelLog, 1, true);
+      }
+
+      @Override
+      public void moveTargetCharacter() {
+        modelLog.append("called advance target character");
+
+      }
+
+      @Override
+      public void nextTurn() {
+        modelLog.append("called next turn!");
+      }
+
+      @Override
+      public Space getSpaceFromSpaceName(String roomName) {
+        return new DrLuckySpace("Billiard Room", new WorldPosition(13, 15),
+                new WorldPosition(23, 25));
+      }
+
+      @Override
+      public void addHumanPlayer(String playerName, int maxItems, String spaceName) {
+        throw new IllegalArgumentException("Room name is invalid!");
+      }
+
+      @Override
+      public String getPlayerDescriptionFromUsername(String username) {
+        modelLog.append("player decription");
+        return "abc";
+      }
+    };
+
+    CustomRandomInterface random = new CustomRandom();
+
+    WorldViewInterface view = new MockView(viewLog) {
+      @Override
+      public void setWorld(ReadOnlyWorldModel world) {
+        viewLog.append("Resetting the game!");
+      }
+
+      @Test
+      public void displayErrorDialog(String title, String message) {
+        viewLog.append(title);
+        viewLog.append(message);
+      }
+
+
+    };
+
+    ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
+            "res/mansion.txt", out);
+    controller.processInput("playerinfo", new String[]{"abc"});
+
+    assertTrue(modelLog.toString().contains("player decription"));
 
   }
 
-  @Test
-  public void testIfComputerPlayerTurn() {
-
-  }
-
-  @Test
-  public void processInvalidAttack() {
-
-  }
 
   @Test
   public void testCommandPattern() {
@@ -565,7 +667,7 @@ public class ControllerViewTest {
     };
 
     ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
-            "", out);
+            "res/mansion.txt", out);
     controller.processInput("human", new String[]{"Neha", "6", "Billiard Room"});
 
     System.out.println(out.toString());
@@ -609,7 +711,7 @@ public class ControllerViewTest {
 
     WorldViewInterface view = new MockView(viewLog);
     ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
-            "", out);
+            "res/mansion.txt", out);
     controller.processInput("computer", new String[]{});
     assertTrue(modelLog.toString().contains("Adding a computer player"));
     assertTrue(out.toString().contains("Now adding a computer controlled player!\n"));
@@ -669,7 +771,7 @@ public class ControllerViewTest {
 
     WorldViewInterface view = new MockView(viewLog);
     ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
-            "", out);
+            "res/mansion.txt", out);
     controller.processInput("playerinfo", new String[]{"Aishwarya"});
 
 
@@ -736,7 +838,7 @@ public class ControllerViewTest {
 
     WorldViewInterface view = new MockView(viewLog);
     ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
-            "", out);
+            "res/mansion.txt", out);
     controller.processInput("spaceinfo", new String[]{"Drawing Room"});
 
 
@@ -811,7 +913,7 @@ public class ControllerViewTest {
 
     WorldViewInterface view = new MockView(viewLog);
     ControllerGuiInterface controller = new ControllerGuiImpl(random, world, view, 4,
-            "", out);
+            "res/mansion.txt", out);
     controller.processInput("pickitem", new String[]{"Revolver"});
 
     assertTrue(modelLog.toString().contains("item picked successfully!"));
@@ -892,7 +994,7 @@ public class ControllerViewTest {
     };
     WorldViewInterface view = new MockView(viewLog);
     ControllerGuiInterface controller = new ControllerGuiImpl(random, model, view, 4,
-            "", out);
+            "res/mansion.txt", out);
 
     controller.processInput("move", new String[]{"Drawing Room"});
     assertTrue(modelLog.toString().contains("Moving player successfully"));
@@ -948,7 +1050,7 @@ public class ControllerViewTest {
 
     WorldViewInterface view = new MockView(viewLog);
     ControllerGuiInterface controller = new ControllerGuiImpl(new CustomRandom(), model, view,
-            4, "", out);
+            4, "res/mansion.txt", out);
 
     controller.processInput("lookaround", new String[]{});
 

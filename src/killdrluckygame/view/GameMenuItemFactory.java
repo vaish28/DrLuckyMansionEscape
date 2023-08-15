@@ -22,6 +22,9 @@ public class GameMenuItemFactory implements MenuItemFactory {
   @Override
   public void handleMenuItemAction(String command) {
     String commandAction = command;
+    if (command == null) {
+      throw new IllegalArgumentException("invalid command");
+    }
     MenuItemActionStrategy strategy;
 
     switch (command) {

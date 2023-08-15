@@ -165,7 +165,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
 
-
   private void loadTargetCharacterImage() {
     try {
       targetCharacterImage = ImageIO.read(new File("res/target.jpg"));
@@ -515,7 +514,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
   private void updateNumberOfTurns() {
-    numberOfTurns.setText("Remaining Turns: " + model.getNumberOfTurns());
+    numberOfTurns.setText("Turns Taken: " + model.getNumberOfTurns());
   }
 
   private void displayTargetCharacterInfo() {

@@ -47,6 +47,29 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   public ControllerGuiImpl(CustomRandomInterface random,
                            World worldModel, WorldViewInterface worldView, int maxTurns,
                            String filePath, Appendable out) {
+    if (random == null) {
+      throw new IllegalArgumentException("Random cannot be null");
+    }
+
+    if (worldModel == null) {
+      throw new IllegalArgumentException("World model cannot be null");
+    }
+
+    if (worldView == null) {
+      throw new IllegalArgumentException("World view cannot be null");
+    }
+
+    if (maxTurns <= 0) {
+      throw new IllegalArgumentException("Max turns must be a positive integer");
+    }
+
+    if (filePath == null || filePath.isEmpty()) {
+      throw new IllegalArgumentException("File path cannot be null or empty");
+    }
+
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable 'out' cannot be null");
+    }
     this.worldModel = worldModel;
     this.worldView = worldView;
     this.random = random;
@@ -75,10 +98,6 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
               roomName, out);
     } catch (NoSuchElementException ex) {
       throw new NoSuchElementException("Enter valid values!");
-    } catch (NumberFormatException ex) {
-      throw new IllegalArgumentException("Enter a valid value for max capacity!");
-    } catch (IllegalArgumentException ex) {
-      throw new IllegalArgumentException("Enter valid values!");
     }
     return command;
   }
@@ -164,6 +183,13 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
 
   @Override
   public void loadNewGame(String worldFileName, int maxTurns) {
+    if (worldFileName == null || worldFileName.isEmpty()) {
+      throw new IllegalArgumentException("World file name cannot be null or empty");
+    }
+
+    if (maxTurns <= 0) {
+      throw new IllegalArgumentException("Max turns must be a positive integer");
+    }
     this.maxTurns = maxTurns;
     try {
       Readable readable = new FileReader(worldFileName);
@@ -287,7 +313,7 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
       } catch (NoSuchElementException ex) {
         worldView.displayErrorDialog("ERROR", ex.getMessage());
       }
-    }  else {
+    } else {
       // end the game
       worldView.gameEnd();
     }
@@ -296,6 +322,13 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
 
   @Override
   public boolean isValidMove(Player currentPlayer, Space clickedRoom) {
+    if (currentPlayer == null) {
+      throw new IllegalArgumentException("Current player cannot be null");
+    }
+
+    if (clickedRoom == null) {
+      throw new IllegalArgumentException("Clicked room cannot be null");
+    }
     Space currentPlayerSpace = worldModel.getCurrentPlayerSpace(currentPlayer);
     List<String> neighNames = worldModel.getNeighborsStrings();
     if (worldModel.isContainsNeighbor(clickedRoom.getSpaceName(), neighNames)) {
@@ -344,7 +377,6 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     return false;
 
   }
-
 
 
 }

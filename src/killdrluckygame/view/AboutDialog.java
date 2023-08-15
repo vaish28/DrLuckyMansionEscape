@@ -15,7 +15,7 @@ import javax.swing.UIManager;
  * The AboutDialog class represents a dialog that displays information about the Dr. Lucky Game.
  * It provides details about the game, its features, and how to play.
  */
-public class AboutDialog extends JDialog {
+public class AboutDialog extends JDialog implements AboutDialogInterface {
 
   /**
    * Constructs an AboutDialog object.

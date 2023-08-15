@@ -15,6 +15,9 @@ public class NewGameActionStrategy implements MenuItemActionStrategy {
    */
 
   public NewGameActionStrategy(WorldViewInterface view) {
+    if (view == null) {
+      throw new IllegalArgumentException("View cannot be null");
+    }
     this.view = view;
   }
 

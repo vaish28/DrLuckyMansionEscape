@@ -16,6 +16,9 @@ public class QuitActionStrategy implements MenuItemActionStrategy {
    * @param view The WorldViewInterface instance associated with the strategy.
    */
   public QuitActionStrategy(WorldViewInterface view) {
+    if (view == null) {
+      throw new IllegalArgumentException("View cannot be null");
+    }
     this.view = view;
   }
 

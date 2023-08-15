@@ -470,6 +470,10 @@ public class DrLuckyWorld implements World {
   @Override
   public boolean move(String spaceName) {
 
+    if (spaceName == null || spaceName.isEmpty()) {
+      throw new IllegalArgumentException("Space name cannot be null or empty");
+    }
+
     if (playerList.size() != 0) {
       increaseNumberOfTurns();
       Player currentPlayer = playerList.get(currentTurn);
@@ -517,9 +521,11 @@ public class DrLuckyWorld implements World {
   // turn is of the computer player If it is it will call the simulateAction method to simulate
   // the next move of the computer player.
 
-  //TODO when the space has no items to pick up.
   @Override
   public boolean checkSpaceContainsItemsToPick(Space space) {
+    if (space == null) {
+      throw new IllegalArgumentException("Space cannot be null!");
+    }
     if (space.getItems().size() != 0) {
       return true;
     }
@@ -528,6 +534,9 @@ public class DrLuckyWorld implements World {
 
   @Override
   public boolean pickItem(String itemName) {
+    if (itemName == null || itemName.isEmpty()) {
+      throw new IllegalArgumentException("item name cannot be null or empty");
+    }
     Player currentPlayer = playerList.get(currentTurn);
     increaseNumberOfTurns();
     if (currentPlayer.isHumanControlled()) {
