@@ -55,7 +55,7 @@ public interface WorldViewInterface {
   void gameEnd();
 
   /**
-   * Creates the menu for display
+   * Creates the menu for display.
    * @param label label to execute
    * @param actionCommand action command to perform
    * @return return the jmenu object

@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="milestone4-vaishnavimadhekarsolo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/milestone4_vaishnavimadhekarsolo_jar</output-path>
+    <root id="archive" name="milestone4-vaishnavimadhekarsolo.jar">
+      <element id="module-output" name="milestone4-vaishnavimadhekarsolo" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/cs5010project-vaish28.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

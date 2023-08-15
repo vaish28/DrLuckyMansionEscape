@@ -954,8 +954,9 @@ public class DrLuckyWorldTest {
     stringBuilder.append("Players: No players in this room").append("\n\n");
 
     stringBuilder.append("Space Info: Space Information (Space Name = "
-                    + "Foyer, WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, "
-                    +"WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
+                    + "Foyer, WorldPosition UpperLeft Row = 26, WorldPosition " );
+    stringBuilder.append("UpperLeft Column = 13, ");
+    stringBuilder.append("WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
                     + "Items = [Item Information (Item Name = Trophy head, Damage Value = 4)])")
             .append("\n");
     stringBuilder.append("Players: No players in this room\n");

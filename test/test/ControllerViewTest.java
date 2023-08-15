@@ -434,7 +434,7 @@ public class ControllerViewTest {
       }
 
       @Override
-      public void addHumanPlayer(String spaceName, int maxItems, String sName) {
+      public void addHumanPlayer(String playerName, int maxItems, String spaceName) {
         throw new IllegalArgumentException("Room name is invalid!");
       }
     };

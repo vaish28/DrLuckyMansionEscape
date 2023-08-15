@@ -74,9 +74,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private JScrollPane worldScrollablePanel;
 
   private BufferedImage targetCharacterImage;
-
   private MenuItemFactory menuItemFactory;
   private boolean humanPlayerAdded;
+  private JLabel numberOfTurns;
 
 
   /**
@@ -103,6 +103,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     this.petInfoLabel = new JLabel();
     this.addHumanPlayer = new JButton("Enter human player info");
     this.addComputerPlayer = new JButton("Enter computer player info");
+    this.numberOfTurns = new JLabel();
     instructionsLabel();
     this.currentPlayerLabel = new JLabel();
     this.gridPanel = new GridPanel();
@@ -144,19 +145,25 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
             StringBuilder("Press 'L' to look around.");
     StringBuilder instructionLabel5 = new
             StringBuilder("Press 'A' to attempt on the target character.");
-
+    StringBuilder instructionLabel6 = new
+            StringBuilder("You have unlimited number of turns for "
+            + "viewing space and player information");
     JLabel label1 = new JLabel(instructionLabel1.toString());
     JLabel label2 = new JLabel(instructionLabel2.toString());
     JLabel label3 = new JLabel(instructionLabel3.toString());
     JLabel label4 = new JLabel(instructionLabel4.toString());
     JLabel label5 = new JLabel(instructionLabel5.toString());
+    JLabel label6 = new JLabel(instructionLabel6.toString());
+
 
     this.infoDisplayPanel.add(label1);
     this.infoDisplayPanel.add(label2);
     this.infoDisplayPanel.add(label3);
     this.infoDisplayPanel.add(label4);
     this.infoDisplayPanel.add(label5);
+    this.infoDisplayPanel.add(label6);
   }
+
 
 
   private void loadTargetCharacterImage() {
@@ -387,6 +394,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     infoDisplayPanel.add(currentPlayerLabel);
     currentPlayerLabel.setFont(new Font("Arial", Font.PLAIN, 14));
     infoDisplayPanel.add(pickedItemLabel);
+    currentPlayerLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+    infoDisplayPanel.add(numberOfTurns);
+
     infoGridPanel.add(infoDisplayPanel, BorderLayout.PAGE_START);
     infoGridPanel.add(gridPanel, BorderLayout.CENTER);
 
@@ -435,8 +445,11 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
     if (selectedSpace != null && !selectedSpace.trim().isEmpty()) {
       String spaceInfo = listener.processInput("spaceinfo", new String[]{selectedSpace});
-      String messageTitle = "Space Information - " + selectedSpace;
-      displayMessageDialog(messageTitle, spaceInfo);
+      if (spaceInfo != null && !spaceInfo.trim().isEmpty()) {
+        String messageTitle = "Space Information - " + selectedSpace;
+        displayMessageDialog(messageTitle, spaceInfo);
+      }
+
     } else {
       String message = "Please enter a valid room name.";
       String messageTitle = "Invalid Input";
@@ -494,10 +507,15 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private void updateDisplay() {
     displayTargetCharacterInfo();
     displayCurrentPlayerInfo();
+    updateNumberOfTurns();
     gridPanel.repaint();
     gridPanel.removeKeyListener(this.keyListener);
     this.keyListener = new ListenKey();
     gridPanel.addKeyListener(this.keyListener);
+  }
+
+  private void updateNumberOfTurns() {
+    numberOfTurns.setText("Remaining Turns: " + model.getNumberOfTurns());
   }
 
   private void displayTargetCharacterInfo() {

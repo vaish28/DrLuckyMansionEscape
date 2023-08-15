@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="milestone4-vaishnavimadhekarsolo:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="260f1d0e-78a6-4718-b834-7fb4a64f8d7b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/milestone4_vaishnavimadhekarsolo_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/milestone4-vaishnavimadhekarsolo.zip" beforeDir="false" afterPath="$PROJECT_DIR$/milestone4-vaishnavimadhekarsolo.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/killdrluckygame/ControllerGuiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/killdrluckygame/ControllerGuiInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/killdrluckygame/DrLuckyWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/killdrluckygame/DrLuckyWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/killdrluckygame/view/WorldViewImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/killdrluckygame/view/WorldViewImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/killdrluckygame/view/WorldViewInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/killdrluckygame/view/WorldViewInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test/ControllerViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test/ControllerViewTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test/DrLuckySpaceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test/DrLuckySpaceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test/DrLuckyWorldTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test/DrLuckyWorldTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test/InputTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test/InputTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test/MockView.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test/MockView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,21 +46,30 @@
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Vaishnavi/Masters/PDP 5010 Milestones/milestone4-vaishnavimadhekarsolo",
+    "last_opened_file_path": "D:/Vaishnavi/Masters/PDP 5010 Milestones/Milestone 4/milestone4-vaishnavimadhekarsolo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.sourceCode.Java",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.RunConfigOne">
+    <configuration name="RunConfigOne" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="killdrluckygame.DrLuckyWorldDriver" />
+      <module name="milestone4-vaishnavimadhekarsolo" />
+      <option name="PROGRAM_PARAMETERS" value="res\\mansion.txt 10" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ControllerViewTest.testProcessInputForInvalidValueOfMaxCapacity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="milestone4-vaishnavimadhekarsolo" />
       <extension name="coverage">
@@ -70,6 +86,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.RunConfigOne" />
+      <item itemvalue="JUnit.ControllerViewTest.testProcessInputForInvalidValueOfMaxCapacity" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ControllerViewTest.testProcessInputForInvalidValueOfMaxCapacity" />
@@ -85,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692050851721</updated>
       <workItem from="1692050852873" duration="725000" />
-      <workItem from="1692051609455" duration="8733000" />
+      <workItem from="1692051609455" duration="15175000" />
     </task>
     <servers />
   </component>
@@ -117,52 +137,47 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>276</line>
+          <line>275</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>277</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>284</line>
+          <line>283</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>282</line>
+          <line>281</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>278</line>
+          <line>277</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>286</line>
+          <line>285</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>288</line>
+          <line>287</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>294</line>
+          <line>293</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>292</line>
+          <line>291</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
-          <line>291</line>
+          <line>290</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -199,6 +214,77 @@
           <url>file://$PROJECT_DIR$/src/killdrluckygame/commands/AddHumanPlayerCommand.java</url>
           <line>62</line>
           <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
+          <line>289</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
+          <line>280</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
+          <line>140</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/ControllerGuiImpl.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/view/WorldViewImpl.java</url>
+          <line>410</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/view/WorldViewImpl.java</url>
+          <line>513</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/view/WorldViewImpl.java</url>
+          <line>512</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/view/WorldViewImpl.java</url>
+          <line>511</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/view/WorldViewImpl.java</url>
+          <line>508</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/killdrluckygame/view/WorldViewImpl.java</url>
+          <line>507</line>
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/killdrluckygame/commands/AddHumanPlayerCommand.java</url>

@@ -78,11 +78,11 @@ This repo represents the coursework for CS 5010, the Fall 2022 Edition!
 
 1. Clone or download Git Repository.
 2. Go into the res directory.
-3. The res directory has a jar file name "cs5010project-vaish28".
+3. The res directory has a jar file name "milestone4-vaishnavimadhekarsolo".
 4. To run the jar file open the command prompt in the folder where the jar file is located.
 5. The res directory also contains sample input files on which you can test the program.
 6. To run the jar file use the command below:
-   ```java -jar cs5010project-vaish28.jar mansion.txt 10```
+   ```java -jar milestone4-vaishnavimadhekarsolo mansion.txt 10```
    The command specifies the path to the mansion.txt file, which is the sample input file. It is
    followed by a number which indicates the maximum turns for the world. In the project, both the
    jar file and the mansion.txt file are currently in the res folder.
@@ -153,6 +153,16 @@ To use the "Dr. Lucky World Game" program, follow these instructions to interact
 13. Keyboard Shortcuts:
     - The keyboard shortcuts "P," "L," and "A" can be used to perform pick-up, look around, and attack actions, respectively.
 
+Instructions for the flow:- 
+
+1. The welcome dialog box will appear first
+2. Click on the close button to close it
+3. Next, please read the instructions to play the game.
+4. Begin by adding human players and then add computer player, you find the buttons at the bottom.
+5. Do not add computer player first, you will not be able to since the button is disabled.
+6. For viewing the space information click the button below and enter the room name you want to view information about.
+7. As the milestone did not mention how this was to be done, I have implemented this way.
+
 ### Example Runs
 
 
@@ -201,7 +211,7 @@ Rest of the example runs are sample runs demonstrating the game play.
   - The computer action was moved from the model to the controller.
   - The controller is now responsible for controlling the players.
   - A new function in the model class is added for loading the world specification from a file.
-  - The view has been added and it supports all the functionalities of previous milestones.
+  - The view has been added, and it supports all the functionalities of previous milestones.
 
 ### Assumptions
 
@@ -209,6 +219,8 @@ Rest of the example runs are sample runs demonstrating the game play.
    at the beginning in a readable format.
 
 2. The human player is included in the game before the computer player.
+
+3. Consecutive computer players will halt the game. Do not add consecutive computer players.
 
 ### Limitations
 

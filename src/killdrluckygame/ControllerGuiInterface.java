@@ -85,4 +85,6 @@ public interface ControllerGuiInterface {
    * @return True if the click is intended to display the player's description, false otherwise.
    */
   boolean checkIfPlayerDescription(Space clickedRoom);
+
+
 }

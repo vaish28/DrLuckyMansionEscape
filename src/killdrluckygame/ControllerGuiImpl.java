@@ -78,7 +78,7 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     } catch (NumberFormatException ex) {
       throw new IllegalArgumentException("Enter a valid value for max capacity!");
     } catch (IllegalArgumentException ex) {
-      throw new IllegalArgumentException("Enter valid room name");
+      throw new IllegalArgumentException("Enter valid values!");
     }
     return command;
   }
@@ -263,7 +263,6 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     Player currentPlayer = worldModel.getCurrentPlayer();
     if (currentPlayer.isComputerControlled()) {
       result = simulateAction(currentPlayer);
-      System.out.println(result);
       advanceTargetCharacter();
       return result;
     }
@@ -288,7 +287,7 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
       } catch (NoSuchElementException ex) {
         worldView.displayErrorDialog("ERROR", ex.getMessage());
       }
-    } else {
+    }  else {
       // end the game
       worldView.gameEnd();
     }
@@ -345,6 +344,7 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     return false;
 
   }
+
 
 
 }
