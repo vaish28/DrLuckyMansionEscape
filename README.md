@@ -82,7 +82,7 @@ This repo represents the coursework for CS 5010, the Fall 2022 Edition!
 4. To run the jar file open the command prompt in the folder where the jar file is located.
 5. The res directory also contains sample input files on which you can test the program.
 6. To run the jar file use the command below:
-   ```java -jar milestone4-vaishnavimadhekarsolo mansion.txt 10```
+   ```java -jar milestone4-vaishnavimadhekarsolo.jar mansion.txt 10```
    The command specifies the path to the mansion.txt file, which is the sample input file. It is
    followed by a number which indicates the maximum turns for the world. In the project, both the
    jar file and the mansion.txt file are currently in the res folder.
