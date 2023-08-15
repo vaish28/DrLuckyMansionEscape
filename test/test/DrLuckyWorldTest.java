@@ -411,7 +411,7 @@ public class DrLuckyWorldTest {
 
     // Pick an item from spaceOne
     String lookAround = world.lookAround();
-    //TODO assert for lookAround
+
 
   }
 
@@ -466,7 +466,6 @@ public class DrLuckyWorldTest {
     // next Turn of player 2
     String lookAround = world.lookAround();
     System.out.println(lookAround);
-    //TODO lookaround string
   }
 
 
@@ -869,7 +868,6 @@ public class DrLuckyWorldTest {
                     "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceFive, spaceTwo, spaceThree, spaceFour)),
             new CustomRandom(0));
-    // TODO add three players
 
     Player playerOne = new HumanControlledPlayer("v", 3);
     Player playerTwo = new HumanControlledPlayer("a", 2);
@@ -957,7 +955,7 @@ public class DrLuckyWorldTest {
 
     stringBuilder.append("Space Info: Space Information (Space Name = "
                     + "Foyer, WorldPosition UpperLeft Row = 26, WorldPosition UpperLeft Column = 13, "
-                    + "WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
+                    +"WorldPosition LowerRight Row = 27, WorldPosition LowerRight Column = 18, "
                     + "Items = [Item Information (Item Name = Trophy head, Damage Value = 4)])")
             .append("\n");
     stringBuilder.append("Players: No players in this room\n");
@@ -1498,59 +1496,6 @@ public class DrLuckyWorldTest {
     assertEquals(result.toString(), world.lookAround());
   }
 
-
-//  @Test
-//  public void testComputerPickedMaxItemValue() {
-//    spaceOne = new DrLuckySpace("Armory", new WorldPosition(22, 19),
-//            new WorldPosition(23, 26));
-//
-//    spaceTwo = new DrLuckySpace("Drawing Room", new WorldPosition(22, 13),
-//            new WorldPosition(25, 18));
-//
-//    spaceThree = new DrLuckySpace("Dining Hall", new WorldPosition(12, 11),
-//            new WorldPosition(21, 20));
-//
-//    spaceFour = new DrLuckySpace("Foyer", new WorldPosition(2, 8),
-//            new WorldPosition(9, 10));
-//
-//
-//    itemOne = new DrLuckyItem("Letter Opener", 2);
-//    itemTwo = new DrLuckyItem("Fork", 2);
-//    itemThree = new DrLuckyItem("Knife", 5);
-//
-//    spaceOne.addItemToSpace(itemOne);
-//    spaceTwo.addItemToSpace(itemThree);
-//    spaceTwo.addItemToSpace(itemTwo);
-//    spaceFour.addItemToSpace(itemOne);
-//
-//
-//    world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
-//            new GameCharacter(50,
-//                    "Lucky", true),
-//            new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
-//            new CustomRandom(1), new Pet("Dr Fortune Cat"));
-//
-//
-//    world.addHumanPlayer("v", 3, "Foyer");
-//    world.addComputerPlayer();
-//    world.lookAround();
-//    world.moveTargetCharacter();
-//    world.nextTurn();
-//
-//
-//    Player cmPlayer = world.getCurrentPlayer();
-//    cmPlayer.pickItem(itemThree);
-//    cmPlayer.pickItem(itemTwo);
-//
-//    world.simulateAction(world.getCurrentPlayer());
-//    world.moveTargetCharacter();
-//    world.nextTurn();
-//
-//
-//    List<Item> itemList = world.getEvidenceList();
-//    assertTrue(itemThree.equals(itemList.get(0)));
-//
-//  }
 
 
 }

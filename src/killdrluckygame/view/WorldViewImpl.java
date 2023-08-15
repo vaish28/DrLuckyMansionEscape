@@ -37,13 +37,18 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import killdrluckygame.ControllerGuiInterface;
 import killdrluckygame.Item;
 import killdrluckygame.Player;
 import killdrluckygame.ReadOnlyWorldModel;
 import killdrluckygame.Space;
 
+
+/**
+ * The graphical user interface implementation for the game world view.
+ * This class extends JFrame and implements WorldViewInterface to display the game world, handle
+ * user input, and update the GUI accordingly.
+ */
 public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private List<Space> spaceList;
@@ -74,6 +79,11 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   private boolean humanPlayerAdded;
 
 
+  /**
+   * Constructs a new WorldViewImpl with the given ReadOnlyWorldModel.
+   *
+   * @param model The ReadOnlyWorldModel representing the game world.
+   */
   public WorldViewImpl(ReadOnlyWorldModel model) {
     this.model = model;
     initialize();
@@ -109,6 +119,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     initializeKeyListeners();
   }
 
+  @Override
   public JMenuItem createMenuItem(String label, String actionCommand) {
     JMenuItem menuItem = new JMenuItem(label);
     menuItem.setActionCommand(actionCommand);
@@ -233,7 +244,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private void computerTurn() {
     String resultComputer = listener.computerPlayerTurn();
-    if (resultComputer != null && (("").equals(!resultComputer)) {
+    if (resultComputer != null && (!("").equals(resultComputer))) {
       displayMessageDialog("Computer Turn", resultComputer);
     }
   }
@@ -605,16 +616,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
         int maxTurns = Integer.parseInt(maxTurnsInput);
 
-        try {
-          // Load the new world from the selected file and start the game with maxTurns
-          listener.loadNewGame(selectedFile.getAbsolutePath(), maxTurns);
-        } catch (IOException ex) {
-          StringBuilder sb = new StringBuilder();
-          sb.append("Error loading the new world: ");
-          sb.append(ex.getMessage());
-          JOptionPane.showMessageDialog(this, sb.toString(),
-                  "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        // Load the new world from the selected file and start the game with maxTurns
+        listener.loadNewGame(selectedFile.getAbsolutePath(), maxTurns);
+
       }
     } else {
       String message = "No file selected!";
@@ -814,13 +818,13 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
               g.fillPolygon(xpoints, ypoints, 3); // Draw the triangle
             } else {
               // For computer players, draw the blue circle (as before)
-              int playerXCenter = roomX + (roomWidth / 2);
-              int playerYCenter = roomY + (roomHeight / 2);
+              int playerxCenter = roomX + (roomWidth / 2);
+              int playeryCenter = roomY + (roomHeight / 2);
               int playerRadius = (Math.min(cellWidth, cellHeight) / 4) * 5;
 
               g.setColor(Color.BLUE);
-              g.fillOval(playerXCenter - playerRadius,
-                      playerYCenter - playerRadius,
+              g.fillOval(playerxCenter - playerRadius,
+                      playeryCenter - playerRadius,
                       playerRadius, playerRadius);
             }
           }

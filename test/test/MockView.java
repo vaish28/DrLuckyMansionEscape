@@ -1,14 +1,23 @@
 package test;
 
+import javax.swing.JMenuItem;
 import killdrluckygame.ControllerGuiInterface;
 import killdrluckygame.ReadOnlyWorldModel;
 import killdrluckygame.view.WorldViewInterface;
 
+/**
+ * A mock implementation of the WorldViewInterface for testing purposes.
+ */
 public class MockView implements WorldViewInterface {
 
   private StringBuilder viewLog;
 
 
+  /**
+   * Constructs a MockView with the specified view log.
+   *
+   * @param viewLog The StringBuilder to store log information.
+   */
   public MockView(StringBuilder viewLog) {
     this.viewLog = viewLog;
   }
@@ -17,6 +26,7 @@ public class MockView implements WorldViewInterface {
    *
    * @param listener The ControllerGuiInterface listener to be added.
    */
+
   @Override
   public void addListener(ControllerGuiInterface listener) {
 
@@ -72,6 +82,11 @@ public class MockView implements WorldViewInterface {
   @Override
   public void gameEnd() {
 
+  }
+
+  @Override
+  public JMenuItem createMenuItem(String label, String actionCommand) {
+    return null;
   }
 
   /**

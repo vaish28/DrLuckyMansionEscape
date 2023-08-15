@@ -3,7 +3,6 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.io.StringReader;
-
 import killdrluckygame.DrLuckyWorld;
 import killdrluckygame.Space;
 import killdrluckygame.World;

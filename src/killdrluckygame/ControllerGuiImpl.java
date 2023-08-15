@@ -170,8 +170,8 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
       this.worldModel = this.worldModel.reload(readable);
     } catch (IOException e) {
       // Handle file reading or parsing errors
-      String.format("An error occurred while reading the file: " + e.getMessage());
-      e.printStackTrace();
+      String sb = String.format("An error occurred while reading the file: ");
+      worldView.displayErrorDialog(sb, e.getMessage());
     }
     worldView.setWorld(worldModel);
   }

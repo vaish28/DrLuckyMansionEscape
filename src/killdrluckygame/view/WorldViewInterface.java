@@ -1,7 +1,9 @@
 package killdrluckygame.view;
 
+import javax.swing.JMenuItem;
 import killdrluckygame.ControllerGuiInterface;
 import killdrluckygame.ReadOnlyWorldModel;
+
 
 /**
  * The WorldViewInterface interface represents the view component of the Dr. Lucky game.
@@ -51,6 +53,14 @@ public interface WorldViewInterface {
    * Handles the end of the game and performs necessary actions.
    */
   void gameEnd();
+
+  /**
+   * Creates the menu for display
+   * @param label label to execute
+   * @param actionCommand action command to perform
+   * @return return the jmenu object
+   */
+  JMenuItem createMenuItem(String label, String actionCommand);
 
   /**
    * Listen to keys pressed.
