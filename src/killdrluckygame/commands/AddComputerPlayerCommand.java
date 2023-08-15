@@ -1,9 +1,7 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
-
 
 /**
  * The {@code AddComputerPlayerCommand} class implements the {@code GameOperationCommand} interface
@@ -26,6 +24,18 @@ public class AddComputerPlayerCommand implements GameOperationCommand {
    * @param out   the appendable object for the output.
    */
   public AddComputerPlayerCommand(World world, Appendable out, int maxCapacity, int spaceIndex) {
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
+    if (maxCapacity <= 0) {
+      throw new IllegalArgumentException("Max capacity must be a positive value");
+    }
+    if (spaceIndex < 0) {
+      throw new IllegalArgumentException("Space index cannot be negative");
+    }
     this.world = world;
     this.out = out;
     this.maxCapacity = maxCapacity;

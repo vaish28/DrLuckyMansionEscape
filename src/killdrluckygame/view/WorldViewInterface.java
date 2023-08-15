@@ -53,6 +53,11 @@ public interface WorldViewInterface {
   void gameEnd();
 
   /**
+   * Listen to keys pressed.
+   */
+  void initializeKeyListeners();
+
+  /**
    * Sets the main view as visible.
    */
   void setVisibleMain();

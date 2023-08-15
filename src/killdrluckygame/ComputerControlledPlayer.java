@@ -44,7 +44,7 @@ public class ComputerControlledPlayer extends AbstractPlayer {
    * Returns a description of the computer-controlled player.
    *
    * @return a string containing the player information, including name, turns exhausted, turns
-   * taken, items in hand, and space information.
+   *         taken, items in hand, and space information.
    */
 
   @Override

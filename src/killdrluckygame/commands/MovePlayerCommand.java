@@ -1,7 +1,6 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
 
 
@@ -26,6 +25,16 @@ public class MovePlayerCommand implements GameOperationCommand {
    */
 
   public MovePlayerCommand(World world, String space, Appendable out) {
+
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (space == null || space.isEmpty()) {
+      throw new IllegalArgumentException("Space name cannot be null or empty");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
     this.world = world;
     this.spaceName = space;
     this.out = out;

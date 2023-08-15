@@ -17,7 +17,12 @@ public interface World extends ReadOnlyWorldModel {
    */
   void addSpaceToSpaceList(Space space);
 
-
+  /**
+   * Adds a computer player to the game world with the specified parameters.
+   *
+   * @param maxCapacityComputer The maximum capacity of items the computer player can carry.
+   * @param spaceIndexRandom    The index of the space where the computer player will be placed.
+   */
   void addComputerPlayer(int maxCapacityComputer, int spaceIndexRandom);
 
   /**
@@ -37,10 +42,31 @@ public interface World extends ReadOnlyWorldModel {
    */
   String playerDescription();
 
+  /**
+   * Evaluates and returns information about neighboring spaces.
+   *
+   * @param currentSpace The current space of the player.
+   * @param player       The player for whom to evaluate the neighboring spaces.
+   * @return Information about neighboring spaces.
+   */
   String evaluateLookAround(Space currentSpace, Player player);
 
+  /**
+   * Evaluates and returns information about picking items from the current space.
+   *
+   * @param items  The list of items in the current space.
+   * @param player The player attempting to pick items.
+   * @return Information about picking items.
+   */
   String evaluatePickItem(List<Item> items, Player player);
 
+  /**
+   * Evaluates and returns neighboring scores for the current player's space.
+   *
+   * @param currentSpace The current space of the player.
+   * @param player       The player for whom to evaluate neighboring scores.
+   * @return Neighboring scores information.
+   */
   String evaluateNeighboringScores(Space currentSpace, Player player);
 
   /**
@@ -195,6 +221,12 @@ public interface World extends ReadOnlyWorldModel {
    */
   void changePrevAction(ActionType newAction);
 
+  /**
+   * Reloads the world from a readable source.
+   *
+   * @param readable The readable source to reload the world from.
+   * @return A new instance of the reloaded world.
+   */
   World reload(Readable readable);
 
 }

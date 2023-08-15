@@ -1,7 +1,6 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
 
 /**
@@ -24,6 +23,16 @@ public class PickItemCommand implements GameOperationCommand {
    * @param out      the appendable object to print the output.
    */
   public PickItemCommand(World world, String itemName, Appendable out, boolean hasItems) {
+
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (itemName == null || itemName.isEmpty()) {
+      throw new IllegalArgumentException("Item name cannot be null or empty");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
     this.world = world;
     this.itemName = itemName;
     this.out = out;

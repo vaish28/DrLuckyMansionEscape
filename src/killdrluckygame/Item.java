@@ -11,12 +11,12 @@ public interface Item {
    *
    * @return name of the weapon
    */
-  public String getItemName();
+  String getItemName();
 
   /**
    * This function returns the damage value of the weapon/item.
    *
    * @return damage value of the weapon
    */
-  public int getDamageValue();
+  int getDamageValue();
 }

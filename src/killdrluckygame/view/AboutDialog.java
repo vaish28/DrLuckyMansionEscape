@@ -11,8 +11,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
+/**
+ * The AboutDialog class represents a dialog that displays information about the Dr. Lucky Game.
+ * It provides details about the game, its features, and how to play.
+ */
 public class AboutDialog extends JDialog {
 
+  /**
+   * Constructs an AboutDialog object.
+   *
+   * @param parentFrame The parent JFrame to which the dialog is attached.
+   */
   public AboutDialog(JFrame parentFrame) {
     super(parentFrame, "About Dr. Lucky Game", true);
 
@@ -43,7 +52,7 @@ public class AboutDialog extends JDialog {
 
     JPanel contentPanel = new JPanel();
     contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-    contentPanel.setBackground(new Color(51, 102, 153)); // Set content panel background color
+    contentPanel.setBackground(new Color(51, 102, 153));
     contentPanel.add(welcomeLabel);
     contentPanel.add(creditsLabel);
 

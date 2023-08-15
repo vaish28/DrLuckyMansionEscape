@@ -21,12 +21,10 @@ public class QuitActionStrategy implements MenuItemActionStrategy {
 
   @Override
   public void executeAction() {
-    JOptionPane.showMessageDialog(
-            null,
-            "Quitting the game now.",
-            "Quit Game",
-            JOptionPane.INFORMATION_MESSAGE);
 
+    String messageTitle = "Quit Game";
+    String message = "Quitting the game now";
+    view.displayErrorDialog(messageTitle, message);
     System.exit(0);
   }
 }

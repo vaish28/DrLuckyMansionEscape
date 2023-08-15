@@ -3,6 +3,9 @@ package killdrluckygame;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This a read only verison of the model for the view.
+ */
 public interface ReadOnlyWorldModel {
 
   /**
@@ -151,6 +154,8 @@ public interface ReadOnlyWorldModel {
    * @return the player object.
    */
   Player getPlayerByPlayerName(String playerName);
+
+
   /**
    * Returns the space the specified player is in.
    *
@@ -172,6 +177,10 @@ public interface ReadOnlyWorldModel {
    */
   String getCurrentPetInfo();
 
+  /**
+   * Returns the map between players and spaces.
+   * @return the map between players and spaces.
+   */
   Map<Space, List<Player>> getMappingOfSpaceAndPlayer();
 
   /**

@@ -1,13 +1,11 @@
 package killdrluckygame;
 
-import killdrluckygame.view.WorldViewImpl;
-import killdrluckygame.view.WorldViewInterface;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
-
+import killdrluckygame.view.WorldViewImpl;
+import killdrluckygame.view.WorldViewInterface;
 
 /**
  * The DrLuckyWorldDriver class is a driver code that demonstrates the gameplay mechanics of the

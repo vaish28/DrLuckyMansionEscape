@@ -12,6 +12,9 @@ public class Pet implements PetInterface {
    * @param petName the name of the pet.
    */
   public Pet(String petName) {
+    if (petName == null || petName.trim().isEmpty()) {
+      throw new IllegalArgumentException("Pet name cannot be null or empty");
+    }
     this.petName = petName;
   }
 

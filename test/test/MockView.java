@@ -79,7 +79,7 @@ public class MockView implements WorldViewInterface {
    */
   @Override
   public void setVisibleMain() {
-
+    viewLog.append("setting the view main panel visible");
   }
 
   /**
@@ -87,7 +87,7 @@ public class MockView implements WorldViewInterface {
    */
   @Override
   public void setVisibleAboutDialog() {
-
+    viewLog.append("setting the about dialog panel visible");
   }
 
   /**
@@ -109,6 +109,11 @@ public class MockView implements WorldViewInterface {
    */
   @Override
   public void displayErrorDialog(String title, String message) {
+
+  }
+
+  @Override
+  public void initializeKeyListeners() {
 
   }
 }

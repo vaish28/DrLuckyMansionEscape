@@ -28,11 +28,11 @@ abstract class AbstractPlayer implements Player {
 
   protected AbstractPlayer(String playerName, int maxItemsCarry) {
 
-    if ( maxItemsCarry < 0) {
+    if (maxItemsCarry < 0) {
       throw new IllegalArgumentException("The max capacity cannot be negative");
     }
 
-    if("".equals(playerName)) {
+    if ("".equals(playerName)) {
       throw new NoSuchElementException("Enter valid values for username");
     }
     this.playerName = playerName;

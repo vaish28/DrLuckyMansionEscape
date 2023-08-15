@@ -116,12 +116,19 @@ public class DrLuckyWorld implements World {
 
   @Override
   public void addSpaceToSpaceList(Space space) {
+    if (space == null) {
+      throw new IllegalArgumentException("Space cannot be null");
+    }
     spaceList.add(space);
   }
 
 
   @Override
   public void addMappingOfSpaceAndPlayer(Space space, Player player) {
+
+    if (space == null || player == null) {
+      throw new IllegalArgumentException("Both 'space' and 'player' parameters must be non-null.");
+    }
     List<Player> players = mappingSpaceToPlayers.get(space);
     // Check if the ArrayList is null
     if (players == null) {
@@ -140,6 +147,10 @@ public class DrLuckyWorld implements World {
 
   @Override
   public Space getSpaceFromSpaceName(String spaceName) {
+    if (spaceName == null || spaceName.isEmpty()) {
+      throw new IllegalArgumentException("spaceName cannot be null or empty");
+    }
+
     for (Space space : spaceList) {
       if (space.getSpaceName().equalsIgnoreCase(spaceName)) {
         return space;
@@ -166,18 +177,20 @@ public class DrLuckyWorld implements World {
   // These methods are for getting the neighbors for a particular space.
   @Override
   public List<Space> getNeighbors(Space space) {
+    if (space == null) {
+      throw new IllegalArgumentException("space cannot be null");
+    }
     return calculateNeighbors(space);
   }
 
   @Override
   public List<String> printNeighbors(List<Space> neigh) {
 
+    if (neigh == null) {
+      throw new IllegalArgumentException("neigh cannot be null");
+    }
     List<String> neighNames = new ArrayList<>();
     for (Space space : neigh) {
-//
-//      if (!getPetSpace().equals(space)) {
-//
-//      }
       neighNames.add(space.getSpaceName());
     }
     return neighNames;
@@ -193,6 +206,9 @@ public class DrLuckyWorld implements World {
 
   private List<Space> calculateNeighbors(Space space) {
 
+    if (space == null) {
+      throw new IllegalArgumentException("space cannot be null");
+    }
     List<Space> neighbors = new ArrayList<>();
 
     // Retrieve the coordinates of the current room
@@ -282,6 +298,11 @@ public class DrLuckyWorld implements World {
 
   @Override
   public String getPlayerDescriptionFromUsername(String playerName) {
+
+    if (playerName == null || playerName.isEmpty()) {
+      throw new IllegalArgumentException("Player name cannot be null or empty");
+    }
+
     Player player = getPlayerByPlayerName(playerName);
     StringBuilder sb = new StringBuilder();
     sb.append(player.getPlayerDescription());
@@ -292,6 +313,12 @@ public class DrLuckyWorld implements World {
 
   @Override
   public Player getPlayerByPlayerName(String playerName) {
+
+    if (playerName == null || playerName.isEmpty()) {
+      throw new IllegalArgumentException("Player name cannot be null or empty");
+    }
+
+
     for (Player player : playerList) {
       if (playerName.equals(player.getName())) {
         return player;
@@ -328,6 +355,9 @@ public class DrLuckyWorld implements World {
   // This gets the space of the current player.
   @Override
   public Space getCurrentPlayerSpace(Player player) {
+    if (player == null) {
+      throw new IllegalArgumentException("Player cannot be null");
+    }
     for (Map.Entry<Space, List<Player>> entry : mappingSpaceToPlayers.entrySet()) {
       List<Player> players = entry.getValue();
       if (players.contains(player)) {
@@ -376,9 +406,7 @@ public class DrLuckyWorld implements World {
   @Override
   public String getCurrentPetInfo() {
     return "";
-//    return String.format("Name of the pet: " + pet.getPetName() + "\n  Pet space information: \n"
-//            + petSpace.getSpaceName());
-    // only the name of the space.
+
   }
 
   @Override
@@ -388,14 +416,13 @@ public class DrLuckyWorld implements World {
 
   @Override
   public void petMove(String movePetToSpace) {
-    //increaseNumberOfTurns();
-    //this.petSpace = getSpaceFromSpaceName(movePetToSpace);
+
   }
 
   @Override
   public Space getPetSpace() {
     return null;
-    //return petSpace;
+
   }
 
   @Override
@@ -404,9 +431,7 @@ public class DrLuckyWorld implements World {
     for (Space space : spaceList) {
       sb.append(space.getSpaceName());
       sb.append("\n");
-//      if (!space.equals(getPetSpace())) {
-//
-//      }
+
     }
     return sb.toString();
   }
@@ -417,10 +442,21 @@ public class DrLuckyWorld implements World {
   public void addHumanPlayer(String playerName, int maxItemsCarry,
                              String spaceName) {
 
+    if (playerName == null || playerName.isEmpty()) {
+      throw new IllegalArgumentException("Player name cannot be null or empty");
+    }
+
+    if (maxItemsCarry <= 0) {
+      throw new IllegalArgumentException("Max items carry must be a positive value");
+    }
+
+    if (spaceName == null || spaceName.isEmpty()) {
+      throw new IllegalArgumentException("Space name cannot be null or empty");
+    }
+
     Player humanPlayer = new HumanControlledPlayer(playerName, maxItemsCarry);
     playerList.add(humanPlayer);
     Space space = getSpaceFromSpaceName(spaceName);
-    // TODO: add space and player mapping:
     addMappingOfSpaceAndPlayer(space, humanPlayer);
 
   }
@@ -582,20 +618,9 @@ public class DrLuckyWorld implements World {
     }
 
 
-//
-//    if (currentPlayerSpace.equals(getPetSpace())) {
-//      sb.append("The target character's pet is in this room! \n ");
-//      sb.append(getCurrentPetInfo());
-//      sb.append("\n");
-//    }
-
-    // TODO Neighboring spaces
     if (neList != null) {
       for (Space space : neList) {
         sb.append(this.printSpaceInfo(space));
-//        if (!space.equals(getPetSpace())) {
-//
-//        }
       }
     }
     return sb.toString();
@@ -629,10 +654,6 @@ public class DrLuckyWorld implements World {
                 "\n"));
       }
 
-//      if ((space != null) && (space.equals(getPetSpace()))) {
-//        sb.append(String.format("The pet of target character is in this space: %s\n",
-//                getCurrentPetInfo(), "\n"));
-//      }
     } else {
       sb.append("\n");
       sb.append(String.format("Space Info: %s\nPlayers: No players in this room", space))
@@ -641,10 +662,7 @@ public class DrLuckyWorld implements World {
         sb.append(String.format("The target character is in this room: %s\n", targetCharacter,
                 "\n"));
       }
-//      if ((space != null) && (space.equals(getPetSpace()))) {
-//        sb.append(String.format("The pet of target character is in this space: %s\n",
-//                getCurrentPetInfo(), "\n"));
-//      }
+
     }
 
     // here those spaces that are adjacent and do not have a pet will be visible.

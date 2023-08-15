@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Function;
-
 import killdrluckygame.commands.AddComputerPlayerCommand;
 import killdrluckygame.commands.AddHumanPlayerCommand;
 import killdrluckygame.commands.AttackPlayerCommand;

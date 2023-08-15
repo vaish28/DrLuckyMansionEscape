@@ -44,6 +44,9 @@ public class CustomRandom implements CustomRandomInterface {
 
   @Override
   public int nextInt(int bound) {
+    if (bound < 0) {
+      throw new IllegalArgumentException("Bound less than zero");
+    }
     if (predictableIntNumbers != null) {
       if (intIndex >= predictableIntNumbers.length) {
         intIndex = 0;
@@ -55,6 +58,7 @@ public class CustomRandom implements CustomRandomInterface {
 
   @Override
   public int nextInt(int min, int max) {
+
     if (min >= max) {
       throw new IllegalArgumentException("Invalid range");
     }

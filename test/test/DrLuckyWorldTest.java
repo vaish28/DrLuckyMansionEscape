@@ -453,7 +453,7 @@ public class DrLuckyWorldTest {
     // Create a player
     world.addHumanPlayer("Player1", 15, "Armory");
     world.addHumanPlayer("Player2", 5, "Armory");
-    world.addComputerPlayer(3,0);
+    world.addComputerPlayer(3, 0);
 
     // Pick an item from spaceOne
     world.move(spaceTwo.getSpaceName());
@@ -483,7 +483,7 @@ public class DrLuckyWorldTest {
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
             new CustomRandom(0));
-    world.addComputerPlayer(3,0);
+    world.addComputerPlayer(3, 0);
     assertTrue(spaceOne.equals(world.getCurrentPlayerSpace(world.getCurrentPlayer())));
   }
 
@@ -777,7 +777,6 @@ public class DrLuckyWorldTest {
   }
 
 
-
   @Test
   public void testAttackTargetCharacterSpaceDifferent() {
 
@@ -834,8 +833,6 @@ public class DrLuckyWorldTest {
   }
 
 
-
-
   @Test
   public void testIsPlayerSeenAttack() {
 
@@ -888,10 +885,6 @@ public class DrLuckyWorldTest {
     assertEquals("Name of the target character: Lucky  Target character is in room: "
             + "Armory  \nHealth 50\n", world.targetCharacterDetails());
   }
-
-
-
-
 
 
   @Test
@@ -1278,7 +1271,6 @@ public class DrLuckyWorldTest {
             .append("\n");
 
 
-
     stringBuilder.append("Space Info: Space Information (Space Name = Dining Hall, "
             + "WorldPosition UpperLeft Row = 12, WorldPosition UpperLeft Column = 11, "
             + "WorldPosition LowerRight Row = 21, WorldPosition LowerRight Column = 20, "
@@ -1480,8 +1472,6 @@ public class DrLuckyWorldTest {
     StringBuilder stringBuilder = new StringBuilder();
 
 
-
-
     stringBuilder.append("The name of the space you are currently in: Dining Hall").append("\n");
     stringBuilder.append("There are no players in the room other than you.").append("\n");
     stringBuilder.append("The items that are currently laying in the room: ").append("\n");
@@ -1507,7 +1497,6 @@ public class DrLuckyWorldTest {
 
     assertEquals(result.toString(), world.lookAround());
   }
-
 
 
 //  @Test

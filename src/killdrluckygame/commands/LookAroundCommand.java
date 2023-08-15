@@ -1,7 +1,6 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
 
 
@@ -22,6 +21,12 @@ public class LookAroundCommand implements GameOperationCommand {
    * @param out   the Appendable object to print the output.
    */
   public LookAroundCommand(World world, Appendable out) {
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
     this.world = world;
     this.out = out;
 
@@ -50,8 +55,6 @@ public class LookAroundCommand implements GameOperationCommand {
       }
     } else {
       sb.append("Look around not successful");
-//      world.moveTargetCharacter();
-//      world.nextTurn();
     }
     return sb.toString();
   }

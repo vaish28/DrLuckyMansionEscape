@@ -10,11 +10,9 @@ import javax.swing.JMenuItem;
 public interface MenuItemFactory {
 
   /**
-   * Creates a new JMenuItem with the provided label and action command.
+   * Handles the action associated with the provided command.
    *
-   * @param label         The label to be displayed on the menu item.
-   * @param actionCommand The action command associated with the menu item.
-   * @return A new JMenuItem instance.
+   * @param command The action command associated with the menu item.
    */
-  JMenuItem createMenuItem(String label, String actionCommand);
+  void handleMenuItemAction(String command);
 }

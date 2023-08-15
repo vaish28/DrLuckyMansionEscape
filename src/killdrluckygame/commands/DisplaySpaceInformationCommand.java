@@ -1,7 +1,6 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
 
 /**
@@ -24,6 +23,15 @@ public class DisplaySpaceInformationCommand implements GameOperationCommand {
    * @param out       The appendable object for printing.
    */
   public DisplaySpaceInformationCommand(World world, String spaceName, Appendable out) {
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (spaceName == null || spaceName.isEmpty()) {
+      throw new IllegalArgumentException("Space name cannot be null or empty");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
     this.world = world;
     this.spaceName = spaceName;
     this.out = out;

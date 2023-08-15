@@ -1,9 +1,7 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
-
 
 /**
  * The {@code AddHumanPlayerCommand} class implements the {@code GameOperationCommand} interface
@@ -32,6 +30,22 @@ public class AddHumanPlayerCommand implements GameOperationCommand {
    */
   public AddHumanPlayerCommand(World world, String playerName, int maxItems,
                                String spaceName, Appendable out) {
+
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (playerName == null || playerName.trim().isEmpty()) {
+      throw new IllegalArgumentException("Player name cannot be null or empty");
+    }
+    if (maxItems <= 0) {
+      throw new IllegalArgumentException("Max items must be a positive value");
+    }
+    if (spaceName == null || spaceName.trim().isEmpty()) {
+      throw new IllegalArgumentException("Space name cannot be null or empty");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
     this.world = world;
     this.maxItems = maxItems;
     this.playerName = playerName;

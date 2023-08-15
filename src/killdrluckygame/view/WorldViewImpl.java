@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -24,8 +25,8 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -36,6 +37,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import killdrluckygame.ControllerGuiInterface;
 import killdrluckygame.Item;
 import killdrluckygame.Player;
@@ -107,12 +109,30 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     initializeKeyListeners();
   }
 
+  public JMenuItem createMenuItem(String label, String actionCommand) {
+    JMenuItem menuItem = new JMenuItem(label);
+    menuItem.setActionCommand(actionCommand);
+    menuItem.addActionListener(e -> handleMenuItemAction(e));
+    return menuItem;
+  }
+
+  private void handleMenuItemAction(ActionEvent event) {
+    String command = event.getActionCommand();
+    menuItemFactory.handleMenuItemAction(command);
+
+  }
+
   private void instructionsLabel() {
-    StringBuilder instructionLabel1 = new StringBuilder("Click on a human player to view their description.");
-    StringBuilder instructionLabel2 = new StringBuilder("Click on a room to move there.");
-    StringBuilder instructionLabel3 = new StringBuilder("Press 'P' to pick an item.");
-    StringBuilder instructionLabel4 = new StringBuilder("Press 'L' to look around.");
-    StringBuilder instructionLabel5 = new StringBuilder("Press 'A' to attempt on the target character.");
+    StringBuilder instructionLabel1 = new
+            StringBuilder("Click on a human player to view their description.");
+    StringBuilder instructionLabel2 = new
+            StringBuilder("Click on a room to move there.");
+    StringBuilder instructionLabel3 = new
+            StringBuilder("Press 'P' to pick an item.");
+    StringBuilder instructionLabel4 = new
+            StringBuilder("Press 'L' to look around.");
+    StringBuilder instructionLabel5 = new
+            StringBuilder("Press 'A' to attempt on the target character.");
 
     JLabel label1 = new JLabel(instructionLabel1.toString());
     JLabel label2 = new JLabel(instructionLabel2.toString());
@@ -141,11 +161,12 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     JMenuBar menuBar = new JMenuBar();
 
     JMenu fileMenu = new JMenu("Game");
-    JMenuItem newGame = menuItemFactory.
-            createMenuItem("New Game (New World)", "NewGame");
-    JMenuItem newGameSameWorld = menuItemFactory.
-            createMenuItem("New Game (Same World)", "NewGameSameWorld");
-    JMenuItem quit = menuItemFactory.createMenuItem("Quit", "Quit");
+    JMenuItem newGame = this
+            .createMenuItem("New Game (New World)", "NewGame");
+    JMenuItem newGameSameWorld = this
+            .createMenuItem("New Game (Same World)", "NewGameSameWorld");
+    JMenuItem quit = this
+            .createMenuItem("Quit", "Quit");
 
     fileMenu.add(newGame);
     fileMenu.add(newGameSameWorld);
@@ -157,7 +178,8 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     setJMenuBar(menuBar);
   }
 
-  private void initializeKeyListeners() {
+  @Override
+  public void initializeKeyListeners() {
     this.addKeyListener(new KeyAdapter() {
       @Override
       public void keyPressed(KeyEvent e) {
@@ -179,6 +201,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     this.setFocusable(true);
     this.requestFocusInWindow();
   }
+
 
   private void showInCorrectKeyDialog() {
     String message = "Incorrect Key selected!";
@@ -210,11 +233,9 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   private void computerTurn() {
     String resultComputer = listener.computerPlayerTurn();
-    if (resultComputer != null && (!resultComputer.equals(""))) {
+    if (resultComputer != null && (("").equals(!resultComputer)) {
       displayMessageDialog("Computer Turn", resultComputer);
     }
-
-
   }
 
   private void attemptOnTargetCharacter() {
@@ -270,14 +291,12 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         }
       }
       messageTitle = "Attacking Now!";
-      displayMessageDialog(messageTitle,resultAttack);
-    }
-    else {
+      displayMessageDialog(messageTitle, resultAttack);
+    } else {
       messageTitle = "Attack cancelled";
       message = "You cancelled the attack";
-      displayMessageDialog(messageTitle,message);
+      displayMessageDialog(messageTitle, message);
     }
-
 
 
     updateDisplay();
@@ -321,13 +340,12 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     String resultPick = "";
     if (selectedItem != null) {
       resultPick = listener.processInput("pickitem", new String[]{selectedItem});
-      if(!("").equals(resultPick)) {
+      if (!("").equals(resultPick)) {
         String messageTitle = "Picked item now!";
         displayMessageDialog(messageTitle, resultPick);
       }
 
     }
-
 
 
     updateDisplay();
@@ -396,7 +414,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
 
-
   private void showViewSpaceInfoDialog() {
     // Create an input dialog to get the room name
     String selectedSpace = JOptionPane.showInputDialog(
@@ -432,10 +449,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
   }
 
 
-  //  @Override
-//  public void displayMessageDialogWithJPane(String title, String message, ) {
-//
-//  }
   @Override
   public void displayMessageDialog(String title, String message) {
     JOptionPane.showMessageDialog(this,
@@ -471,7 +484,6 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
     displayTargetCharacterInfo();
     displayCurrentPlayerInfo();
     gridPanel.repaint();
-//    instructionsLabel(); // Add this line
     gridPanel.removeKeyListener(this.keyListener);
     this.keyListener = new ListenKey();
     gridPanel.addKeyListener(this.keyListener);
@@ -596,8 +608,11 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         try {
           // Load the new world from the selected file and start the game with maxTurns
           listener.loadNewGame(selectedFile.getAbsolutePath(), maxTurns);
-        } catch (Exception ex) {
-          JOptionPane.showMessageDialog(this, "Error loading the new world: " + ex.getMessage(),
+        } catch (IOException ex) {
+          StringBuilder sb = new StringBuilder();
+          sb.append("Error loading the new world: ");
+          sb.append(ex.getMessage());
+          JOptionPane.showMessageDialog(this, sb.toString(),
                   "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
@@ -624,13 +639,7 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
   @Override
   public void moveToGame() {
-//    if (this != null) {
-//      remove(worldPanel); // Remove the existing WorldPanel if any
-//    }
-//    worldPanel = new WorldPanel(world); // Create the new WorldPanel
-//    add(worldPanel, BorderLayout.CENTER); // Add it to the center of the layout
-//    revalidate(); // Inform the layout manager that the structure has changed
-//    refresh(); // Repaint the view
+
     initialize();
 
   }
@@ -702,29 +711,26 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
       Space clickedRoom = getClickedRoom(roomRow, roomCol);
 
       if (clickedRoom != null) {
+        if (listener.checkIfPlayerDescription(clickedRoom)) {
 
-//        if (model.getCurrentPlayer().isHumanControlled()) { // Check if the current player is human-controlled
-          if (listener.checkIfPlayerDescription(clickedRoom)) {
+          String description = listener.processInput("playerinfo",
+                  new String[]{model.getCurrentPlayer().getName()});
 
-            String description = listener.processInput("playerinfo",
-                    new String[]{model.getCurrentPlayer().getName()}); // Replace with your description logic
+          String messageTitle = "Player Description";
+          displayMessageDialog(messageTitle, description);
 
-            String messageTitle = "Player Description";
-            displayMessageDialog(messageTitle,description);
-
-          } else if (listener.isValidMove(model.getCurrentPlayer(), clickedRoom)) {
-            String resultMove = listener.processInput("move",
-                    new String[]{clickedRoom.getSpaceName()});
-            String messageTitle = "Moving player";
-            displayMessageDialog(messageTitle,resultMove);
-            computerTurn();
-            updateDisplay();
-          } else {
-            String resultMove = "Invalid move! The space is not your neighbor";
-            String messageTitle = "Invalid move!";
-            displayMessageDialog(messageTitle,resultMove);
-          }
-//        }
+        } else if (listener.isValidMove(model.getCurrentPlayer(), clickedRoom)) {
+          String resultMove = listener.processInput("move",
+                  new String[]{clickedRoom.getSpaceName()});
+          String messageTitle = "Moving player";
+          displayMessageDialog(messageTitle, resultMove);
+          computerTurn();
+          updateDisplay();
+        } else {
+          String resultMove = "Invalid move! The space is not your neighbor";
+          String messageTitle = "Invalid move!";
+          displayMessageDialog(messageTitle, resultMove);
+        }
       }
     }
 
@@ -795,16 +801,17 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
         if (players != null) {
           for (Player player : players) {
             if (player.isHumanControlled()) {
-              int playerXCenter = roomX + (roomWidth / 2);
-              int playerYCenter = roomY + (roomHeight / 2);
+              int playerxCenter = roomX + (roomWidth / 2);
+              int playeryCenter = roomY + (roomHeight / 2);
               int playerSize = (Math.min(cellWidth, cellHeight) / 2) * 2;
 
-              g.setColor(Color.GREEN); // Use green color for human player
-//              g.fillRect(playerXCenter - playerSize / 2, playerYCenter - playerSize / 2, playerSize, playerSize);
-              int[] xPoints = {playerXCenter, playerXCenter - playerSize, playerXCenter + playerSize};
-              int[] yPoints = {playerYCenter - playerSize, playerYCenter + playerSize, playerYCenter + playerSize};
+              g.setColor(Color.PINK); // Use green color for human player
+              int[] xpoints = {playerxCenter, playerxCenter - playerSize, playerxCenter
+                      + playerSize};
+              int[] ypoints = {playeryCenter - playerSize, playeryCenter + playerSize, playeryCenter
+                      + playerSize};
 
-              g.fillPolygon(xPoints, yPoints, 3); // Draw the triangle
+              g.fillPolygon(xpoints, ypoints, 3); // Draw the triangle
             } else {
               // For computer players, draw the blue circle (as before)
               int playerXCenter = roomX + (roomWidth / 2);
@@ -821,16 +828,16 @@ public class WorldViewImpl extends JFrame implements WorldViewInterface {
 
 
         if (room.equals(model.getCurrentSpaceTargetIsIn())) {
-          int targetCharacterXCenter = roomX + (roomWidth / 2);
-          int targetCharacterYCenter = roomY + (roomHeight / 2);
+          int targetCharacterxCenter = roomX + (roomWidth / 2);
+          int targetCharacteryCenter = roomY + (roomHeight / 2);
           int targetCharacterRadius = (Math.min(cellWidth, cellHeight) / 4) * 5;
 
           // Draw the target character image instead of an oval
           if (targetCharacterImage != null) {
             int imgWidth = targetCharacterRadius * 2;
             int imgHeight = targetCharacterRadius * 2;
-            int imgX = targetCharacterXCenter - imgWidth / 2;
-            int imgY = targetCharacterYCenter - imgHeight / 2;
+            int imgX = targetCharacterxCenter - imgWidth / 2;
+            int imgY = targetCharacteryCenter - imgHeight / 2;
             g.drawImage(targetCharacterImage, imgX, imgY, imgWidth, imgHeight, this);
           }
         }

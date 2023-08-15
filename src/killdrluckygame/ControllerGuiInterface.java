@@ -78,5 +78,11 @@ public interface ControllerGuiInterface {
    */
   boolean isValidMove(Player currentPlayer, Space clickedRoom);
 
+  /**
+   * Checks if a mouse click on a player's space is meant for displaying the player's description.
+   *
+   * @param clickedRoom The room clicked by the mouse.
+   * @return True if the click is intended to display the player's description, false otherwise.
+   */
   boolean checkIfPlayerDescription(Space clickedRoom);
 }

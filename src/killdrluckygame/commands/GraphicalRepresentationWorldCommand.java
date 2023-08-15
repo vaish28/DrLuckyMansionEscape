@@ -1,7 +1,6 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
 
 
@@ -25,6 +24,12 @@ public class GraphicalRepresentationWorldCommand implements GameOperationCommand
    * @param out   the Appendable object to print the output.
    */
   public GraphicalRepresentationWorldCommand(World world, Appendable out) {
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
     this.world = world;
     this.out = out;
   }

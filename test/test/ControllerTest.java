@@ -7,10 +7,24 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import killdrluckygame.*;
+import killdrluckygame.ActionType;
+import killdrluckygame.CustomRandom;
+import killdrluckygame.CustomRandomInterface;
+import killdrluckygame.DrLuckyItem;
+import killdrluckygame.DrLuckySpace;
+import killdrluckygame.DrLuckyWorld;
+import killdrluckygame.GameCharacter;
+import killdrluckygame.GameController;
+import killdrluckygame.GameControllerInterface;
+import killdrluckygame.HumanControlledPlayer;
+import killdrluckygame.Item;
+import killdrluckygame.Player;
+import killdrluckygame.Space;
+import killdrluckygame.World;
+import killdrluckygame.WorldPosition;
 import org.junit.Before;
 import org.junit.Test;
+
 
 /**
  * This is a class  for testing the controller in isolation. This tests the commands of the
@@ -784,7 +798,7 @@ public class ControllerTest {
 
 
     // Create a test DrLuckyWorld
-    DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
+    World world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
             random);
@@ -837,7 +851,7 @@ public class ControllerTest {
 
 
     // Create a test DrLuckyWorld
-    DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
+    World world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
             random);
@@ -888,7 +902,7 @@ public class ControllerTest {
 
     GameControllerInterface systemUnderTest = new GameController(in, out, random);
     // Create a test DrLuckyWorld and pass the CustomRandomStub object to the constructor
-    DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
+    World world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne)),
             new CustomRandom(0));
@@ -929,7 +943,7 @@ public class ControllerTest {
             new WorldPosition(21, 28));
 
     // Create a test DrLuckyWorld and pass the CustomRandomStub object to the constructor
-    DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
+    World world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo)),
             new CustomRandom(1));
@@ -982,7 +996,7 @@ public class ControllerTest {
             new WorldPosition(13, 25));
 
     // Create a test DrLuckyWorld and pass the CustomRandomStub object to the constructor
-    DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
+    World world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree, spaceFour)),
             new CustomRandom(3));
@@ -1032,7 +1046,7 @@ public class ControllerTest {
             new WorldPosition(17, 27));
 
     // Create a test DrLuckyWorld and pass the CustomRandomStub object to the constructor
-    DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
+    World world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree)),
             new CustomRandom(2));
@@ -1116,7 +1130,7 @@ public class ControllerTest {
             new WorldPosition(15, 20));
 
     // Create a test DrLuckyWorld
-    DrLuckyWorld world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
+    World world = new DrLuckyWorld(12, 8, "Dr Lucky Mansion",
             new GameCharacter(50, "Lucky", true),
             new ArrayList<>(Arrays.asList(spaceOne, spaceTwo, spaceThree)),
             random);

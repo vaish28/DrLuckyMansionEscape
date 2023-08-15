@@ -1,7 +1,6 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
 
 /**
@@ -22,6 +21,15 @@ public class AttackPlayerCommand implements GameOperationCommand {
    * @param out    The Appendable object to output information.
    */
   public AttackPlayerCommand(World world, String option, Appendable out) {
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (option == null) {
+      throw new IllegalArgumentException("Attack option cannot be null");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
     this.option = option;
     this.out = out;
     this.world = world;

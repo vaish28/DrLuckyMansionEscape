@@ -13,6 +13,7 @@ public class NewGameActionStrategy implements MenuItemActionStrategy {
    *
    * @param view The WorldViewInterface instance associated with the strategy.
    */
+
   public NewGameActionStrategy(WorldViewInterface view) {
     this.view = view;
   }

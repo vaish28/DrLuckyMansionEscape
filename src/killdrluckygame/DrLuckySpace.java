@@ -110,7 +110,7 @@ public class DrLuckySpace implements Space {
    *
    * @param item The item to be removed.
    * @return true if the item is successfully removed, false if the item does not exist in the
-   * space.
+   *         space.
    */
 
   @Override

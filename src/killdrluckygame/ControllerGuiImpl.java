@@ -8,10 +8,22 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Function;
-
-import killdrluckygame.commands.*;
+import killdrluckygame.commands.AddComputerPlayerCommand;
+import killdrluckygame.commands.AddHumanPlayerCommand;
+import killdrluckygame.commands.AttackPlayerCommand;
+import killdrluckygame.commands.DisplayPlayerInformationCommand;
+import killdrluckygame.commands.DisplaySpaceInformationCommand;
+import killdrluckygame.commands.GameOperationCommand;
+import killdrluckygame.commands.LookAroundCommand;
+import killdrluckygame.commands.MovePlayerCommand;
+import killdrluckygame.commands.PickItemCommand;
 import killdrluckygame.view.WorldViewInterface;
 
+
+/**
+ * The ControllerGuiImpl class implements the ControllerGuiInterface and represents
+ * the controller component of the Dr. Lucky game's GUI.
+ */
 public class ControllerGuiImpl implements ControllerGuiInterface {
   private World worldModel;
   private final Appendable out;
@@ -21,6 +33,17 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
   private final Map<String, Function<Scanner, GameOperationCommand>> supportedOperations;
   private String filePath;
 
+
+  /**
+   * Constructs a ControllerGuiImpl object.
+   *
+   * @param random     The CustomRandomInterface implementation.
+   * @param worldModel The World model of the game.
+   * @param worldView  The WorldViewInterface implementation for GUI.
+   * @param maxTurns   The maximum number of turns for the game.
+   * @param filePath   The file path for game data.
+   * @param out        The output stream for displaying game messages.
+   */
   public ControllerGuiImpl(CustomRandomInterface random,
                            World worldModel, WorldViewInterface worldView, int maxTurns,
                            String filePath, Appendable out) {
@@ -102,12 +125,12 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     GameOperationCommand command = null;
     try {
       String spaceName = sc.nextLine();
-      if(worldModel.getSpaceFromSpaceName(spaceName)==null) {
+      if (worldModel.getSpaceFromSpaceName(spaceName) == null) {
         throw new IllegalArgumentException("Enter valid space name");
       }
-      command = new DisplaySpaceInformationCommand(worldModel,spaceName, out);
+      command = new DisplaySpaceInformationCommand(worldModel, spaceName, out);
 
-    } catch(IllegalArgumentException ex) {
+    } catch (IllegalArgumentException ex) {
       throw ex;
     }
     return command;
@@ -134,8 +157,6 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
 
   @Override
   public void playGame() {
-
-    // TODO make the controller initialise or start the view according to the MVC principles.
     worldView.setVisibleAboutDialog();
     worldView.setVisibleMain();
   }
@@ -146,7 +167,7 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     this.maxTurns = maxTurns;
     try {
       Readable readable = new FileReader(worldFileName);
-      this.worldModel = this.worldModel.reload(readable); //new DrLuckyWorld.Input().readInput(new FileReader(worldFileName));
+      this.worldModel = this.worldModel.reload(readable);
     } catch (IOException e) {
       // Handle file reading or parsing errors
       String.format("An error occurred while reading the file: " + e.getMessage());
@@ -157,12 +178,9 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
 
   @Override
   public void resetGame() {
-
-
     try {
       Readable readable = new FileReader(filePath);
       this.worldModel = this.worldModel.reload(readable);
-//              new DrLuckyWorld.Input().readInput(new FileReader(filePath));
     } catch (IOException e) {
       String.format(e.getMessage());
     }
@@ -206,7 +224,8 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
       result = sb.toString();
 
     } else {
-      if (randomValue < moveProbability && (worldModel.getPrevActionOfComputer() != ActionType.MOVE)) {
+      if (randomValue < moveProbability
+              && (worldModel.getPrevActionOfComputer() != ActionType.MOVE)) {
 
         worldModel.changePrevAction(ActionType.MOVE);
         sb.append("Performing move");
@@ -318,8 +337,8 @@ public class ControllerGuiImpl implements ControllerGuiInterface {
     Player currentPlayer = worldModel.getCurrentPlayer();
     List<Player> playersInClickedRoom = worldModel.getMappingOfSpaceAndPlayer().get(clickedRoom);
 
-    if(currentPlayer.isHumanControlled()) {
-      if(playersInClickedRoom != null &&(playersInClickedRoom.contains(currentPlayer))) {
+    if (currentPlayer.isHumanControlled()) {
+      if (playersInClickedRoom != null && (playersInClickedRoom.contains(currentPlayer))) {
         return true;
       }
     }

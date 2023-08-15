@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import killdrluckygame.*;
+import killdrluckygame.ActionType;
+import killdrluckygame.HumanControlledPlayer;
+import killdrluckygame.Item;
+import killdrluckygame.Player;
+import killdrluckygame.Space;
+import killdrluckygame.World;
 
 /**
  * This class is mock model for testing the controller in isolation from the model. This class
@@ -18,7 +22,6 @@ public class MockWorldModel implements World {
   private Map<Space, List<Player>> mappingSpaceToPlayers;
   private StringBuilder log;
   private final int uniqueCode;
-
   private final boolean isHumanControlled;
 
 

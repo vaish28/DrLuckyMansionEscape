@@ -1,7 +1,6 @@
 package killdrluckygame.commands;
 
 import java.io.IOException;
-
 import killdrluckygame.World;
 
 
@@ -22,6 +21,16 @@ public class DisplayPlayerInformationCommand implements GameOperationCommand {
    * @param out        An appendable object for saving the output.
    */
   public DisplayPlayerInformationCommand(World world, String playerName, Appendable out) {
+
+    if (world == null) {
+      throw new IllegalArgumentException("World cannot be null");
+    }
+    if (playerName == null || playerName.isEmpty()) {
+      throw new IllegalArgumentException("Player name cannot be null or empty");
+    }
+    if (out == null) {
+      throw new IllegalArgumentException("Appendable (out) cannot be null");
+    }
     this.world = world;
     this.playerName = playerName;
     this.out = out;
