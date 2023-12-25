@@ -1,14 +1,5 @@
 # CS 5010 Semester Project
 
-This repo represents the coursework for CS 5010, the Fall 2022 Edition!
-
-**Name:** Vaishnavi Sunil Madhekar
-
-**Email:** madhekar.v@northeastern.edu
-
-**Preferred Name:** Vaishnavi
-
-
 
 ### About/Overview
 
