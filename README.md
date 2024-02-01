@@ -1,6 +1,9 @@
 # CS 5010 Semester Project
 
 
+### VIDEO DEMO
+https://drive.google.com/file/d/1iIDcseMNvCR-04lvpARFHsXAkRe9f9Xq/view?usp=sharing
+
 ### About/Overview
 
 - The problem involves creating a program to simulate the game called "Kill Doctor Lucky".
